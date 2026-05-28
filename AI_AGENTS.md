@@ -24,6 +24,62 @@ A US-based TikTok Shop seller doing roughly $5k–$50k/month in sales across 10�
 
 Get 50 sellers onto a free beta and validate that real per-SKU profit is a tool they'll pay for. Convert early users to a paid plan once the dashboard proves its value.
 
+## MarginReady — Agent Build Guide
+
+### What this is
+
+A web app that shows TikTok Shop sellers their real per-SKU profit. It connects to a seller's own TikTok Shop account via OAuth, pulls their actual settled sales and platform fees from TikTok's Finance API, and subtracts the cost of goods (COGS) the seller enters per product. Output: true profit per product, from real settled numbers — not estimates.
+
+### Hard rules (do not violate)
+
+- **No scraping. Ever.** No Playwright, Puppeteer, headless browsers, or public-page parsing. All data comes from authenticated TikTok Shop API calls using the seller's own OAuth token. If a task seems to need scraping, stop and flag it — the design is wrong, not the API.
+- **We only ever read the seller's OWN data.** This tool never touches competitor data. There is no competitor/market-comparison feature. Don't add one.
+- **Never hardcode TikTok fee percentages.** Fees come from the API's actual settled amounts (`fee_and_tax_amount`), not a fee table. The whole point is real numbers, not modeled ones.
+- **Treat seller financial data and OAuth tokens as sensitive.** Tokens encrypted at rest. Never log tokens or raw financial payloads. No third-party analytics that captures revenue data.
+
+### Core data source
+
+TikTok Shop Partner API — `seller.finance.info` scope.
+
+- `GET` Order List → enumerate orders
+- `GET /finance/202501/orders/{order_id}/statement_transactions` ([Get Transactions by Order](https://partner.tiktokshop.com/docv2/page/get-transactions-by-order-202501)) → per-order and per-SKU settled detail
+
+Key response fields per order: `revenue_amount`, `fee_and_tax_amount`, `shipping_cost_amount`, `settlement_amount`, and `sku_transactions[]` (each with `sku_id`, `sku_name`, `product_name`, `quantity`, settled amount).
+
+Relationship: `settlement_amount = revenue_amount - shipping_cost_amount - fee_and_tax_amount`.
+
+Data availability limits: only after 2023-07-01; for US cross-border sellers, only after 2025-04-30. Handle missing history gracefully.
+
+### Core formula
+
+```
+true_profit_per_sku = sku_settlement_amount - (cogs_per_unit × quantity)
+```
+
+The only seller-provided input is `cogs_per_unit`. Everything else comes from the API.
+
+### Architecture
+
+- **OAuth flow:** seller authorizes → store encrypted access + refresh token → handle token refresh.
+- **Nightly sync job:** pull new/updated orders, fetch transactions per order, upsert into DB.
+- **DB tables (minimum):** `sellers`, `oauth_tokens`, `products` (sku_id, names, cogs_per_unit), `transactions` (order_id, sku_id, settlement fields, quantity, timestamps).
+- **Idempotent sync** — re-running must not double-count. Key on `order_id` + `sku_id` + `statement_id`.
+
+### Build order
+
+1. OAuth flow against TikTok sandbox / Development Shops (live API is gated behind TikTok's US data security review — assume sandbox until told otherwise).
+2. Sync job + data model.
+3. COGS entry UI (one editable cost field per SKU).
+4. Dashboard: per-SKU real profit + margin %, sorted, underwater products flagged.
+
+### Out of scope until explicitly requested
+
+GMV Max / ad-spend integration (lives in a separate TikTok Marketing API, separate signup/approval), Amazon/Shopify, alerts, bulk tools, billing. Don't build these in v1.
+
+### When unsure
+
+If a request conflicts with the "no scraping / own-data-only / no hardcoded fees" rules, stop and ask rather than improvising. Those three rules are the product's foundation.
+
 ## Tech stack
 
 Astro project under the sites/* workspace. Build path goes
