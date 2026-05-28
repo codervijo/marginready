@@ -1,0 +1,86 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  chrome?: boolean;
+}
+
+const { chrome = true } = Astro.props;
+const path = Astro.url.pathname;
+
+const navLinks = [
+  { href: "/connect", label: "Connect" },
+  { href: "/cogs", label: "COGS" },
+  { href: "/dashboard", label: "Dashboard" },
+];
+
+const isActive = (href: string) => path === href || path === `${href}/`;
+const baseLink = "px-3 py-2 rounded-md transition";
+const idleLink = `${baseLink} text-muted-foreground hover:text-foreground hover:bg-muted`;
+const activeLink = `${baseLink} text-foreground bg-muted`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <slot name="head" />
+  </head>
+  <body>
+    {
+      chrome ? (
+        <div class="min-h-screen bg-background text-foreground flex flex-col">
+          <header class="border-b border-border bg-background/80 backdrop-blur sticky top-0 z-30">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+              <a href="/" class="flex items-center gap-2 font-semibold tracking-tight">
+                <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="h-4 w-4"
+                  >
+                    <path d="M16 7h6v6" />
+                    <path d="m22 7-8.5 8.5-5-5L2 17" />
+                  </svg>
+                </span>
+                <span>MarginReady</span>
+              </a>
+              <nav class="hidden sm:flex items-center gap-1 text-sm">
+                {navLinks.map((l) => (
+                  <a href={l.href} class={isActive(l.href) ? activeLink : idleLink}>
+                    {l.label}
+                  </a>
+                ))}
+              </nav>
+            </div>
+          </header>
+          <main class="flex-1">
+            <slot />
+          </main>
+          <footer class="border-t border-border">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 text-xs text-muted-foreground flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
+              <span>© 2026 MarginReady. Built for TikTok Shop sellers.</span>
+              <span>Frontend prototype · mock data</span>
+            </div>
+          </footer>
+        </div>
+      ) : (
+        <slot />
+      )
+    }
+  </body>
+</html>

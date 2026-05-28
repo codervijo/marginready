@@ -1,58 +1,57 @@
 ---
-// src/pages/index.astro
+import Layout from "../layouts/Layout.astro";
+import { Landing } from "../components/Landing";
+
 const site = "https://marginready.com";
-const title = "marginready.com";
-const description = "<fill in: 1-2 sentence value prop for SEO description>";
+const title = "MarginReady — Real profit per product on TikTok Shop";
+const description =
+  "MarginReady shows settled revenue, platform fees, product costs, and net profit per SKU for TikTok Shop sellers.";
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<Layout>
+  <Fragment slot="head">
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={site} />
+    <link rel="canonical" href={site + "/"} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={site} />
-    <meta property="og:site_name" content="marginready.com" />
+    <meta
+      property="og:description"
+      content="See your true profit per SKU on TikTok Shop. Settled revenue, fees, refunds, and COGS in one dashboard."
+    />
+    <meta property="og:url" content={site + "/"} />
+    <meta property="og:site_name" content="MarginReady" />
 
     <!-- Twitter card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
-    <!-- JSON-LD structured data: Organization + WebSite (static; domain
-         is known at scaffold time. Update description by hand if needed.) -->
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://marginready.com/#organization",
-      "name": "marginready.com",
-      "url": "https://marginready.com/"
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://marginready.com/#website",
-      "url": "https://marginready.com/",
-      "name": "marginready.com",
-      "publisher": { "@id": "https://marginready.com/#organization" }
-    }
-  ]
-}
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://marginready.com/#organization",
+            "name": "MarginReady",
+            "url": "https://marginready.com/"
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://marginready.com/#website",
+            "url": "https://marginready.com/",
+            "name": "MarginReady",
+            "publisher": { "@id": "https://marginready.com/#organization" }
+          }
+        ]
+      }
     </script>
-  </head>
-  <body>
-    <main>
-      <h1>{title}</h1>
-      <p>Scaffolded via <code>portfolio new bootstrap</code>.</p>
-    </main>
-  </body>
-</html>
+  </Fragment>
+
+  <Landing client:load />
+</Layout>

@@ -1,0 +1,38 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { CogsEntryTable } from "../components/CogsEntryTable";
+
+const site = "https://marginready.com";
+const title = "Enter your product costs — MarginReady";
+const description =
+  "Add your cost per unit so MarginReady can calculate true net profit per SKU.";
+---
+
+<Layout>
+  <Fragment slot="head">
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={site + "/cogs"} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={site + "/cogs"} />
+    <meta property="og:site_name" content="MarginReady" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+  </Fragment>
+
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+    <header class="mb-8">
+      <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight">
+        Enter your product costs
+      </h1>
+      <p class="mt-2 text-muted-foreground">
+        Add your cost per unit so MarginReady can calculate true net profit.
+      </p>
+    </header>
+    <CogsEntryTable client:load />
+  </div>
+</Layout>
