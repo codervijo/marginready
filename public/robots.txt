@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://marginready.com/sitemap.xml
+Sitemap: https://marginready.com/sitemap-index.xml
