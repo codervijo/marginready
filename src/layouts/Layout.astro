@@ -9,9 +9,9 @@ const { chrome = true } = Astro.props;
 const path = Astro.url.pathname;
 
 const navLinks = [
-  { href: "/connect", label: "Connect" },
-  { href: "/cogs", label: "COGS" },
-  { href: "/dashboard", label: "Dashboard" },
+  { href: "/connect/", label: "Connect" },
+  { href: "/cogs/", label: "COGS" },
+  { href: "/dashboard/", label: "Dashboard" },
 ];
 
 const isActive = (href: string) => path === href || path === `${href}/`;

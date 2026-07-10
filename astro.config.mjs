@@ -8,6 +8,8 @@ export default defineConfig({
   site: 'https://marginready.com',
   integrations: [sitemap(), react()],
   output: 'static',
+  trailingSlash: 'always',
+  build: { format: 'directory' },
   vite: {
     plugins: [tailwindcss()],
   },
