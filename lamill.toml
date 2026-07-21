@@ -11,6 +11,10 @@ custom_domains = [
     "marginready.com",
 ]
 
+[index]
+indexnow_key = "494160881e1fdbf6c3af3f81d0af206c"
+indexnow_enabled = true
+
 [stack]
 framework = "astro"
 
