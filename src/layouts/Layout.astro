@@ -9,9 +9,31 @@ const { chrome = true } = Astro.props;
 const path = Astro.url.pathname;
 
 const navLinks = [
+  { href: "/tools/", label: "Free tools" },
   { href: "/connect/", label: "Connect" },
   { href: "/cogs/", label: "COGS" },
   { href: "/dashboard/", label: "Dashboard" },
+];
+
+// Public content pages that must not carry the prototype disclaimer — it
+// undermines trust on pages meant to rank and be shared.
+const APP_PROTOTYPE_PATHS = ["/connect/", "/cogs/", "/dashboard/"];
+const isAppPrototype = APP_PROTOTYPE_PATHS.some(
+  (p) => path === p || path === p.slice(0, -1),
+);
+
+// Footer links to every indexable content page, so no tool or guide is an
+// orphan regardless of which page a crawler lands on first.
+const footerLinks = [
+  { href: "/tools/", label: "Free tools" },
+  { href: "/tiktok-shop-fee-calculator/", label: "Fee calculator" },
+  { href: "/tiktok-shop-break-even-calculator/", label: "Break-even price" },
+  { href: "/tiktok-shop-roas-calculator/", label: "Break-even ROAS" },
+  { href: "/tiktok-shop-payout-schedule/", label: "Payout schedule" },
+  {
+    href: "/why-tiktok-shop-payout-is-less-than-sales/",
+    label: "GMV vs settlement",
+  },
 ];
 
 const isActive = (href: string) => path === href || path === `${href}/`;
@@ -72,9 +94,21 @@ const activeLink = `${baseLink} text-foreground bg-muted`;
             <slot />
           </main>
           <footer class="border-t border-border">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 text-xs text-muted-foreground flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
-              <span>© 2026 MarginReady. Built for TikTok Shop sellers.</span>
-              <span>Frontend prototype · mock data</span>
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+              <nav
+                aria-label="Free TikTok Shop tools and guides"
+                class="flex flex-wrap gap-x-5 gap-y-2 text-xs text-muted-foreground"
+              >
+                {footerLinks.map((l) => (
+                  <a class="hover:text-foreground hover:underline" href={l.href}>
+                    {l.label}
+                  </a>
+                ))}
+              </nav>
+              <div class="mt-5 pt-5 border-t border-border text-xs text-muted-foreground flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
+                <span>© 2026 MarginReady. Built for TikTok Shop sellers.</span>
+                {isAppPrototype && <span>Frontend prototype · mock data</span>}
+              </div>
             </div>
           </footer>
         </div>

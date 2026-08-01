@@ -12,6 +12,10 @@ const description =
   <Fragment slot="head">
     <title>{title}</title>
     <meta name="description" content={description} />
+    <!-- App prototype screen running on mock data: no search intent to serve,
+         and thin mock content should not set this site's quality baseline.
+         Also excluded from the sitemap in astro.config.mjs. -->
+    <meta name="robots" content="noindex, follow" />
     <link rel="canonical" href={site + "/connect/"} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta property="og:type" content="website" />

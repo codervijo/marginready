@@ -12,3 +12,16 @@ to surface "last AI prompt" per project. Keep entries append-only.
 ## 2026-05-28 — scaffolded via portfolio new bootstrap
 
 > Created project skeleton. Stack chosen, scaffolding written, git initialized.
+
+## 2026-07-30 — v1.B: SEO content cluster + internal-link fix
+
+> "improve SEO for this site, increase impressions, and clicks" (site was at
+> 0 impressions / 0 clicks, 5 pages).
+>
+> Diagnosis: technical SEO was already fine (sitemap OK in GSC, homepage
+> indexed, trailing-slash canonical, IndexNow). The real defects were (1) the
+> fee calculator was an orphan page with zero inbound internal links, (2) 3 of
+> 5 pages were mock-data prototype screens, and (3) content supply was one
+> page. Shipped 5 interlinked pages (2 calculators + 2 guides + hub), rebuilt
+> the internal-link graph, noindexed the prototype screens. All fee/payout
+> facts sourced from TikTok Seller Center primary docs and cited on-page.

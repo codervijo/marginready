@@ -26,6 +26,29 @@ const steps = [
   { icon: LineChart, title: "See real profit per SKU", body: "Sorted from your best earner to your worst." },
 ];
 
+const freeTools = [
+  {
+    href: "/tiktok-shop-fee-calculator/",
+    name: "Fee & net profit calculator",
+    body: "See what a TikTok Shop order really nets after every fee.",
+  },
+  {
+    href: "/tiktok-shop-break-even-calculator/",
+    name: "Break-even price calculator",
+    body: "Find the lowest price that doesn't lose money — and your target-margin price.",
+  },
+  {
+    href: "/tiktok-shop-roas-calculator/",
+    name: "Break-even ROAS calculator",
+    body: "Work out the ROAS your ads actually need to clear your costs.",
+  },
+  {
+    href: "/why-tiktok-shop-payout-is-less-than-sales/",
+    name: "Why your payout is less than your sales",
+    body: "Every deduction between GMV and the money that reaches your bank.",
+  },
+];
+
 export function Landing() {
   return (
     <>
@@ -74,12 +97,47 @@ export function Landing() {
           </ol>
           <div className="mt-10">
             <a
-              href="/connect"
+              href="/connect/"
               className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
             >
               See it now in the demo →
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* Free tools */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div className="max-w-2xl">
+          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">
+            Free calculators, no signup
+          </h2>
+          <p className="mt-3 text-muted-foreground">
+            Not ready to connect an account? Start with the math. These run in
+            your browser on numbers you type in.
+          </p>
+        </div>
+        <div className="mt-10 grid gap-4 sm:gap-5 sm:grid-cols-2">
+          {freeTools.map((t) => (
+            <a
+              key={t.href}
+              href={t.href}
+              className="group rounded-2xl border border-border bg-card p-6 shadow-card transition hover:border-primary/40 hover:shadow-md"
+            >
+              <h3 className="font-semibold group-hover:text-primary">{t.name}</h3>
+              <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
+                {t.body}
+              </p>
+            </a>
+          ))}
+        </div>
+        <div className="mt-8">
+          <a
+            href="/tools/"
+            className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+          >
+            See all free TikTok Shop tools →
+          </a>
         </div>
       </section>
 

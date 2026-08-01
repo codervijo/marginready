@@ -1,0 +1,230 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { BreakEvenCalculator } from "../components/BreakEvenCalculator";
+
+const site = "https://marginready.com";
+const path = "/tiktok-shop-break-even-calculator/";
+const url = site + path;
+const title = "TikTok Shop Break-Even Calculator — What Price Do You Need?";
+const description =
+  "Free TikTok Shop break-even calculator. Enter your COGS, referral fee, affiliate commission, fulfillment, returns, and ad spend to find the lowest price that does not lose money — and the price you need for your target net margin.";
+
+// Rates confirmed against TikTok Shop Seller Center. Update this date when re-verified.
+const ratesAsOf = "July 2026";
+
+const webApplicationLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "TikTok Shop Break-Even Calculator",
+  url,
+  description:
+    "Calculate the break-even selling price and the price required for a target net margin on TikTok Shop, after referral fees, affiliate commissions, fulfillment, returns, and ad spend.",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+  publisher: { "@id": "https://marginready.com/#organization" },
+};
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "How do I calculate break-even price on TikTok Shop?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Split your costs into two groups. Percentage costs scale with price (referral fee, affiliate commission, returns); fixed costs do not (COGS, fulfillment, ad spend per unit). Break-even price = fixed cost per unit ÷ (1 − referral rate − affiliate rate − return rate). With $15 COGS and a 6% referral fee and nothing else, that is $15 ÷ 0.94 = $15.96.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How much should I mark up a product on TikTok Shop?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "There is no universal multiple — it depends entirely on your own percentage costs. The calculator on this page shows the exact markup multiple over your product cost needed both to break even and to reach the net margin you want. The heavier your affiliate rate and return rate, the higher that multiple has to be.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Why can't I reach my target margin at any price?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Because percentage costs scale with price, raising the price raises them too. If your referral fee, affiliate commission, and return rate together consume more of each dollar than the margin you want to keep, no price works. You have to cut a percentage cost rather than raise the price.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Should I include ad spend in break-even price?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, if you want a price that covers acquisition. Divide total ad spend by units sold to get ad spend per unit and enter it as a fixed cost. If you would rather solve for the ad efficiency your current price can support, use the break-even ROAS calculator instead.",
+      },
+    },
+  ],
+};
+---
+
+<Layout>
+  <Fragment slot="head">
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={url} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:site_name" content="MarginReady" />
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(webApplicationLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
+  </Fragment>
+
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+    <header class="mb-6">
+      <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight">
+        TikTok Shop Break-Even Calculator
+      </h1>
+      <p class="mt-3 text-muted-foreground max-w-2xl">
+        Most sellers price backwards — they pick a number that &ldquo;feels
+        right,&rdquo; then find out later it never covered the fees. Enter your
+        costs below to get the lowest price that doesn&rsquo;t lose money, and
+        the price you actually need for the margin you want.
+      </p>
+      <p class="mt-3 text-xs text-muted-foreground">
+        Rates current as of {ratesAsOf}; confirm your category in TikTok Seller
+        Center. This estimator uses your inputs — it does not read your account.
+      </p>
+    </header>
+
+    <BreakEvenCalculator client:load />
+
+    <div class="prose-tk mt-14 space-y-12 max-w-3xl">
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          How to calculate break-even price on TikTok Shop
+        </h2>
+        <p class="mt-3 text-muted-foreground">
+          The trick is that your costs are not all the same kind. Some scale
+          with the price you charge, and some don&rsquo;t — and mixing them is
+          why so many break-even estimates come out wrong.
+        </p>
+        <ul class="mt-3 space-y-3 text-muted-foreground">
+          <li>
+            <strong class="text-foreground">Percentage costs</strong> — the
+            referral fee, affiliate commission, and revenue lost to returns.
+            Raise your price and these go up in lockstep. They never get
+            &ldquo;covered&rdquo; by charging more.
+          </li>
+          <li>
+            <strong class="text-foreground">Fixed costs per unit</strong> — your
+            product cost, fulfillment, and ad spend per unit. These stay flat
+            no matter what you charge, so a higher price really does absorb
+            them.
+          </li>
+        </ul>
+        <p class="mt-3 text-muted-foreground">
+          Which gives the formula the calculator uses:
+        </p>
+        <p
+          class="mt-3 rounded-lg border border-border bg-muted/40 px-4 py-3 text-sm text-foreground tabular-nums"
+        >
+          break-even price = fixed cost per unit ÷ (1 &minus; referral rate
+          &minus; affiliate rate &minus; return rate)
+        </p>
+        <p class="mt-3 text-muted-foreground">
+          A worked example: $15 product cost, the standard US 6% referral fee,
+          no affiliate and no returns. The denominator is 0.94, so break-even is
+          $15 ÷ 0.94 = <strong class="text-foreground">$15.96</strong>. Not
+          $15.90 — the fee applies to the higher price too, which is exactly the
+          circularity the division resolves.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          Why raising your price sometimes doesn&rsquo;t help
+        </h2>
+        <p class="mt-3 text-muted-foreground">
+          Add a 25% affiliate commission and a 5% return rate to that same
+          product and the denominator drops to 0.64. Break-even jumps from
+          $15.96 to <strong class="text-foreground">$23.44</strong> — a 47%
+          price increase caused entirely by costs that had nothing to do with
+          your product.
+        </p>
+        <p class="mt-3 text-muted-foreground">
+          Push the percentage costs far enough and the denominator reaches zero.
+          At that point there is no break-even price at all: every dollar you add
+          to the price is consumed by the fees that scale with it. The
+          calculator flags this case explicitly, because the fix is never
+          &ldquo;charge more&rdquo; — it is cutting the affiliate rate,
+          attacking the return rate, or walking away from the product.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          Pricing for a target margin, not just break-even
+        </h2>
+        <p class="mt-3 text-muted-foreground">
+          Break-even is the floor, not the goal. To price for a margin you
+          actually want to keep, the same logic applies with the target margin
+          subtracted from the denominator:
+        </p>
+        <p
+          class="mt-3 rounded-lg border border-border bg-muted/40 px-4 py-3 text-sm text-foreground tabular-nums"
+        >
+          target price = fixed cost per unit ÷ (1 &minus; referral rate &minus;
+          affiliate rate &minus; return rate &minus; target margin)
+        </p>
+        <p class="mt-3 text-muted-foreground">
+          This is also why a &ldquo;3× your cost&rdquo; rule of thumb is
+          unreliable on TikTok Shop. The multiple you need is a consequence of
+          your percentage costs, not a constant. The calculator shows your
+          actual multiple so you can sanity-check it against what the market
+          will bear.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          Should ad spend go in your break-even price?
+        </h2>
+        <p class="mt-3 text-muted-foreground">
+          If you want a price that pays for its own customer acquisition, yes —
+          divide total ad spend by units sold and enter it as a fixed per-unit
+          cost. If your price is already fixed by the market and the real
+          question is how efficient your ads must be, solve it from the other
+          direction with the
+          <a class="underline hover:text-foreground" href="/tiktok-shop-roas-calculator/"
+            >break-even ROAS calculator</a
+          >.
+        </p>
+        <p class="mt-4 text-sm text-muted-foreground">
+          Once you are selling, estimates stop being the point. <a
+            class="underline hover:text-foreground"
+            href="/">MarginReady</a
+          > connects to your TikTok Shop account and shows true profit per SKU from
+          your actual settled payouts — the real fees TikTok charged, not modeled
+          ones. See also the <a
+            class="underline hover:text-foreground"
+            href="/tiktok-shop-fee-calculator/">TikTok Shop fee calculator</a
+          > for profit at a price you have already set.
+        </p>
+      </section>
+    </div>
+  </div>
+</Layout>

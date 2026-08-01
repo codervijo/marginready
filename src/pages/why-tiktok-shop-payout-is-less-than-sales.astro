@@ -1,0 +1,364 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const site = "https://marginready.com";
+const path = "/why-tiktok-shop-payout-is-less-than-sales/";
+const url = site + path;
+const title = "Why Your TikTok Shop Payout Is Less Than Your Sales";
+const description =
+  "Your TikTok Shop dashboard shows GMV; your bank shows settlement. Here is every deduction between the two — referral fees, the platform-discount trap, creator commissions, refund admin fees, and reserves — and how to reconcile them.";
+
+// Fee mechanics verified against TikTok Shop Seller Center. Update when re-verified.
+const verifiedAsOf = "July 2026";
+
+const REFERRAL_FEE_URL =
+  "https://seller-us.tiktok.com/university/essay?knowledge_id=5982454398175018&lang=en";
+const SETTLEMENT_POLICY_URL =
+  "https://seller-us.tiktok.com/university/essay?knowledge_id=3995852763531009&lang=en";
+
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline:
+    "Why Your TikTok Shop Payout Is Less Than Your Sales (GMV vs Settlement)",
+  description,
+  mainEntityOfPage: url,
+  author: { "@id": "https://marginready.com/#organization" },
+  publisher: { "@id": "https://marginready.com/#organization" },
+};
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Why is my TikTok Shop payout less than my sales?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Your dashboard reports GMV — gross order value before anything is deducted. Your payout is settlement, which is GMV minus the referral fee, creator commissions, fulfillment, refunds and their admin fees, and whatever is currently held in reserve. The two numbers measure different things, so they are never expected to match.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What is the difference between GMV and settlement on TikTok Shop?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "GMV is the total value of orders placed. Settlement is what TikTok actually pays you for delivered orders after every platform deduction. GMV is a demand metric; settlement is a cash metric. Profit can only be calculated from settlement, because only settlement reflects the fees TikTok really charged.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Do I pay TikTok Shop referral fees on discounted orders?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes — and on the discount itself when it is a platform discount. TikTok's referral fee formula is the fee rate multiplied by customer payment plus platform discount minus tax. The platform-funded discount is added back before the fee is calculated, so your fee is based on a figure higher than what the customer actually paid you.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What is the TikTok Shop refund administration fee?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "When an order is refunded, TikTok retains a refund administration fee equal to 20% of the original referral fee, capped at $5 per SKU type. So a refund does not return you to zero — you keep the loss of the product and shipping, and a slice of the original fee is retained.",
+      },
+    },
+  ],
+};
+
+// Illustrative reconciliation. Inputs chosen for clarity, NOT survey data —
+// only the fee mechanics (6% referral, 20%-of-referral refund admin fee capped
+// at $5/SKU) are from TikTok Seller Center policy.
+const orders = 100;
+const price = 50;
+const gmv = orders * price;
+const referralRate = 0.06;
+const referralFee = gmv * referralRate;
+const creatorShare = 0.5; // half of orders creator-driven
+const creatorRate = 0.15;
+const creatorCommission = gmv * creatorShare * creatorRate;
+const fulfillmentPerUnit = 3.58;
+const fulfillment = orders * fulfillmentPerUnit;
+const refundedOrders = 5;
+const refundedRevenue = refundedOrders * price;
+// 20% of the referral fee on those orders, capped at $5 per SKU type.
+const refundAdminFee = Math.min(refundedOrders * price * referralRate * 0.2, 5);
+const settled =
+  gmv - referralFee - creatorCommission - fulfillment - refundedRevenue - refundAdminFee;
+
+const money = (n: number) =>
+  n.toLocaleString("en-US", { style: "currency", currency: "USD" });
+
+const rows = [
+  { label: "GMV — what the dashboard shows", value: gmv, kind: "total" },
+  { label: `Referral fee (6% of GMV)`, value: -referralFee, kind: "cost" },
+  {
+    label: `Creator commissions (15% on ${creatorShare * 100}% of orders)`,
+    value: -creatorCommission,
+    kind: "cost",
+  },
+  {
+    label: `Fulfillment (${money(fulfillmentPerUnit)} × ${orders} units)`,
+    value: -fulfillment,
+    kind: "cost",
+  },
+  {
+    label: `Refunded revenue (${refundedOrders} orders)`,
+    value: -refundedRevenue,
+    kind: "cost",
+  },
+  {
+    label: "Refund administration fee (20% of referral, capped $5/SKU)",
+    value: -refundAdminFee,
+    kind: "cost",
+  },
+  { label: "Settlement — what reaches your bank", value: settled, kind: "total" },
+];
+
+const takePct = ((gmv - settled) / gmv) * 100;
+---
+
+<Layout>
+  <Fragment slot="head">
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={url} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:site_name" content="MarginReady" />
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(articleLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
+  </Fragment>
+
+  <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+    <header class="mb-8">
+      <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight">
+        Why your TikTok Shop payout is less than your sales
+      </h1>
+      <p class="mt-4 text-muted-foreground">
+        Because they are two different measurements. Your dashboard reports
+        <strong class="text-foreground">GMV</strong> — the gross value of orders
+        placed. Your bank receives
+        <strong class="text-foreground">settlement</strong> — what TikTok pays
+        out on delivered orders after every deduction. Expecting them to match is
+        the mistake; the useful work is knowing exactly what sits between them.
+      </p>
+      <p class="mt-3 text-xs text-muted-foreground">
+        Fee mechanics verified against TikTok Shop Seller Center as of {
+          verifiedAsOf
+        }. Confirm your category rate in Seller Center.
+      </p>
+    </header>
+
+    <div class="prose-tk space-y-12">
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          The referral fee, and the platform-discount trap
+        </h2>
+        <p class="mt-3 text-muted-foreground">
+          The US referral fee has been
+          <strong class="text-foreground">6% per order</strong> since April 1,
+          2024, across most categories. That part is well known. The part that
+          surprises sellers is the formula TikTok uses to apply it:
+        </p>
+        <p
+          class="mt-3 rounded-lg border border-border bg-muted/40 px-4 py-3 text-sm text-foreground"
+        >
+          referral fee = rate × (customer payment + platform discount &minus;
+          tax)
+        </p>
+        <p class="mt-3 text-muted-foreground">
+          Read that middle term again. The
+          <strong class="text-foreground">platform discount is added back</strong
+          > before the fee is calculated. TikTok&rsquo;s own worked example: an order
+          where the customer pays $102, with a $5 platform discount and $2 tax, is
+          charged 6% × ($102 + $5 &minus; $2) = <strong class="text-foreground"
+            >$6.30</strong
+          >.
+        </p>
+        <p class="mt-3 text-muted-foreground">
+          So when you join a platform promotion, you are charged referral fees on
+          money that never reached you. It is a small line per order and an
+          invisible one at scale — which is precisely why it turns up as an
+          unexplained gap rather than a decision anyone consciously made.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          Refunds don&rsquo;t reset to zero
+        </h2>
+        <p class="mt-3 text-muted-foreground">
+          A refunded order is worse than a sale that never happened. You lose the
+          revenue, you have usually already paid to ship the product, you may not
+          get it back in resellable condition — and TikTok retains a
+          <strong class="text-foreground">refund administration fee</strong> of 20%
+          of the original referral fee, capped at $5 per SKU type. (That cap has
+          applied since May 15, 2025; TikTok does not charge the fee on creator
+          sample order refunds or eligible pre-shipment auto-cancellations.)
+        </p>
+        <p class="mt-3 text-muted-foreground">
+          The cap keeps this line small in dollar terms. Its real cost is
+          reconciliation friction: it is one more deduction that doesn&rsquo;t
+          correspond to any row in your sales report.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          Working an example end to end
+        </h2>
+        <p class="mt-3 text-muted-foreground">
+          Here is the full walk from GMV to settlement. The
+          <em>mechanics</em> below are TikTok&rsquo;s published policy; the
+          <em>inputs</em> are illustrative numbers chosen to make the arithmetic
+          legible — they are not survey data, and your own creator mix,
+          fulfillment cost, and return rate will differ.
+        </p>
+        <div class="mt-4 overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="border-b border-border text-left">
+                <th class="py-2 pr-4 font-semibold text-foreground">Line</th>
+                <th class="py-2 text-right font-semibold text-foreground">
+                  Amount
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                rows.map((r) => (
+                  <tr
+                    class={`border-b border-border ${r.kind === "total" ? "font-semibold" : ""}`}
+                  >
+                    <td
+                      class={`py-2 pr-4 ${r.kind === "total" ? "text-foreground" : "text-muted-foreground"}`}
+                    >
+                      {r.label}
+                    </td>
+                    <td
+                      class={`py-2 text-right tabular-nums ${
+                        r.kind === "cost" ? "text-loss" : "text-foreground"
+                      }`}
+                    >
+                      {r.value < 0 ? "−" : ""}
+                      {money(Math.abs(r.value))}
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-4 text-muted-foreground">
+          {money(gmv)} of sales becomes <strong class="text-foreground"
+            >{money(settled)}</strong
+          > of settlement — the channel absorbed
+          <strong class="text-foreground">{takePct.toFixed(1)}%</strong> of GMV
+          before your product cost is even considered. Subtract COGS and the
+          number that actually matters, net profit, is smaller still.
+        </p>
+        <p class="mt-3 text-muted-foreground">
+          Note what is <em>not</em> in that table: your product cost. TikTok
+          never sees it, so no TikTok report can show you profit. Settlement is
+          the closest the platform gets, and it is still only half the equation.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          Timing widens the gap further
+        </h2>
+        <p class="mt-3 text-muted-foreground">
+          Even the settlement figure above doesn&rsquo;t arrive at once. Payouts
+          are initiated 1–31 days after each order is <em>delivered</em>, by
+          settlement tier, and a reserve is held for 30 days from the delivery
+          date against future returns. So a month&rsquo;s GMV resolves into cash
+          over a considerably longer and more variable window — the mechanics are
+          in
+          <a
+            class="underline hover:text-foreground"
+            href="/tiktok-shop-payout-schedule/">the payout schedule guide</a
+          >.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          How to actually reconcile it
+        </h2>
+        <ol class="mt-3 space-y-2 text-muted-foreground list-decimal pl-5">
+          <li>
+            Stop reconciling against GMV. Pull the
+            <strong class="text-foreground">settled</strong> figure per order — it
+            is the only number that reflects what TikTok really charged.
+          </li>
+          <li>
+            Break settlement down <strong class="text-foreground">per SKU</strong
+            >, not per shop. Blended margins hide the products that are quietly
+            underwater.
+          </li>
+          <li>
+            Attach your cost per unit to each SKU. Settlement minus COGS is real
+            profit; everything above that line is revenue theater.
+          </li>
+          <li>
+            Watch the fee lines as a percentage of revenue over time. Creator
+            commission mix moves this more than the 6% referral fee ever will.
+          </li>
+        </ol>
+        <p class="mt-4 text-sm text-muted-foreground">
+          Doing that by hand across dozens of SKUs is the spreadsheet grind this
+          site exists to kill. <a class="underline hover:text-foreground" href="/"
+            >MarginReady</a
+          > connects to your TikTok Shop account, pulls your real settled transactions,
+          subtracts the COGS you enter, and shows true profit per SKU. To model a
+          product before you list it, use the <a
+            class="underline hover:text-foreground"
+            href="/tiktok-shop-fee-calculator/">fee calculator</a
+          > or the <a
+            class="underline hover:text-foreground"
+            href="/tiktok-shop-break-even-calculator/"
+            >break-even price calculator</a
+          >.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">Sources</h2>
+        <ul class="mt-3 space-y-2 text-sm text-muted-foreground">
+          <li>
+            <a
+              class="underline hover:text-foreground"
+              href={REFERRAL_FEE_URL}
+              rel="nofollow noopener"
+              target="_blank">TikTok Shop Seller Center — Referral Fee Updates</a
+            > — 6% rate effective April 1 2024, fee formula and worked example, refund
+            administration fee and $5 cap.
+          </li>
+          <li>
+            <a
+              class="underline hover:text-foreground"
+              href={SETTLEMENT_POLICY_URL}
+              rel="nofollow noopener"
+              target="_blank"
+              >TikTok Shop Seller Center — Dynamic Settlement and Reserve Policy</a
+            > — settlement tiers and the 30-day reserve.
+          </li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</Layout>
