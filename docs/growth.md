@@ -35,11 +35,20 @@ this work?" is just a feeling.
 ### Where to get the numbers
 
 ```bash
-cd ~/work/projects/sites/portfolio && make run ARGS="gsc sync"
+cd ~/work/projects/sites/portfolio && uv run portfolio project seo marginready.com
 ```
 
-Then read the row for `marginready.com`. Or pull from
+That prints the GSC 28d row (impressions / clicks / CTR / position), sitemap
+state, and per-URL coverage from the URL Inspection API in one pass. Add
+`--refresh` to force fresh URL inspections rather than the cache.
+
+For the whole fleet at once, `uv run portfolio fleet seo`. Or pull from
 https://search.google.com/search-console directly.
+
+> **Note (2026-07-31):** this used to read `make run ARGS="gsc sync"`. That
+> command no longer exists — GSC moved under `project seo` / `fleet seo`. If the
+> command above stops resolving too, check `uv run portfolio --help` rather than
+> assuming the data source is gone.
 
 ### Format
 
@@ -57,10 +66,109 @@ https://search.google.com/search-console directly.
 ---
 
 ## 2026-05-28 — TikTok Shop sellers are starved for profit tooling and congregate in…
-- **Status:** active
+- **Status:** abandoned *(reviewed 2026-07-31 — never executed; see Learning)*
 - **Hypothesis:** TikTok Shop sellers are starved for profit tooling and congregate in high-traffic communities (r/TikTokShop, Facebook seller groups) where pricing and "am I actually making money" questions draw hundreds of comments. By posting genuinely useful breakdowns of TikTok fees and real-profit math — not ads — and offering a free beta to the first 50 sellers, MarginReady earns trust and signups cheaply. Once sellers connect their accounts and enter COGS, the accumulated history and setup create switching costs, turning free beta users into a sticky paid base and a credible source of case-study wins that fuel further organic distribution.
 - **KPI:** any GSC traffic — clicks, impressions, indexed-page count
 - **Baseline:** 0 clicks / 0 impressions (just deployed)
 - **Action:** project scaffolded via `portfolio new bootstrap`; first deploy pending. After deploy: verify in GSC as `sc-domain:marginready.com` and submit the sitemap.
-- **Result:** TBD — review 2026-06-25
-- **Learning:** TBD
+- **Result:** Reviewed 2026-07-31 (36 days past the 2026-06-25 review date).
+  **0 clicks / 0 impressions** over GSC's 28d window — unchanged from baseline.
+  Coverage: 1 of 5 URLs indexed (20%); only `/` is `submitted_indexed`. Sitemap
+  submitted and OK, but last fetched by Google 6 weeks ago.
+- **Learning:** **This entry was not reviewable, and that is the finding.** The
+  hypothesis was about *community distribution* — posting fee/profit breakdowns
+  in r/TikTokShop and Facebook seller groups and offering a free beta. The Action
+  line records something else entirely: "project scaffolded, deploy pending." The
+  community posting was never done. So the 0 impressions is **not** evidence
+  against the hypothesis; it is evidence that nothing was ever shipped to test
+  it. The KPI chosen (GSC impressions) also didn't match the hypothesis —
+  Reddit/Facebook distribution would show up as referral traffic, not search
+  impressions.
+  Two process fixes for future entries: (1) an entry's **Action must be the thing
+  the Hypothesis bets on**, or it cannot be reviewed — if the action changes,
+  close the entry and open a new one; (2) the **KPI must be able to observe the
+  channel** the hypothesis names. Marked `abandoned` rather than `failed`
+  because an untested bet has not lost — the community-distribution idea remains
+  open and unevaluated. What actually shipped instead was SEO content, logged
+  separately on 2026-07-30.
+- **Status update (2026-07-31):** `active` → `abandoned` (superseded, never executed)
+
+## 2026-07-30 — 0 impressions is a content-supply problem, not a technical one
+- **Status:** active
+- **Hypothesis:** The site has had ~0 impressions since launch not because of a
+  crawl/index defect but because it had exactly **one** page targeting real
+  search demand (`/tiktok-shop-fee-calculator/`), and that page was an **orphan**
+  — zero inbound internal links, discoverable only via sitemap. Adding a cluster
+  of 5 interlinked seller-money pages (2 calculators, 2 guides, 1 hub) and fixing
+  the internal-link graph should produce first impressions within one crawl
+  cycle, because the fee calculator already proved the format and the queries are
+  high-intent commercial ones a 5-page site can plausibly reach.
+- **KPI:** GSC impressions (primary), indexed-page count (secondary), clicks
+  (tertiary — expected to lag impressions by a cycle)
+- **Baseline (GSC sync 2026-07-13):** 0 clicks, 0 impressions. Coverage: `/`
+  `submitted_indexed` (last crawl 2026-07-03); `/cogs/`, `/connect/`,
+  `/dashboard/` all `url_is_unknown_to_google` (never crawled).
+  `/tiktok-shop-fee-calculator/` absent from coverage entirely — it shipped after
+  Google's last sitemap download (2026-06-19) and was never IndexNow-submitted.
+- **Action:**
+  - Diagnosed the orphan: nothing on the site linked to the fee calculator; nav
+    was Connect / COGS / Dashboard only.
+  - Shipped 5 new indexable pages — `/tools/` (hub), `/tiktok-shop-break-even-calculator/`,
+    `/tiktok-shop-roas-calculator/`, `/tiktok-shop-payout-schedule/`,
+    `/why-tiktok-shop-payout-is-less-than-sales/` (674–817 words each, FAQPage /
+    WebApplication / Article JSON-LD).
+  - Fixed the link graph: site-wide footer nav links every content page, homepage
+    gained a "Free calculators" section, tools cross-link each other. No content
+    page is now more than one click from any other.
+  - `noindex, follow` + sitemap exclusion on `/cogs/`, `/connect/`, `/dashboard/`
+    (mock-data prototype screens, 69–298 words, zero search intent).
+  - Scoped the "Frontend prototype · mock data" footer to the app screens only —
+    it was appearing on the public calculator page.
+  - Fixed `/connect` → `/connect/` on the homepage (redirect hop).
+  - Sitemap goes 5 URLs → 7, all indexable.
+- **Result:** TBD — review 2026-08-27
+- **Learning:** TBD. Key thing to check at review: whether impressions arrive for
+  the *new* pages specifically, which would confirm supply (not technical SEO)
+  was the binding constraint. If impressions stay at 0 with 7 indexed pages, the
+  constraint is domain-level (age/authority) and the next lever is off-site, not
+  more content.
+
+## 2026-07-31 — pre-deploy baseline: the orphan diagnosis is confirmed by GSC
+- **Status:** testing
+- **KPI:** GSC per-URL coverage state (does Google know a URL exists at all),
+  plus impressions / clicks as the downstream measure
+- **Baseline (fresh read, `portfolio project seo marginready.com`, 2026-07-31):**
+  - **0 impressions, 0 clicks** (GSC 28d) — unchanged since launch.
+  - Coverage **1 of 5 indexed (20%)**. `/` is `submitted_indexed`, crawled 4d ago.
+  - `/cogs/`, `/connect/`, `/dashboard/` — `url_is_unknown_to_google`.
+  - **`/tiktok-shop-fee-calculator/` — `url_is_unknown_to_google`.**
+  - Sitemap submitted and `OK`, but **last fetched by Google 6 weeks ago**.
+  - Fleet grade: 🌱 *unproven — young, no traffic yet (nothing else wrong)*; no
+    blockers detected.
+- **Action:** measurement only — no site change. Taken deliberately *before*
+  deploying the 2026-07-30 content cluster (still uncommitted in the working
+  tree) so there is a clean pre/post boundary.
+- **Result:** The fee calculator has been live and listed in the sitemap since
+  ~2026-07-20 and Google **still does not know it exists** 11 days later. Google
+  has not re-fetched the sitemap in 6 weeks. This is direct confirmation of the
+  2026-07-30 diagnosis: with **zero inbound internal links**, sitemap-only
+  discovery did not work — the page was invisible, not merely unranked.
+- **Learning:** Two things worth carrying to every other site in the portfolio:
+  1. **A sitemap entry is not a discovery mechanism.** Google fetched this
+     sitemap once and then not again for 6 weeks. On a low-authority domain,
+     crawl scheduling follows links; a URL reachable only from a stale sitemap
+     can sit undiscovered indefinitely. Internal links are what actually get a
+     page crawled.
+  2. **`url_is_unknown_to_google` and "ranks badly" are completely different
+     failures** with completely different fixes, and the 0-impressions number
+     looks identical for both. Always read per-URL coverage before concluding a
+     page "isn't ranking" — it may never have been seen. Checking this earlier
+     would have caught the orphan within days of the calculator shipping instead
+     of 11 days later.
+  This also means the 2026-07-30 cluster is testing **two** changes at once
+  (more pages + a real link graph). If impressions arrive, the link-graph fix is
+  the more likely cause of *discovery*, and content supply the cause of any
+  *breadth* in queries — worth separating when reading the results.
+- **Review:** 2026-08-28 (28d), and re-check coverage ~7 days after deploy — the
+  fast signal is URLs flipping off `url_is_unknown_to_google`, which should move
+  well before impressions do.

@@ -6,33 +6,66 @@ non-features that aren't obvious from the code or git history.
 
 ## Project
 
-<1-2 sentence description — fill in: what does this site do, who is
-the user, what is the stack (marginready.com runs on the sites/* workspace
-shared infra: Vite or Astro + pnpm + Cloudflare Pages, with Makefile
-forwarding to the central builder).>
+MarginReady shows TikTok Shop sellers their real per-SKU profit — it will
+connect to a seller's own shop via OAuth, pull actual *settled* sales and
+platform fees from TikTok's Finance API, and subtract the COGS they enter.
+The user is a US TikTok Shop seller doing ~$5k–$50k/month across 10–80 SKUs
+who knows their GMV but not their profit.
+
+Stack: **Astro** + React islands + Tailwind v4 + pnpm, deployed to
+**Cloudflare Workers (Static Assets)** via `wrangler.jsonc` — *not* Pages,
+and *not* Vite-standalone. Makefile forwards to the central builder.
+
+**Current state (2026-07-31):** the app screens (`/connect/`, `/cogs/`,
+`/dashboard/`) are a **frontend prototype on mock data** — no OAuth, no API,
+no database yet (that's v2.A). What is genuinely real and shipped is the
+public content surface: the free calculators and guides, which compute from
+user-entered numbers via pure functions in `src/lib/`. Don't mistake the
+dashboard for a working product when picking up work here.
 
 ## Commands
 
 ```bash
-# Build / dev (forwards to the parent Makefile)
+# Build / dev (forwards to ../Makefile with proj=marginready.com)
 make deps           # install deps via the central builder
-make dev            # local dev server
+make run            # local dev server  (NOT `make dev` — that target doesn't exist)
 make build          # production build → dist/
-
-# Test (per-stack — adjust as needed)
-make test           # if a test suite is wired in
-
-# Deploy
-git push            # Cloudflare Pages auto-builds on push to main
+make test           # pnpm install + build + test
 ```
+
+**`make test` hard-fails outside docker.** The host has an ancient Node; the
+container has Node 22 via Volta. Either `make buildsh` from `sites/` first, or
+run a one-shot container from `sites/` (this is what works from a Claude Code
+session, where Bash runs on the host):
+
+```bash
+cd ~/work/projects/sites && docker run --rm -v "$PWD":/usr/src/app \
+  -w /usr/src/app/marginready.com sites1:latest \
+  bash -lc 'export PATH=/root/.volta/bin:$PATH; npx vitest run && npx astro build'
+```
+
+Deploy: Cloudflare **Workers** (Static Assets) — `wrangler deploy`, or CF's Git
+integration on push to `main`.
 
 ## Conventions
 
   - Build path: this project's `Makefile` → `../Makefile` (parent
     workspace) → `~/work/projects/builder/` (central builder).
   - Stack: pnpm-only. No `package-lock.json` / `bun.lockb` / `yarn.lock`.
-  - Deploy: Cloudflare Pages via `wrangler.jsonc`. No `_redirects`
-    SPA fallback (uses CF's `not_found_handling` instead).
+  - Deploy: Cloudflare **Workers** (Static Assets) via `wrangler.jsonc`. No
+    `_redirects` SPA fallback (uses CF's `not_found_handling` instead).
+  - `trailingSlash: 'always'` + `build.format: 'directory'`. **Every internal
+    link must end in `/`** or it costs a redirect hop; there's a test guarding
+    this in `src/__tests__/seo.test.js`.
+  - **Fee math lives in pure functions** in `src/lib/` (`tiktok-fees.ts`,
+    `tiktok-breakeven.ts`, `tiktok-roas.ts`), never inside components — so it
+    can be unit-tested and cross-validated. New calculators follow that shape:
+    lib + test + component + page.
+  - **Never hardcode TikTok fee tables.** Rates are user inputs with documented
+    defaults. Any fee/payout fact stated in prose needs a citeable Seller Center
+    source on the page.
+  - Public content pages must not carry the "Frontend prototype · mock data"
+    footer — it's scoped to the app screens in `Layout.astro`.
 
 ## Heading hygiene
 
@@ -63,5 +96,21 @@ mistakes at the point of writing, not at quarterly cleanup time.
 
 ## Deferred decisions
 
-<Things deliberately *not* shipped. Append entries with rationale so
-future Claude sessions don't re-propose them.>
+*Things deliberately **not** shipped. Append entries with rationale so future
+Claude sessions don't re-propose them.*
+
+- **2026-07-31 — App screens stay `noindex`, not deleted and not fleshed out.**
+  `/connect/`, `/cogs/`, `/dashboard/` run on mock data and serve no search
+  intent. They're kept reachable for demo purposes but carry `noindex, follow`
+  and are excluded from the sitemap (`astro.config.mjs` filter). Revisit only
+  when v2.A makes them real. Don't "improve their SEO" — that's not the gap.
+- **2026-07-31 — No blog / CMS.** Content ships as individual Astro pages under
+  `src/pages/`. At this page count a collection or CMS is overhead. Revisit past
+  ~15 content pages.
+- **2026-07-31 — Calculators stay client-side and account-free.** No signup, no
+  server call, no persistence. They're top-of-funnel; friction there costs more
+  than the captured emails are worth pre-beta.
+- **2026-07-31 — No per-category TikTok fee table.** The US rate is effectively
+  flat (6%, 5% select jewelry) and category grids in old guides are stale. A
+  maintained table is a liability we'd have to keep re-verifying; the rate is a
+  user input with a documented default instead.

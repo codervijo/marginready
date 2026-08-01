@@ -88,12 +88,27 @@ per-stack work to the central builder at `~/work/projects/builder/`.
 
 ## Project structure
 
-- `src/` — application source
-- `public/` — static assets copied to `dist/` at build (favicons, OG images, `_headers`)
-- `docs/` — PRD, Prompts log
+- `src/pages/` — one `.astro` file per route. Content pages own their own
+  `<title>` / meta / canonical / JSON-LD in a `<Fragment slot="head">`.
+- `src/lib/` — **pure, framework-agnostic math**, no React imports:
+  `tiktok-fees.ts` (profit at a given price), `tiktok-breakeven.ts` (price for
+  a target margin), `tiktok-roas.ts` (break-even ROAS), plus `format.ts`.
+  All calculator logic lives here so it's unit-testable.
+- `src/components/` — React islands (`client:load`) + presentational pieces.
+  Calculators are a thin UI shell over `src/lib/`; keep math out of them.
+- `src/layouts/Layout.astro` — shared chrome. Owns the nav, the site-wide
+  **footer link graph** (the no-orphans guarantee), and the prototype-footer
+  scoping.
+- `src/__tests__/` — vitest. Math tests cross-validate the libs against each
+  other; `seo.test.js` guards the tag baseline, `noindex` state, sitemap
+  exclusions, and internal linking.
+- `public/` — static assets copied to `dist/` at build (favicon, `_headers`,
+  `robots.txt`, IndexNow key file)
+- `docs/` — PRD, Prompts log, growth log, per-project CLAUDE.md
 - `Makefile` — thin forwarder to `../Makefile`
+- `astro.config.mjs` — `site`, `trailingSlash: 'always'`, and the **sitemap
+  filter** excluding the noindexed prototype screens
 - `wrangler.jsonc` — Cloudflare deploy config
-- `scripts/` *(if present)* — ingester or build-time helpers
 
 ## Building info
 
@@ -144,21 +159,60 @@ docker exec -w /usr/src/app <name> make test proj=marginready.com
   (avoids the bun-detection trap kwizicle.com hit). Idempotent; safe to re-run.
 - **Vite version:** must be ≥ 6.0.0 — Wrangler's Vite integration rejects Vite 5.
 - **Env vars:** set `VITE_*` vars (e.g. `VITE_GA_ID`) in the Cloudflare Workers project's environment-variable settings — they're inlined at build time.
-- **Live URL:** https://marginready.com/  *(update once first deploy succeeds)*
+- **Live URL:** https://marginready.com/ — live, serving 200 (verified 2026-07-31).
 - **Legacy:** if a `vercel.json` or `.vercelignore` is present from a Lovable export, it's inert on Cloudflare and safe to delete.
 
 ## Content strategy
 
 *what content this site needs — page types, initial topics, format mix (long-form vs reference vs tool)*
 
-Page types: landing page (early-access email capture), product/how-it-works page, and a small blog. Topics: TikTok Shop fees explained, GMV vs. real profit, how to calculate true margin, settlement and payout timing, COGS tracking for TikTok sellers. Format mix: short practical guides aimed at the exact pricing/profit questions sellers ask in r/TikTokShop and Facebook groups, each pointing softly to the tool. Lead with the landing page; build content out after beta validation.
+Page types: landing page (early-access email capture), free calculator/tool pages, and practical guides. Topics: TikTok Shop fees explained, GMV vs. real profit, how to calculate true margin, settlement and payout timing, COGS tracking for TikTok sellers. Format mix: interactive calculators backed by explainer prose, aimed at the exact pricing/profit questions sellers ask in r/TikTokShop and Facebook groups, each pointing softly to the tool.
 
-### Post-deploy checklist (do these once after the first successful deploy)
+**Revised 2026-07-31 — the original "lead with the landing page, build content
+after beta validation" plan was inverted.** A brand-only landing page has no
+query to rank for, so it produced 0 impressions for two months. Content now
+leads: the calculators are the acquisition surface and the landing page converts
+what they bring. See `docs/growth.md` (2026-07-30, 2026-07-31) for the evidence.
 
-- [ ] Verify in **Google Search Console** at https://search.google.com/search-console — add as `sc-domain:marginready.com` property; verify via DNS TXT record. Until this is done, no SEO traffic data is observable for this site (and the workspace-wide `30 commercial sites with traffic` goal can't credit it).
-- [ ] Submit the sitemap (`https://marginready.com/sitemap.xml`) inside GSC.
-- [ ] Update the **Live URL** above with the actual deploy URL.
-- [ ] Run `make run ARGS="cleanup"` from `sites/portfolio/` so `data/portfolio.json` reflects the new project's state (and `project status marginready.com` resolves cleanly).
+**The proven format** — every content page follows it:
+
+1. A working calculator at the top (pure math in `src/lib/`, React island).
+2. Explainer prose beneath answering the exact query in the H1.
+3. `FAQPage` + `WebApplication`/`Article` JSON-LD.
+4. Cited primary sources for any fee/payout fact — TikTok Seller Center, linked
+   on-page. Never an uncited number.
+5. Cross-links to sibling tools + a soft CTA to the real product.
+
+**Current content surface (7 indexable URLs):** `/`, `/tools/` (hub),
+`/tiktok-shop-fee-calculator/`, `/tiktok-shop-break-even-calculator/`,
+`/tiktok-shop-roas-calculator/`, `/tiktok-shop-payout-schedule/`,
+`/why-tiktok-shop-payout-is-less-than-sales/`.
+
+**Hard-won rule: no orphan pages.** The fee calculator shipped with zero inbound
+internal links and Google still didn't know it existed 11 days later, despite it
+being live and in the sitemap. A sitemap entry is *not* a discovery mechanism on
+a low-authority domain. Every new content page must be linked from the footer
+nav in `Layout.astro` **and** the `/tools/` hub. There is a regression test
+enforcing this in `src/__tests__/seo.test.js`.
+
+### Post-deploy checklist
+
+*All verified complete 2026-07-31 via `uv run portfolio project seo marginready.com`.*
+
+- [x] Verify in **Google Search Console** — `sc-domain:marginready.com` property is live and returning data.
+- [x] Submit the sitemap inside GSC — submitted, status `OK`. Note the real path is **`/sitemap-index.xml`** (Astro's sitemap integration), not `/sitemap.xml`.
+- [x] Update the **Live URL** above — https://marginready.com/ serves 200.
+- [x] `data/portfolio.json` contains `marginready.com`; `project seo` resolves cleanly.
+
+**Ongoing SEO check** (replaces the retired `gsc sync` command):
+
+```bash
+cd ~/work/projects/sites/portfolio && uv run portfolio project seo marginready.com
+```
+
+Read **per-URL coverage**, not just impressions. `url_is_unknown_to_google` means
+the page was never discovered — a completely different failure from "indexed but
+not ranking", with a different fix. Both show 0 impressions.
 
 ## How to run
 
@@ -196,8 +250,14 @@ Read **the full workflow inside `docs/growth.md`** — it's self-sustaining
 so you don't have to remember the lifecycle from outside the file.
 
 Update it whenever you do something growth-relevant on this site. The
-data source is GSC (`portfolio gsc sync` from the portfolio dir); this
-file narrates *why*.
+data source is GSC — `uv run portfolio project seo marginready.com` from
+`sites/portfolio/` (the old `gsc sync` command was retired); this file
+narrates *why*.
+
+Two lifecycle rules that have already cost this project a wasted entry:
+an entry's **Action must be the thing its Hypothesis bets on** (otherwise it
+can't be reviewed), and its **KPI must be able to observe the channel** the
+hypothesis names. See the 2026-05-28 entry's Learning for how that went wrong.
 
 ## Strategy reminder — ship fast, let the market decide
 
@@ -254,4 +314,24 @@ the bootstrap (this scaffold); v1.A is the first real shipped capability.
 
 ## Out of scope / don't touch
 
-- *(leave blank — fill in when something is)*
+- **The three product rules are foundational** (see *Hard rules* above): no
+  scraping, own-data-only, no hardcoded fee percentages in the product. If a
+  request conflicts with one, stop and ask — the design is wrong, not the API.
+- **`/connect/`, `/cogs/`, `/dashboard/` are `noindex` on purpose.** They're
+  mock-data prototype screens. Don't "fix their SEO", don't re-add them to the
+  sitemap, don't write filler copy onto them. They become real in v2.A.
+- **Don't state a TikTok fee, rate, or payout figure without a citeable Seller
+  Center source.** The public calculators are explicitly *estimators* driven by
+  user-entered rates — that's a deliberate distinction from the product's real
+  settled numbers, and the pages say so. Never present a modeled figure as
+  settled data.
+- **Don't add a competitor/market-comparison feature.** Not a v1 gap — a
+  permanent non-goal.
+- **`docs/growth.md` is append-only.** Fill in a past entry's Result/Learning at
+  review time; never rewrite its Hypothesis, Baseline, or Action.
+
+## Deferred decisions
+
+See `docs/CLAUDE.md § Deferred decisions` for things deliberately not shipped
+(no blog/CMS, calculators stay account-free, no per-category fee table) so they
+don't get re-proposed each session.
