@@ -281,5 +281,7 @@ https://search.google.com/search-console directly.
   rose 6% → 8% on 2026-08-04, with no TikTok source; the other guides checked disagree
   with each other. TikTok's referral fee page (last updated 2026-05-14) says 6%. The page
   uses 6% as an editable default. Operator to confirm in Seller Center.
+  Post-deploy (2026-09-18): operator requested Google indexing in Search Console; the
+  URL was also pinged to IndexNow (Bing/Yandex/…, not Google).
 - **Result:** TBD — review 2026-10-16
 - **Learning:** TBD.
