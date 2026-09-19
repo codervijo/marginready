@@ -215,6 +215,10 @@ https://search.google.com/search-console directly.
   `/how-to-calculate-cogs-tiktok-shop/` (landed-cost calculator). Both are linked
   from the footer, `/tools/`, and each other. Replaced stale January FBT figures
   on the fee calculator with a link to the new page.
+- **Manual GSC step (2026-09-18):** operator resubmitted `sitemap-index.xml` and
+  requested indexing for `/tools/`, `/tiktok-shop-break-even-calculator/`, and both
+  new pages. Right after: all 4 still `url_is_unknown_to_google`; GSC still shows
+  the sitemap as last fetched 3 months ago.
 - **Result:** TBD — review 2026-10-16
 - **Learning:** TBD. Also check whether `/tools/` and the break-even calculator
   left `url_is_unknown_to_google` after the manual index requests (2026-09-18).

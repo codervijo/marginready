@@ -23,6 +23,20 @@ public content surface: the free calculators and guides, which compute from
 user-entered numbers via pure functions in `src/lib/`. Don't mistake the
 dashboard for a working product when picking up work here.
 
+**Pending follow-ups (check these first when picking the project back up):**
+
+- [ ] **~2026-09-25: indexing check.** Run
+  `cd ~/work/projects/sites/portfolio && uv run portfolio project seo marginready.com --refresh`.
+  Confirm `/tools/`, `/tiktok-shop-break-even-calculator/`,
+  `/tiktok-shop-fbt-fee-calculator/` and `/how-to-calculate-cogs-tiktok-shop/`
+  have left `url_is_unknown_to_google`, and that the sitemap's "last fetched" date
+  has moved (indexing was requested manually on 2026-09-18). If they are still
+  unknown, investigate before shipping more pages. Note the result in the v1.C
+  growth entry.
+- [ ] **2026-10-16: v1.C growth review.** Fill in Result/Learning for the
+  2026-09-18 entry in `docs/growth.md` (FBT-intent query impressions and
+  position, plus first impressions on the two new pages).
+
 ## Commands
 
 ```bash
