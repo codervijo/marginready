@@ -33,7 +33,7 @@ const FIELDS: FieldDef[] = [
   },
   {
     key: "fulfillmentPerUnit",
-    label: "Fulfillment per unit",
+    label: "Fulfillment / shipping per unit",
     note: "Your FBT fee from the current rate card, or your own label + packing cost.",
     prefix: "$",
     step: "0.01",
@@ -150,16 +150,26 @@ export function TikTokFeeCalculator() {
           }`}
         >
           <p className="text-sm font-medium text-muted-foreground">
-            Net profit
+            Net profit per unit sold
           </p>
           <p
             className={`mt-1 text-4xl sm:text-5xl font-semibold tracking-tight tabular-nums ${
               profitable ? "text-profit" : "text-loss"
             }`}
           >
-            {formatCurrency(result.netProfit)}
+            {formatCurrencyPrecise(result.netProfitPerUnit)}
           </p>
           <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-sm">
+            <span className="text-muted-foreground">
+              Total{" "}
+              <span
+                className={`font-semibold tabular-nums ${
+                  profitable ? "text-profit" : "text-loss"
+                }`}
+              >
+                {formatCurrency(result.netProfit)}
+              </span>
+            </span>
             <span className="text-muted-foreground">
               Net margin{" "}
               <span

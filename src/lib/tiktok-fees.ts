@@ -31,6 +31,8 @@ export interface FeeResult {
   estimatedReturnsCost: number;
   adSpend: number;
   netProfit: number;
+  /** Net profit per unit sold, USD (0 when no units) */
+  netProfitPerUnit: number;
   /** Net profit as % of revenue */
   netMarginPct: number;
   /**
@@ -75,6 +77,8 @@ export function calcFees(input: FeeInputs): FeeResult {
     estimatedReturnsCost -
     adSpend;
 
+  const netProfitPerUnit = units > 0 ? netProfit / units : 0;
+
   const netMarginPct = totalRevenue > 0 ? (netProfit / totalRevenue) * 100 : 0;
 
   const effectiveTakePct =
@@ -93,6 +97,7 @@ export function calcFees(input: FeeInputs): FeeResult {
     estimatedReturnsCost,
     adSpend,
     netProfit,
+    netProfitPerUnit,
     netMarginPct,
     effectiveTakePct,
   };

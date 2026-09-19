@@ -253,3 +253,33 @@ https://search.google.com/search-console directly.
   2026-09-18, and it was also pinged to IndexNow (see the v1.C entry).
 - **Result:** TBD — review 2026-10-16
 - **Learning:** TBD.
+
+## 2026-09-18 — v1.A.1: strengthen the fee calculator page (fix uncited claims, target "profit calculator")
+- **Status:** active
+- **Hypothesis:** `/tiktok-shop-fee-calculator/` gets the most query variety on the
+  site but ranks ~69. It stated fee facts with no on-page source, including an
+  unsourced "~20–30% effective take" plus a 3% promo and a UK 9% rate that can't be
+  cited now. It also had FAQ schema with no visible FAQ, showed only batch totals
+  despite promising "per order", and didn't target "profit calculator", its
+  #2–3 query. Fixing these should improve position and CTR for the fee/profit
+  calculator queries.
+- **KPI:** page avg position + impressions (28d); position for "tiktok shop fee
+  calculator", "tiktok shop profit calculator", "tiktok shop calculator".
+- **Baseline (GSC 90d, 2026-09-18):** page 143 imp / 0 clicks / pos 68.6. Queries:
+  "tiktok shop fee calculator" 12 @ 63.1; "tiktok shop calculator" 8 @ 77.9;
+  "tiktok shop profit calculator" 8 @ 70.6; "tiktok shop fees calculator" 7 @ 59.1;
+  "tiktok shop shipping calculator" 3 @ 72.3; "tiktok shop revenue calculator" 2 @ 71.5.
+- **Action:** rewrote the page. Every fee fact is now cited (Seller Center referral fee
+  page, Seller Terms, TX/WV sales tax on referral fees, Modern Retail on the shipping
+  reversal), plus a Sources section. Removed the unsourced 20–30%, the 3% promo, and
+  UK 9%. Added worked examples ($50 → $32.00 at 64%; $20 creator product → $1.80 at 9%,
+  and a −$1.20 loss with ads), guarded by tests. Added a visible 5-question FAQ,
+  per-unit net profit in the calculator headline, and "Fulfillment / shipping" labeling.
+  Title → "TikTok Shop Fee & Profit Calculator — Net Profit Per Order"; H1 now differs
+  from the title; slug unchanged.
+  **Open fact question:** one third-party blog (delzonic.com) claims the US referral fee
+  rose 6% → 8% on 2026-08-04, with no TikTok source; the other guides checked disagree
+  with each other. TikTok's referral fee page (last updated 2026-05-14) says 6%. The page
+  uses 6% as an editable default. Operator to confirm in Seller Center.
+- **Result:** TBD — review 2026-10-16
+- **Learning:** TBD.

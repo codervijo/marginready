@@ -60,6 +60,7 @@ Two-level versioning convention (canonical: `sites/portfolio/AI_AGENTS.md`):
 |---|---|---|---|
 | **v0.A** | scaffolded | `portfolio new bootstrap` ran; standard files written; git initialized | ✅ |
 | **v1.A** | frontend prototype + first tool | Landing page, mock-data app screens (`/connect/`, `/cogs/`, `/dashboard/`), `/tiktok-shop-fee-calculator/`; CF deploy, trailing-slash canonical, IndexNow | ✅ |
+| **v1.A.1** | fee calculator upgrade | Every fee fact cited + Sources; uncited claims removed; worked examples (test-guarded); visible FAQ; per-unit net profit; title targets "profit calculator" | ✅ |
 | **v1.B** | SEO content cluster | `/tools/` hub, `/tiktok-shop-break-even-calculator/`, `/tiktok-shop-roas-calculator/`, `/tiktok-shop-payout-schedule/`, `/why-tiktok-shop-payout-is-less-than-sales/`; site-wide internal-link graph; prototype screens noindexed + sitemap-excluded | ✅ |
 | **v1.B.1** | payout page upgrade | Payout-date estimator on `/tiktok-shop-payout-schedule/`, worked timelines, late-payout checklist, visible FAQ matching schema | ✅ |
 | **v1.C** | FBT + COGS pages | `/tiktok-shop-fbt-fee-calculator/` (chargeable weight, storage, returns, vs self-ship), `/how-to-calculate-cogs-tiktok-shop/` (landed-cost calculator); stale FBT figures removed from fee calculator | ✅ |
@@ -68,3 +69,7 @@ Two-level versioning convention (canonical: `sites/portfolio/AI_AGENTS.md`):
 ## 6. Open questions
 
 - *(append-only log; mark answered with date but never delete)*
+- **2026-09-18:** Is the US referral fee still 6%? A third-party blog claims 6% → 8% from
+  2026-08-04 (no TikTok source); TikTok's fee page (updated 2026-05-14) says 6%. Operator to
+  confirm in Seller Center. If it changed, update the 6% defaults and prose on the fee,
+  break-even, ROAS, FBT and payout-less pages.

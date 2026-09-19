@@ -33,7 +33,9 @@ dashboard for a working product when picking up work here.
   has moved (indexing was requested manually on 2026-09-18). If they are still
   unknown, investigate before shipping more pages. Note the result in the v1.C
   growth entry.
-- [ ] **2026-10-16: v1.C + v1.B.1 growth reviews.** Fill in Result/Learning for both
+- [ ] **Confirm the US referral fee rate** (see `docs/prd.md` § Open questions). An
+  unverified claim says 8% since 2026-08-04; every page defaults to 6%.
+- [ ] **2026-10-16: v1.C + v1.B.1 + v1.A.1 growth reviews.** Fill in Result/Learning for all three
   2026-09-18 entries in `docs/growth.md` (FBT-intent query impressions and
   position, first impressions on the two new pages, payout page position).
 

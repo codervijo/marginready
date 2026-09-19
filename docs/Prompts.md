@@ -40,3 +40,11 @@ to surface "last AI prompt" per project. Keep entries append-only.
 > "strengthen the payout schedule page". Added the payout-date estimator
 > (`tiktok-payout.ts` + tests), worked timelines, a late-payout checklist, and a
 > visible FAQ (previously JSON-LD only). Re-verified against Seller Center.
+
+## 2026-09-18 — v1.A.1: strengthen the fee calculator page
+
+> "strengthen the fee calculator page". Found uncited fee facts (incl. an unsourced
+> 20–30% effective-take figure) and FAQ schema without a visible FAQ. Re-sourced
+> every fact from Seller Center, removed what can't be cited, added worked examples
+> (test-guarded), visible FAQ, per-unit profit, and a Sources section. Flagged an
+> unverified third-party "8% from Aug 4 2026" claim for operator confirmation.

@@ -5,69 +5,70 @@ import { TikTokFeeCalculator } from "../components/TikTokFeeCalculator";
 const site = "https://marginready.com";
 const path = "/tiktok-shop-fee-calculator/";
 const url = site + path;
-const title =
-  "TikTok Shop Fee Calculator — See Your Real Net Profit Per Order";
+const title = "TikTok Shop Fee & Profit Calculator — Net Profit Per Order";
 const description =
-  "Free TikTok Shop fee calculator. Enter your price, referral fee, COGS, affiliate commission, fulfillment, and ad spend to see real net profit, net margin, and TikTok's effective take per order.";
+  "Enter your price, COGS, affiliate rate, shipping and ad spend to see what you keep per order on TikTok Shop after the 6% referral fee and every other cost.";
 
-// Rates confirmed against TikTok Shop Seller Center. Update this date when re-verified.
-const ratesAsOf = "July 2026";
+// Fee facts verified against TikTok Shop Seller Center. Update when re-verified.
+const verifiedAsOf = "September 2026";
+
+const REFERRAL_FEES_URL =
+  "https://seller-us.tiktok.com/university/essay?knowledge_id=5988482086864682";
+const SELLER_TERMS_URL =
+  "https://seller-us.tiktok.com/university/essay?knowledge_id=1331308753078058&lang=en";
+const REFERRAL_TAX_URL =
+  "https://seller-us.tiktok.com/university/essay?knowledge_id=1017269682849550&lang=en";
+const SHIPPING_REVERSAL_URL =
+  "https://www.modernretail.co/operations/tiktok-halts-plan-to-end-independent-shipping-for-u-s-sellers-after-backlash/";
+
+const faq = [
+  {
+    q: "How much does TikTok Shop take per sale?",
+    a: "TikTok's own cut is the referral fee: 6% of what the buyer pays in most US categories, 5% in five jewelry subcategories. What the channel takes in total depends on your affiliate rate, shipping, returns and ads. A $20 product with a 20% creator commission and $4 shipping loses 46% of its revenue before product cost. Enter your numbers above to see your own figure.",
+  },
+  {
+    q: "What is the TikTok Shop referral fee in the US?",
+    a: "6% for most categories. Five jewelry subcategories (Diamond, Gold, Jade, Platinum/Carat Gold, Ruby/Sapphire/Emerald) pay 5%, and pre-owned categories have their own rates. TikTok can change the fee and says it will notify sellers by email or in Seller Center, so check your category's rate there.",
+  },
+  {
+    q: "Is there a separate payment processing fee on TikTok Shop?",
+    a: "Not from TikTok. Its Seller Terms describe the referral fee as covering the platform, including the services that let payment providers process payments for you. So don't add a separate card-processing percentage to your model the way you would on some other platforms.",
+  },
+  {
+    q: "Do I pay sales tax on the TikTok Shop referral fee?",
+    a: "Only if your business is registered in Texas or West Virginia. Since November 1, 2025, TikTok collects sales tax on the referral fee for sellers there and adds it to the referral fee on your seller invoice. Everywhere else, no.",
+  },
+  {
+    q: "What is the difference between fees and net profit on TikTok Shop?",
+    a: "Fees are what TikTok and your creators take: referral fee, affiliate commission, and FBT if you use it. Net profit is what's left after those and your own costs: product cost (COGS), shipping, returns and ads. A product can have normal fees and still lose money if COGS or ad spend is too high, so this calculator ends on net profit, not fees.",
+  },
+];
 
 const webApplicationLd = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  name: "TikTok Shop Fee Calculator",
+  name: "TikTok Shop Fee & Profit Calculator",
   url,
   description:
-    "Calculate the real net profit and net margin per order on TikTok Shop after referral fees, affiliate commissions, fulfillment, returns, and ad spend.",
+    "Calculate net profit per order and net margin on TikTok Shop after the referral fee, affiliate commissions, fulfillment or shipping, returns, and ad spend.",
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "USD",
-  },
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
   publisher: { "@id": "https://marginready.com/#organization" },
 };
 
 const faqLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "How much does TikTok Shop take?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "In the US, TikTok Shop takes a flat 6% referral fee on most categories (5% on select jewelry), and that fee already includes payment processing. Your effective take climbs to roughly 20–30% of revenue once affiliate commissions, fulfillment, and returns stack on top. Confirm your own category rate in TikTok Seller Center.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What are TikTok Shop seller fees?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "TikTok Shop seller fees are the referral fee (a percentage of order value that includes payment processing), fulfillment costs if you use Fulfilled by TikTok, affiliate/creator commissions you set when working with creators, and the profit lost to returns and refunds.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What is the TikTok Shop commission rate?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "The standard US TikTok Shop commission (referral fee) is a flat 6%, with a 5% exception for select jewelry. Non-US markets differ — the UK moved to 9%. Always confirm your category rate in TikTok Seller Center.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How do I calculate my net profit on TikTok Shop?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Start with revenue (price × units), then subtract the referral fee, any affiliate commission, fulfillment, your product cost (COGS), estimated returns, and ad spend. What remains is your net profit; divide it by revenue for net margin. This calculator does the math live as you type.",
-      },
-    },
-  ],
+  mainEntity: faq.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
 };
+
+const link = "underline hover:text-foreground";
+const ext = { rel: "nofollow noopener", target: "_blank" };
 ---
 
 <Layout>
@@ -97,17 +98,21 @@ const faqLd = {
   <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
     <header class="mb-6">
       <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight">
-        TikTok Shop Fee Calculator
+        TikTok Shop fee calculator: what you keep per order
       </h1>
       <p class="mt-3 text-muted-foreground max-w-2xl">
-        Revenue isn&rsquo;t profit. Enter your numbers below to see your real
-        net profit and net margin per order after TikTok&rsquo;s referral fee,
-        affiliate commissions, fulfillment, returns, and ad spend — plus how
-        much TikTok Shop actually takes.
+        TikTok Shop charges a 6% referral fee on most US orders. Once you add
+        creator commissions, shipping, returns and ads, it&rsquo;s often not
+        the biggest cost on the order. Enter your numbers to see net
+        profit per order, net margin, and how much of each sale goes to
+        costs other than your product.
       </p>
       <p class="mt-3 text-xs text-muted-foreground">
-        Rates current as of {ratesAsOf}; confirm your category in TikTok Seller
-        Center. This estimator uses your inputs — it does not read your account.
+        Fee facts checked against TikTok Seller Center, {verifiedAsOf}. The 6%
+        default comes from TikTok&rsquo;s
+        <a class={link} href={REFERRAL_FEES_URL} {...ext}>referral fee page</a>;
+        confirm your category there. This estimator uses your inputs. It
+        does not read your account.
       </p>
     </header>
 
@@ -116,107 +121,181 @@ const faqLd = {
     <div class="prose-tk mt-14 space-y-12 max-w-3xl">
       <section>
         <h2 class="text-2xl font-semibold tracking-tight">
-          How much does TikTok Shop take?
+          What TikTok Shop charges, and what it doesn&rsquo;t
         </h2>
         <p class="mt-3 text-muted-foreground">
-          In the US, TikTok Shop takes a <strong class="text-foreground"
-            >flat 6% referral fee</strong
-          > on most categories (5% on select jewelry). That referral fee already
-          includes payment processing, so there is no separate processing charge
-          to add on top.
+          TikTok itself charges one fee on every sale, the
+          <strong class="text-foreground">referral fee</strong>. In the US
+          it&rsquo;s <strong class="text-foreground">6%</strong> in most
+          categories, with 5% for five jewelry subcategories (Diamond, Gold,
+          Jade, Platinum/Carat Gold, Ruby/Sapphire/Emerald). It&rsquo;s
+          calculated on the total amount the buyer pays. It also covers the
+          services that let payment providers process the payment, so there is
+          no separate processing fee from TikTok to add.
         </p>
         <p class="mt-3 text-muted-foreground">
-          But 6% is just the platform&rsquo;s cut. Your
-          <strong class="text-foreground">effective take</strong> — everything the
-          channel eats before you see profit — typically climbs to
-          <strong class="text-foreground">~20–30% of revenue</strong> once affiliate
-          commissions, fulfillment, and returns stack on top. The calculator above
-          shows this &ldquo;effective take&rdquo; live so you can see it for your
-          own numbers. Rates come from the TikTok Shop Seller Center — confirm your
-          own category rate there.
+          One exception: if your business is registered in
+          <strong class="text-foreground">Texas or West Virginia</strong>,
+          TikTok has added sales tax to the referral fee on your seller invoice
+          since November 1, 2025. In those states the fee is slightly higher
+          than 6%.
         </p>
-      </section>
-
-      <section>
-        <h2 class="text-2xl font-semibold tracking-tight">
-          TikTok Shop seller fees explained
-        </h2>
+        <p class="mt-3 text-muted-foreground">
+          Everything else in the calculator is a cost you choose or cause:
+        </p>
         <ul class="mt-3 space-y-3 text-muted-foreground">
           <li>
-            <strong class="text-foreground">Referral fee</strong> — a percentage
-            of order value (the standard US rate is 6%). It is charged on the
-            selling price before tax and already includes payment processing.
+            <strong class="text-foreground">Affiliate / creator commission.</strong>
+            A rate you set per product, paid only on sales creators drive.
+            At a 20% commission it&rsquo;s more than three times the referral
+            fee on the same sale.
           </li>
           <li>
-            <strong class="text-foreground">Fulfillment</strong> — you can ship
-            orders yourself or use Fulfilled by TikTok (FBT), which charges a
-            per-unit fee set by chargeable weight and how many items ship
-            together, plus storage and return handling. The rate card changed
-            several times in 2026. Use the
-            <a class="underline hover:text-foreground" href="/tiktok-shop-fbt-fee-calculator/">FBT fee calculator</a>
-            to get your all-in cost per unit. TikTok announced a plan to require its own logistics by March 31,
-            2026, but reversed it in February 2026 — independent seller shipping
-            remains available.
+            <strong class="text-foreground">Fulfillment or shipping.</strong>
+            Either your own label and packing cost, or Fulfilled by TikTok (FBT),
+            which charges per unit by chargeable weight, plus storage and return
+            handling. Use the
+            <a class={link} href="/tiktok-shop-fbt-fee-calculator/">FBT fee calculator</a>
+            to get that figure. TikTok planned to phase out independent seller
+            shipping in 2026 but
+            <a class={link} href={SHIPPING_REVERSAL_URL} {...ext}>reversed the plan in February</a>,
+            so shipping yourself is still an option.
           </li>
           <li>
-            <strong class="text-foreground">Affiliate / creator commissions</strong>
-            — the rate you set when creators promote your product (commonly
-            10–30%). You only pay it on sales creators drive.
+            <strong class="text-foreground">Returns.</strong> The calculator
+            treats a returned order as lost revenue, assuming the product and
+            shipping aren&rsquo;t recovered. That&rsquo;s the conservative case.
           </li>
           <li>
-            <strong class="text-foreground">Returns &amp; refunds</strong> — refunded
-            orders erase revenue and, in most cases, the product and shipping you
-            already spent. A few points of return rate can move your margin
-            noticeably.
+            <strong class="text-foreground">Ad spend.</strong> Enter the total
+            for the same batch of orders; the calculator spreads it per unit.
+          </li>
+          <li>
+            <strong class="text-foreground">Product cost (COGS).</strong> Use
+            landed cost, not the supplier price. See
+            <a class={link} href="/how-to-calculate-cogs-tiktok-shop/">how to calculate COGS for TikTok Shop</a>.
           </li>
         </ul>
       </section>
 
       <section>
         <h2 class="text-2xl font-semibold tracking-tight">
-          TikTok Shop commission rates
+          Two products, same 6% fee, very different profit
         </h2>
         <p class="mt-3 text-muted-foreground">
-          The standard US TikTok Shop commission (referral fee) is a
-          <strong class="text-foreground">flat 6%</strong>, with a
-          <strong class="text-foreground">5% exception for select jewelry</strong>.
-          This replaced the older per-category tables (4–9%) that some outdated
-          guides still show — for the US in 2026 it is a single flat rate, not a
-          category grid.
+          <strong class="text-foreground">The easy case</strong> (the
+          calculator&rsquo;s defaults): a $50 product with a $15 cost, no
+          creators, no ads, shipping built into the price. TikTok takes $3.00
+          and you keep <strong class="text-foreground">$32.00 per order, a 64%
+          margin</strong>. The referral fee barely matters here.
         </p>
         <p class="mt-3 text-muted-foreground">
-          New US sellers may qualify for a promotional 3% referral rate for their
-          first 30 days after an early first sale — a temporary discount, not the
-          standing rate. Non-US markets differ: the UK, for example, moved to 9%.
-          Whatever market you sell in, confirm the current rate for your exact
-          category in TikTok Seller Center before you price.
+          <strong class="text-foreground">The common case:</strong> a $20
+          product costing $8, sold through creators at a 20% commission,
+          shipped at $4 a label, with 5% of revenue refunded. Per order:
+        </p>
+        <ul class="mt-3 space-y-1 text-muted-foreground tabular-nums">
+          <li>Referral fee (6%): $1.20</li>
+          <li>Creator commission (20%): $4.00</li>
+          <li>Shipping: $4.00</li>
+          <li>Returns (5% of revenue): $1.00</li>
+          <li>Product cost: $8.00</li>
+          <li>You keep: <strong class="text-foreground">$1.80, a 9% margin</strong></li>
+        </ul>
+        <p class="mt-3 text-muted-foreground">
+          The channel costs (referral, commission and shipping) take
+          <strong class="text-foreground">46%</strong> of the price before the
+          product is paid for. And the failure case: add $3 per order of ad
+          spend and the same product <strong class="text-foreground">loses $1.20
+          on every sale</strong>, with channel costs (now including ads) at 61% of revenue. Revenue
+          looks the same in the TikTok dashboard in both cases.
+        </p>
+        <p class="mt-3 text-muted-foreground">
+          If the answer is a loss, work backwards instead: the
+          <a class={link} href="/tiktok-shop-break-even-calculator/">break-even price calculator</a>
+          finds the price that covers these costs, and the
+          <a class={link} href="/tiktok-shop-roas-calculator/">break-even ROAS calculator</a>
+          tells you how efficient your ads need to be.
         </p>
       </section>
 
       <section>
         <h2 class="text-2xl font-semibold tracking-tight">
-          How to use this calculator
+          Why the fee rates you read online disagree
         </h2>
-        <ol class="mt-3 space-y-2 text-muted-foreground list-decimal pl-5">
-          <li>Enter your selling price per unit and how many units sold.</li>
-          <li>
-            Set the referral fee (6% is the US default), your COGS per unit, and
-            any affiliate, fulfillment, return-rate, or ad-spend figures that
-            apply.
-          </li>
-          <li>
-            Read the headline <strong class="text-foreground">net profit</strong> and
-            <strong class="text-foreground">net margin</strong>, and watch
-            TikTok&rsquo;s effective take update as you change any input.
-          </li>
-        </ol>
-        <p class="mt-4 text-sm text-muted-foreground">
-          Want profit from your <em>real</em> settled TikTok payouts instead of
-          estimates? <a class="underline hover:text-foreground" href="/"
-            >MarginReady</a
-          > connects to your TikTok Shop account and shows true profit per SKU from
-          actual settled fees — no modeling.
+        <p class="mt-3 text-muted-foreground">
+          Search for TikTok Shop fees and you&rsquo;ll find guides quoting
+          anything from 2% to 11%, per-category grids, and different
+          &ldquo;new&rdquo; rates. None of the ones we checked in September 2026
+          linked to a TikTok source. Some mix up markets, and some describe old
+          category tables or new-seller promos whose official pages no longer
+          exist.
         </p>
+        <p class="mt-3 text-muted-foreground">
+          The only authoritative source is TikTok&rsquo;s own
+          <a class={link} href={REFERRAL_FEES_URL} {...ext}>referral fee page</a>
+          and your Seller Center. TikTok&rsquo;s
+          <a class={link} href={SELLER_TERMS_URL} {...ext}>Seller Terms</a>
+          let it change the fee, with notice by email or in Seller Center.
+          That&rsquo;s why the rate is an editable input here and not built
+          in: if yours differs, change it and the whole result updates.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">Common questions</h2>
+        <div class="mt-4 space-y-5">
+          {
+            faq.map((f) => (
+              <div>
+                <h3 class="font-semibold text-foreground">{f.q}</h3>
+                <p class="mt-1.5 text-muted-foreground">{f.a}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">From estimate to real numbers</h2>
+        <p class="mt-3 text-muted-foreground">
+          This calculator models the fees. Your settlement shows what TikTok
+          actually deducted, and it rarely matches revenue. See
+          <a class={link} href="/why-tiktok-shop-payout-is-less-than-sales/">why your payout is less than your sales</a>
+          and <a class={link} href="/tiktok-shop-payout-schedule/">when TikTok Shop pays you</a>,
+          or browse all the <a class={link} href="/tools/">free seller tools</a>.
+        </p>
+        <p class="mt-4 text-sm text-muted-foreground">
+          <a class={link} href="/">MarginReady</a> connects to your TikTok Shop
+          account and shows true profit per SKU from your settled payouts,
+          using the fees TikTok actually charged instead of modeled ones.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">Sources</h2>
+        <ul class="mt-3 space-y-2 text-sm text-muted-foreground">
+          <li>
+            <a class={link} href={REFERRAL_FEES_URL} {...ext}
+              >TikTok Shop Seller Center: Referral Fees by Category</a
+            >. The 6% standard rate, the 5% jewelry subcategories, pre-owned rates.
+          </li>
+          <li>
+            <a class={link} href={SELLER_TERMS_URL} {...ext}
+              >TikTok Shop Seller Terms of Service (US)</a
+            >. What the referral fee covers, what it's calculated on, and TikTok's right to amend it.
+          </li>
+          <li>
+            <a class={link} href={REFERRAL_TAX_URL} {...ext}
+              >TikTok Shop Seller Center: Sales Tax on Referral Fees</a
+            >. Texas and West Virginia, effective November 1, 2025.
+          </li>
+          <li>
+            <a class={link} href={SHIPPING_REVERSAL_URL} {...ext}
+              >Modern Retail: TikTok halts plan to end independent shipping for U.S. sellers</a
+            >.
+          </li>
+        </ul>
       </section>
     </div>
   </div>

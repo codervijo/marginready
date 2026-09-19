@@ -57,3 +57,40 @@ describe('calcFees', () => {
     expect(r.netProfit).toBe(0);
   });
 });
+
+// Guards the worked examples quoted in prose on the fee calculator page.
+describe('fee calculator page worked examples', () => {
+  const ex = {
+    price: 20,
+    units: 1,
+    referralRatePct: 6,
+    cogsPerUnit: 8,
+    affiliateRatePct: 20,
+    fulfillmentPerUnit: 4,
+    returnRatePct: 5,
+    adSpend: 0,
+  };
+
+  it('$20 creator-driven product keeps $1.80 (9.0%), take 46%', () => {
+    const r = calcFees(ex);
+    expect(r.netProfitPerUnit).toBeCloseTo(1.8, 10);
+    expect(r.netMarginPct).toBeCloseTo(9, 10);
+    expect(r.effectiveTakePct).toBeCloseTo(46, 10);
+  });
+
+  it('adding $3/unit of ads turns it into a $1.20 loss, take 61%', () => {
+    const r = calcFees({ ...ex, adSpend: 3 });
+    expect(r.netProfitPerUnit).toBeCloseTo(-1.2, 10);
+    expect(r.effectiveTakePct).toBeCloseTo(61, 10);
+  });
+
+  it('calculator defaults: $50 price, $15 COGS, 6% → $32.00/unit, 64%', () => {
+    const r = calcFees({ ...base, price: 50, units: 100, cogsPerUnit: 15 });
+    expect(r.netProfitPerUnit).toBeCloseTo(32, 10);
+    expect(r.netMarginPct).toBeCloseTo(64, 10);
+  });
+
+  it('per-unit profit is 0 with no units', () => {
+    expect(calcFees({ ...base, price: 10 }).netProfitPerUnit).toBe(0);
+  });
+});
