@@ -34,3 +34,9 @@ to surface "last AI prompt" per project. Keep entries append-only.
 > with pure libs (`tiktok-fbt.ts`, `landed-cogs.ts`) + tests. FBT dollar rates
 > are user inputs; only the Seller Center rules (dim weight ÷166 above 2 lb /
 > 332 in³, 60 free storage days) are encoded.
+
+## 2026-09-18 — v1.B.1: strengthen the payout schedule page
+
+> "strengthen the payout schedule page". Added the payout-date estimator
+> (`tiktok-payout.ts` + tests), worked timelines, a late-payout checklist, and a
+> visible FAQ (previously JSON-LD only). Re-verified against Seller Center.

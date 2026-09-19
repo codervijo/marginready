@@ -61,6 +61,7 @@ Two-level versioning convention (canonical: `sites/portfolio/AI_AGENTS.md`):
 | **v0.A** | scaffolded | `portfolio new bootstrap` ran; standard files written; git initialized | ✅ |
 | **v1.A** | frontend prototype + first tool | Landing page, mock-data app screens (`/connect/`, `/cogs/`, `/dashboard/`), `/tiktok-shop-fee-calculator/`; CF deploy, trailing-slash canonical, IndexNow | ✅ |
 | **v1.B** | SEO content cluster | `/tools/` hub, `/tiktok-shop-break-even-calculator/`, `/tiktok-shop-roas-calculator/`, `/tiktok-shop-payout-schedule/`, `/why-tiktok-shop-payout-is-less-than-sales/`; site-wide internal-link graph; prototype screens noindexed + sitemap-excluded | ✅ |
+| **v1.B.1** | payout page upgrade | Payout-date estimator on `/tiktok-shop-payout-schedule/`, worked timelines, late-payout checklist, visible FAQ matching schema | ✅ |
 | **v1.C** | FBT + COGS pages | `/tiktok-shop-fbt-fee-calculator/` (chargeable weight, storage, returns, vs self-ship), `/how-to-calculate-cogs-tiktok-shop/` (landed-cost calculator); stale FBT figures removed from fee calculator | ✅ |
 | **v2.A** | real TikTok Shop OAuth + sync | Replace mock data: OAuth against sandbox, nightly sync job, data model, real per-SKU settled profit | planned |
 

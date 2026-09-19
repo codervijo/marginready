@@ -33,9 +33,9 @@ dashboard for a working product when picking up work here.
   has moved (indexing was requested manually on 2026-09-18). If they are still
   unknown, investigate before shipping more pages. Note the result in the v1.C
   growth entry.
-- [ ] **2026-10-16: v1.C growth review.** Fill in Result/Learning for the
-  2026-09-18 entry in `docs/growth.md` (FBT-intent query impressions and
-  position, plus first impressions on the two new pages).
+- [ ] **2026-10-16: v1.C + v1.B.1 growth reviews.** Fill in Result/Learning for both
+  2026-09-18 entries in `docs/growth.md` (FBT-intent query impressions and
+  position, first impressions on the two new pages, payout page position).
 
 ## Commands
 

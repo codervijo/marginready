@@ -222,3 +222,27 @@ https://search.google.com/search-console directly.
 - **Result:** TBD — review 2026-10-16
 - **Learning:** TBD. Also check whether `/tools/` and the break-even calculator
   left `url_is_unknown_to_google` after the manual index requests (2026-09-18).
+
+## 2026-09-18 — v1.B.1: strengthen the payout schedule page (best position on the site)
+- **Status:** active
+- **Hypothesis:** `/tiktok-shop-payout-schedule/` is the site's strongest page
+  (121 imp @ 28.7 over 28d) but ranks ~46 for its head query "tiktok shop payout".
+  It had no tool, no worked examples, and its FAQPage schema had no visible FAQ
+  (a mismatch). Adding a payout-date estimator, worked timelines, a late-payout
+  checklist, and a visible FAQ should improve average position and widen the
+  long-tail queries it's shown for ("when does tiktok shop pay you", "payout time").
+- **KPI:** page avg position + impressions (28d); position for "tiktok shop payout";
+  count of distinct queries matched to the page.
+- **Baseline (GSC 2026-09-18):** 28d: 121 imp / 0 clicks / pos 28.7. 90d queries:
+  "tiktok shop payout" 29 imp @ 45.7; "when does tiktok shop pay you" 2 @ 45.0;
+  "tiktok shop payout time" 1 @ 40.0; "when do you get paid from tiktok shop" 1 @ 37.0;
+  "tiktok affiliate payout schedule" 1 @ 53.0; "tiktok withdrawal processing time" 1 @ 52.0.
+- **Action:** added the payout-date estimator (delivery date + settlement days →
+  initiation, bank window, reserve release), "Three orders, three payout dates"
+  examples including a return-hold case, a 6-step "Payout late?" checklist, a visible
+  6-question FAQ (FAQ schema now built from the same array), and Failed status +
+  automatic payouts (re-verified against Seller Center). Meta description rewritten;
+  title and slug unchanged because the page is already indexed.
+  Affiliate payout timing deliberately left out: no official source found.
+- **Result:** TBD — review 2026-10-16
+- **Learning:** TBD.
