@@ -219,6 +219,11 @@ https://search.google.com/search-console directly.
   requested indexing for `/tools/`, `/tiktok-shop-break-even-calculator/`, and both
   new pages. Right after: all 4 still `url_is_unknown_to_google`; GSC still shows
   the sitemap as last fetched 3 months ago.
+- **IndexNow ping (2026-09-18):** submitted 6 URLs (both new pages, `/tools/`,
+  the break-even, fee, and payout pages) via `portfolio.indexnow.submit_urls`; key
+  verified live. Reaches Bing/Yandex/Naver/Seznam/Yep only, **not Google**. Google's
+  Indexing API only covers JobPosting/BroadcastEvent pages and the portfolio GSC scope
+  is read-only, so Google requests stay a manual Search Console step.
 - **Result:** TBD — review 2026-10-16
 - **Learning:** TBD. Also check whether `/tools/` and the break-even calculator
   left `url_is_unknown_to_google` after the manual index requests (2026-09-18).
@@ -244,5 +249,7 @@ https://search.google.com/search-console directly.
   automatic payouts (re-verified against Seller Center). Meta description rewritten;
   title and slug unchanged because the page is already indexed.
   Affiliate payout timing deliberately left out: no official source found.
+  Operator requested Google indexing for the page in Search Console on
+  2026-09-18, and it was also pinged to IndexNow (see the v1.C entry).
 - **Result:** TBD — review 2026-10-16
 - **Learning:** TBD.
