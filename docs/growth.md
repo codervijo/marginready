@@ -126,12 +126,27 @@ https://search.google.com/search-console directly.
     it was appearing on the public calculator page.
   - Fixed `/connect` → `/connect/` on the homepage (redirect hop).
   - Sitemap goes 5 URLs → 7, all indexable.
-- **Result:** TBD — review 2026-08-27
-- **Learning:** TBD. Key thing to check at review: whether impressions arrive for
-  the *new* pages specifically, which would confirm supply (not technical SEO)
-  was the binding constraint. If impressions stay at 0 with 7 indexed pages, the
-  constraint is domain-level (age/authority) and the next lever is off-site, not
-  more content.
+- **Result:** Reviewed 2026-09-18 (22 days past the 2026-08-27 review date), via
+  `portfolio project seo marginready.com`. GSC 28d: **267 impressions**
+  (baseline 0), **0 clicks**, 0.0% CTR, avg position **47.5**. Coverage **5 of
+  7 indexed (71%)** (baseline 1 of 5): `/`, `/tiktok-shop-fee-calculator/`,
+  `/tiktok-shop-roas-calculator/`, `/tiktok-shop-payout-schedule/`,
+  `/why-tiktok-shop-payout-is-less-than-sales/` all `submitted_indexed`, and
+  recently crawled (3h to 2w ago). Still `url_is_unknown_to_google`: `/tools/`
+  and `/tiktok-shop-break-even-calculator/`. The sitemap was last fetched 3
+  months ago.
+- **Learning:** **Hypothesis confirmed on impressions.** The count went from 0 to
+  267 within one window, and 4 of the 5 newly indexed URLs are content pages
+  that were unknown to Google before. That points at supply plus the link graph,
+  not technical SEO. Google still hasn't re-fetched the sitemap, so discovery
+  came through links, which backs up the 2026-07-31 finding. The operator also
+  reports better views after the change. Clicks are still 0: position 47.5 is
+  page 5, so the pages are being seen but don't rank high enough to get clicks.
+  The next bottleneck is ranking, not discovery. Open question: why are
+  `/tools/` and the break-even calculator still undiscovered when the footer
+  links to them site-wide? Check before adding more pages. This review didn't
+  pull per-page or per-query impression splits.
+- **Status update (2026-09-18):** `active` → `shipped`
 
 ## 2026-07-31 — pre-deploy baseline: the orphan diagnosis is confirmed by GSC
 - **Status:** testing
@@ -172,3 +187,8 @@ https://search.google.com/search-console directly.
 - **Review:** 2026-08-28 (28d), and re-check coverage ~7 days after deploy — the
   fast signal is URLs flipping off `url_is_unknown_to_google`, which should move
   well before impressions do.
+- **Review result (2026-09-18):** The fee calculator is now `submitted_indexed`,
+  crawled about 2 weeks ago. It had been `url_is_unknown_to_google` at baseline.
+  Its sitemap entry wasn't the cause: the sitemap was still last fetched about 3
+  months ago. That confirms the link-graph diagnosis. See the 2026-07-30 entry
+  for the full numbers.
