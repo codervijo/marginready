@@ -25,3 +25,12 @@ to surface "last AI prompt" per project. Keep entries append-only.
 > page. Shipped 5 interlinked pages (2 calculators + 2 guides + hub), rebuilt
 > the internal-link graph, noindexed the prototype screens. All fee/payout
 > facts sourced from TikTok Seller Center primary docs and cited on-page.
+
+## 2026-09-18 — v1.C: FBT fee calculator + COGS guide
+
+> "build FBT and COGS pages" — after reviewing v1.B (0 → 267 impressions, 5/7
+> indexed) and a keyword pass (Ahrefs out of units; used GSC queries + SERPs).
+> Shipped `/tiktok-shop-fbt-fee-calculator/` and `/how-to-calculate-cogs-tiktok-shop/`
+> with pure libs (`tiktok-fbt.ts`, `landed-cogs.ts`) + tests. FBT dollar rates
+> are user inputs; only the Seller Center rules (dim weight ÷166 above 2 lb /
+> 332 in³, 60 free storage days) are encoded.

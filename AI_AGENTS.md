@@ -183,7 +183,8 @@ what they bring. See `docs/growth.md` (2026-07-30, 2026-07-31) for the evidence.
    on-page. Never an uncited number.
 5. Cross-links to sibling tools + a soft CTA to the real product.
 
-**Current content surface (7 indexable URLs):** `/`, `/tools/` (hub),
+**Current content surface (9 indexable URLs):** `/`, `/tools/` (hub),
+`/tiktok-shop-fbt-fee-calculator/`, `/how-to-calculate-cogs-tiktok-shop/`,
 `/tiktok-shop-fee-calculator/`, `/tiktok-shop-break-even-calculator/`,
 `/tiktok-shop-roas-calculator/`, `/tiktok-shop-payout-schedule/`,
 `/why-tiktok-shop-payout-is-less-than-sales/`.

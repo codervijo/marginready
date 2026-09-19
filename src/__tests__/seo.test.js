@@ -54,6 +54,8 @@ const CONTENT_PAGES = [
   'tiktok-shop-fee-calculator.astro',
   'tiktok-shop-break-even-calculator.astro',
   'tiktok-shop-roas-calculator.astro',
+  'tiktok-shop-fbt-fee-calculator.astro',
+  'how-to-calculate-cogs-tiktok-shop.astro',
   'tiktok-shop-payout-schedule.astro',
   'why-tiktok-shop-payout-is-less-than-sales.astro',
 ];
@@ -140,6 +142,8 @@ describe('internal linking', () => {
     '/tiktok-shop-fee-calculator/',
     '/tiktok-shop-break-even-calculator/',
     '/tiktok-shop-roas-calculator/',
+    '/tiktok-shop-fbt-fee-calculator/',
+    '/how-to-calculate-cogs-tiktok-shop/',
     '/tiktok-shop-payout-schedule/',
     '/why-tiktok-shop-payout-is-less-than-sales/',
   ];

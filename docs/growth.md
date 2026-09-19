@@ -192,3 +192,29 @@ https://search.google.com/search-console directly.
   Its sitemap entry wasn't the cause: the sitemap was still last fetched about 3
   months ago. That confirms the link-graph diagnosis. See the 2026-07-30 entry
   for the full numbers.
+
+## 2026-09-18 — v1.C: capture the FBT queries already landing on the fee calculator
+- **Status:** active
+- **Hypothesis:** GSC shows FBT-intent queries ("fulfilled by tiktok calculator",
+  "tiktok fbt calculator", "tiktok (fbt calculator)") matched to
+  `/tiktok-shop-fee-calculator/` at positions 54–75, a page that only mentions FBT
+  in passing. A dedicated FBT calculator page should earn impressions for those
+  queries at a better position than the fee calculator gets. A COGS guide targets
+  the one input the product itself asks for.
+- **KPI:** impressions + average position for queries containing "fbt" or
+  "fulfilled by tiktok" (any page), and first impressions for
+  `/tiktok-shop-fbt-fee-calculator/` and `/how-to-calculate-cogs-tiktok-shop/`.
+  Pull with `portfolio.gsc.query_with_dims(..., dimensions=['query','page'])`.
+- **Baseline (GSC 28d, 2026-09-18):** site 267 impressions / 0 clicks / pos 47.5.
+  FBT-intent queries, all on the fee calculator: 3 imp @ 74.7, 2 imp @ 62.5,
+  1 imp @ 54.0. COGS queries: none visible (most of the site's impressions come
+  from queries GSC anonymizes).
+- **Action:** shipped `/tiktok-shop-fbt-fee-calculator/` (chargeable-weight rule,
+  storage after the 60 free days, return handling, comparison with self-shipping;
+  dollar rates are user inputs because TikTok's rate card changed 3× in 2026) and
+  `/how-to-calculate-cogs-tiktok-shop/` (landed-cost calculator). Both are linked
+  from the footer, `/tools/`, and each other. Replaced stale January FBT figures
+  on the fee calculator with a link to the new page.
+- **Result:** TBD — review 2026-10-16
+- **Learning:** TBD. Also check whether `/tools/` and the break-even calculator
+  left `url_is_unknown_to_google` after the manual index requests (2026-09-18).

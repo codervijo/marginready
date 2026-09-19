@@ -34,7 +34,7 @@ const FIELDS: FieldDef[] = [
   {
     key: "fulfillmentPerUnit",
     label: "Fulfillment per unit",
-    note: "FBT approx $2.86–$4.28/unit.",
+    note: "Your FBT fee from the current rate card, or your own label + packing cost.",
     prefix: "$",
     step: "0.01",
   },

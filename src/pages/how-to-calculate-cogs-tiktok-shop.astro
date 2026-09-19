@@ -1,0 +1,266 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { LandedCogsCalculator } from "../components/LandedCogsCalculator";
+
+const site = "https://marginready.com";
+const path = "/how-to-calculate-cogs-tiktok-shop/";
+const url = site + path;
+const title = "How to Calculate COGS for TikTok Shop (Landed Cost Per Unit)";
+const description =
+  "Work out your real cost per unit for TikTok Shop: supplier price plus freight, duties, packaging and inbound shipping, divided by the units you can actually sell.";
+
+const faq = [
+  {
+    q: "Does COGS include shipping on TikTok Shop?",
+    a: "Inbound shipping, yes: freight from your supplier and the cost of getting stock into your warehouse or FBT are part of what a sellable unit cost you. Outbound shipping to the customer, no. That's a fulfillment cost, and TikTok already deducts shipping and FBT fees in your settlement.",
+  },
+  {
+    q: "Should TikTok's referral fee or affiliate commission go in COGS?",
+    a: "No. They're selling costs, not product costs, and they already come out of your settlement before the money reaches you. If you add them to COGS as well, you count them twice and understate your profit.",
+  },
+  {
+    q: "How do I handle free samples sent to creators?",
+    a: "Keep them out of the per-unit COGS of the units you sell, and track them as a marketing cost for that SKU: the landed cost of each sample plus the postage to send it. Otherwise heavy sampling makes a product's cost look higher than it is, and the real question ('are samples paying for themselves?') never gets asked. Ask your accountant how to treat samples for tax.",
+  },
+  {
+    q: "What if my supplier price changes between orders?",
+    a: "Calculate landed COGS per purchase order, not once per product. Then either use the cost of the batch you're currently selling from, or take a weighted average across the batches in stock. Pick one method and stick to it: switching between them is how month-to-month margins start moving for no real reason.",
+  },
+  {
+    q: "Does TikTok Shop know my COGS?",
+    a: "No. TikTok's settlement records what the customer paid and what TikTok deducted: fees, shipping and tax. What you paid your supplier is never in that data, which is why TikTok can show you revenue and payout but not profit.",
+  },
+];
+
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "How to Calculate COGS for TikTok Shop",
+  description,
+  mainEntityOfPage: url,
+  author: { "@id": "https://marginready.com/#organization" },
+  publisher: { "@id": "https://marginready.com/#organization" },
+};
+
+const webApplicationLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Landed COGS Calculator",
+  url,
+  description:
+    "Calculate landed cost of goods per sellable unit from one purchase order: supplier price, packaging, freight, duties, inbound shipping, and defective units.",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  publisher: { "@id": "https://marginready.com/#organization" },
+};
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const link = "underline hover:text-foreground";
+const th = "py-2 pr-4 text-left font-semibold text-foreground";
+const td = "py-2 pr-4 align-top text-muted-foreground";
+---
+
+<Layout>
+  <Fragment slot="head">
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={url} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:site_name" content="MarginReady" />
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(articleLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(webApplicationLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
+  </Fragment>
+
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+    <header class="mb-6">
+      <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight">
+        How to calculate COGS for TikTok Shop
+      </h1>
+      <p class="mt-3 text-muted-foreground max-w-2xl">
+        Your COGS per unit is everything you paid to get a unit ready to sell,
+        divided by the units you can <em>actually</em> sell: supplier price,
+        packaging, freight, duties, and shipping into your warehouse or FBT.
+        It doesn&rsquo;t include TikTok&rsquo;s referral fee, affiliate
+        commissions or fulfillment fees. TikTok deducts those in your
+        settlement, so they&rsquo;re counted already. Enter one purchase order
+        below to get your landed cost per unit.
+      </p>
+    </header>
+
+    <LandedCogsCalculator client:load />
+
+    <div class="prose-tk mt-14 space-y-12 max-w-3xl">
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          Why this is the one number TikTok can&rsquo;t give you
+        </h2>
+        <p class="mt-3 text-muted-foreground">
+          TikTok&rsquo;s settlement for an order is roughly: revenue, minus
+          shipping, minus fees and tax. Everything TikTok charges you is
+          already in it. What isn&rsquo;t in it is what you paid for the
+          product, because you never told TikTok. That&rsquo;s why the seller
+          dashboard can show GMV and payouts but never profit.
+        </p>
+        <p class="mt-3 text-muted-foreground">
+          So on TikTok Shop, profit per unit = settlement per unit &minus; COGS
+          per unit. Settlement is TikTok&rsquo;s number. COGS is yours, and
+          it&rsquo;s the one sellers most often get wrong. (See
+          <a class={link} href="/why-tiktok-shop-payout-is-less-than-sales/">why your payout is less than your sales</a>
+          for everything that comes out of the settlement side.)
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">What goes in COGS, and what doesn&rsquo;t</h2>
+        <div class="mt-4 overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="border-b border-border">
+              <tr><th class={th}>Include in COGS</th><th class={th}>Leave out: already in your settlement or elsewhere</th></tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              <tr><td class={td}>Supplier price per unit</td><td class={td}>TikTok referral fee</td></tr>
+              <tr><td class={td}>Packaging, labels, inserts, polybags</td><td class={td}>Affiliate / creator commission</td></tr>
+              <tr><td class={td}>Freight from the supplier</td><td class={td}>FBT fulfillment fee or your outbound shipping label</td></tr>
+              <tr><td class={td}>Duties, tariffs, customs broker fees</td><td class={td}>Ad spend (GMV Max, Spark Ads)</td></tr>
+              <tr><td class={td}>Inspection and prep services</td><td class={td}>Refunds and return costs</td></tr>
+              <tr><td class={td}>Shipping stock into your warehouse or FBT</td><td class={td}>Free samples to creators (track as marketing)</td></tr>
+              <tr><td class={td}>The cost of units that arrive unsellable</td><td class={td}>Software, rent, your salary (overhead)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-3 text-muted-foreground">
+          The test for each cost: would it exist if you had never listed the
+          product on TikTok? Freight and duties would, so they&rsquo;re COGS.
+          A referral fee wouldn&rsquo;t, so it isn&rsquo;t.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">Worked example: the $4 product that really costs $5.50</h2>
+        <p class="mt-3 text-muted-foreground">
+          The calculator&rsquo;s default order: 500 units at $4.00 from the
+          supplier, $0.35 per unit in packaging, $400 freight, $120 to ship
+          into the warehouse, and 2% of units unsellable on arrival.
+        </p>
+        <ul class="mt-3 space-y-1 text-muted-foreground tabular-nums">
+          <li>Supplier: 500 × $4.00 = $2,000</li>
+          <li>Packaging: 500 × $0.35 = $175</li>
+          <li>Freight + inbound: $400 + $120 = $520</li>
+          <li>Order total: <strong class="text-foreground">$2,695</strong></li>
+          <li>Sellable units: 500 × 98% = 490</li>
+          <li>Landed COGS: $2,695 ÷ 490 = <strong class="text-foreground">$5.50 per unit</strong></li>
+        </ul>
+        <p class="mt-3 text-muted-foreground">
+          That&rsquo;s 37.5% above the $4.00 supplier price. Now the mistake
+          this page exists to prevent: say you sell at $12 and, using the
+          supplier price, work out $12 &minus; $0.72 (6% referral) &minus; $4.00
+          = $7.28 per unit before fulfillment and other costs. The real figure
+          is $12 &minus; $0.72 &minus; $5.50 = $5.78. You&rsquo;d be
+          overstating that profit by 26% on every unit, and pricing, ad
+          budgets and affiliate rates would all be set off the wrong number.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">Why you divide by sellable units, not ordered units</h2>
+        <p class="mt-3 text-muted-foreground">
+          Defective units still cost you money. If 10% of the order above
+          arrives damaged and the supplier won&rsquo;t credit it, you paid
+          $2,695 for 450 units you can sell, so COGS is
+          <strong class="text-foreground">$5.99</strong>, not $5.50. Dividing
+          by the 500 you ordered quietly writes those damaged units off as
+          free. Put a realistic unsellable rate into the calculator; if you
+          don&rsquo;t know it, check your last few orders.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">Cases that trip sellers up</h2>
+        <ul class="mt-3 space-y-3 text-muted-foreground">
+          <li>
+            <strong class="text-foreground">Bundles and multipacks.</strong>
+            A bundle SKU&rsquo;s COGS is the sum of its components&rsquo;
+            landed costs plus any extra packaging. Don&rsquo;t reuse the
+            single-unit cost.
+          </li>
+          <li>
+            <strong class="text-foreground">A new batch at a new price.</strong>
+            Every purchase order gets its own landed cost. A tariff change or a
+            freight spike shows up here first, and it won&rsquo;t show in your
+            margins until you update the COGS you&rsquo;re using.
+          </li>
+          <li>
+            <strong class="text-foreground">Returned units.</strong> A return
+            you can resell goes back into stock at its original COGS. One you
+            can&rsquo;t resell is a loss on that order, not an increase to
+            everyone else&rsquo;s COGS.
+          </li>
+          <li>
+            <strong class="text-foreground">FBT inbound.</strong> Getting
+            stock into an FBT warehouse is COGS (it&rsquo;s part of making
+            the unit sellable). The per-unit FBT fulfillment fee is not. The
+            <a class={link} href="/tiktok-shop-fbt-fee-calculator/">FBT fee calculator</a>
+            handles that side. If you&rsquo;ve put inbound into COGS here, set
+            its inbound field to zero so it isn&rsquo;t counted twice.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">Common questions</h2>
+        <div class="mt-4 space-y-5">
+          {
+            faq.map((f) => (
+              <div>
+                <h3 class="font-semibold text-foreground">{f.q}</h3>
+                <p class="mt-1.5 text-muted-foreground">{f.a}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">Use the number</h2>
+        <p class="mt-3 text-muted-foreground">
+          Put your landed COGS into the
+          <a class={link} href="/tiktok-shop-break-even-calculator/">break-even price calculator</a>
+          to find the lowest safe price, or the
+          <a class={link} href="/tiktok-shop-fee-calculator/">fee and profit calculator</a>
+          to check a price you already charge. More in the
+          <a class={link} href="/tools/">free seller tools</a>.
+        </p>
+        <p class="mt-4 text-sm text-muted-foreground">
+          COGS is the only number <a class={link} href="/">MarginReady</a>
+          asks you for. Enter it once per SKU and it&rsquo;s subtracted from
+          your actual settled TikTok Shop payouts to show real profit for
+          every product.
+        </p>
+      </section>
+    </div>
+  </div>
+</Layout>

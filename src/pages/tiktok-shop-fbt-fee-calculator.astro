@@ -1,0 +1,298 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { FbtCalculator } from "../components/FbtCalculator";
+
+const site = "https://marginready.com";
+const path = "/tiktok-shop-fbt-fee-calculator/";
+const url = site + path;
+const title = "FBT Fee Calculator — Fulfilled by TikTok Cost Per Unit";
+const description =
+  "Work out what Fulfilled by TikTok really costs per unit: chargeable weight, fulfillment, storage after 60 free days, and return handling, compared against shipping it yourself.";
+
+// Rules verified against TikTok Shop Seller Center. Update when re-verified.
+const verifiedAsOf = "September 2026";
+
+const RATE_CARD_URL =
+  "https://seller-us.tiktok.com/university/essay?knowledge_id=3507056320268087&lang=en";
+const FBT_OVERVIEW_URL =
+  "https://seller-us.tiktok.com/university/essay?knowledge_id=8644984183162670&lang=en";
+
+const faq = [
+  {
+    q: "How much does Fulfilled by TikTok cost per unit?",
+    a: "There is no single number. The fulfillment fee depends on the unit's chargeable weight and how many units are in the order, and TikTok revised the rate card three times between May and July 2026. On top of it come inbound shipping, storage after the first 60 days, and return handling. Read your fee off the current rate card and enter it in the calculator to get your all-in cost.",
+  },
+  {
+    q: "What does the FBT fulfillment fee include?",
+    a: "Pick, pack, packaging, and last-mile shipping to the shopper, charged per unit. It does not include getting your stock into the FBT warehouse, storage, or return handling. Those are separate costs.",
+  },
+  {
+    q: "How does TikTok calculate FBT dimensional weight?",
+    a: "If a unit weighs 2 lb or less and its volume is 332 cubic inches or less, TikTok charges on actual weight. Otherwise the chargeable weight is the greater of actual weight and dimensional weight, which is length × width × height in inches ÷ 166.",
+  },
+  {
+    q: "Is FBT storage free?",
+    a: "For the first 60 days of each inbound shipment. After that, storage is charged daily on the total cubic feet of your units, including defective ones, at a rate that rises the longer stock sits.",
+  },
+  {
+    q: "Is FBT cheaper than shipping orders myself?",
+    a: "It depends on your chargeable weight, how fast the product sells, and what a label costs you. Light, fast-moving products in tight packaging usually favour FBT; bulky or slow-moving stock often doesn't. Enter your own label and packing cost in section 4 of the calculator to compare.",
+  },
+];
+
+const webApplicationLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Fulfilled by TikTok (FBT) Fee Calculator",
+  url,
+  description:
+    "Calculate FBT chargeable weight and the all-in Fulfilled by TikTok cost per unit — fulfillment, inbound, storage, and return handling — and compare it with self-shipping.",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  publisher: { "@id": "https://marginready.com/#organization" },
+};
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const link = "underline hover:text-foreground";
+---
+
+<Layout>
+  <Fragment slot="head">
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={url} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:site_name" content="MarginReady" />
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(webApplicationLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
+  </Fragment>
+
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+    <header class="mb-6">
+      <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight">
+        Fulfilled by TikTok (FBT) fee calculator
+      </h1>
+      <p class="mt-3 text-muted-foreground max-w-2xl">
+        FBT charges you per unit in four places: getting stock into the
+        warehouse, the fulfillment fee (set by the unit&rsquo;s
+        <em>chargeable</em> weight, which may not be its real weight), storage
+        once the first 60 days are up, and handling for units that come back.
+        Add them up and you get what FBT actually costs you per unit. The
+        calculator below does that and compares it with shipping the order
+        yourself.
+      </p>
+      <p class="mt-3 text-xs text-muted-foreground">
+        Weight and storage rules checked against TikTok Seller Center, {verifiedAsOf}.
+        Dollar rates are yours to enter from the
+        <a class={link} href={RATE_CARD_URL} rel="nofollow noopener" target="_blank">current FBT rate card</a>.
+        This estimator uses your inputs. It does not read your account.
+      </p>
+    </header>
+
+    <FbtCalculator client:load />
+
+    <div class="prose-tk mt-14 space-y-12 max-w-3xl">
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          The four costs behind one FBT order
+        </h2>
+        <ul class="mt-3 space-y-3 text-muted-foreground">
+          <li>
+            <strong class="text-foreground">Inbound shipping.</strong> Freight
+            from you or your supplier to the FBT warehouse. It&rsquo;s paid per
+            shipment, so divide it by the units in that shipment. Sellers
+            forget this one most often, because it&rsquo;s paid long before
+            the sale.
+          </li>
+          <li>
+            <strong class="text-foreground">Fulfillment fee.</strong> Covers
+            pick, pack, packaging and last-mile delivery to the shopper,
+            charged per unit. The rate depends on chargeable weight and on how
+            many units ship together: orders with more units pay less per unit.
+          </li>
+          <li>
+            <strong class="text-foreground">Storage.</strong> Free for the
+            first 60 days of each inbound shipment. After that it&rsquo;s
+            charged daily on total cubic feet, including defective units, so
+            it&rsquo;s a volume cost, not a weight cost.
+          </li>
+          <li>
+            <strong class="text-foreground">Return handling.</strong> Charged
+            on units that come back. Spread across every unit you sell, its
+            real cost per unit is the fee × your return rate.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          Chargeable weight: why the box can cost more than the product
+        </h2>
+        <p class="mt-3 text-muted-foreground">
+          TikTok doesn&rsquo;t always bill on what the unit weighs. The rule
+          (effective May 1, 2026):
+        </p>
+        <ul class="mt-3 space-y-2 text-muted-foreground">
+          <li>
+            Unit weighs <strong class="text-foreground">2 lb or less</strong>
+            <em>and</em> is <strong class="text-foreground">332 in³ or less</strong>:
+            billed on actual weight.
+          </li>
+          <li>
+            Otherwise: billed on the <strong class="text-foreground">greater</strong>
+            of actual weight and dimensional weight, where
+            dimensional weight = length × width × height (inches) ÷ 166.
+          </li>
+        </ul>
+        <p class="mt-3 text-muted-foreground">
+          Take a 1 lb candle. In a 9 × 6 × 3 in box (162 in³) it&rsquo;s under
+          both limits and bills at 1 lb. Ship the same candle in a
+          12 × 10 × 6 in box (720 in³) and it goes over the volume limit.
+          Dimensional weight is 720 ÷ 166 = <strong class="text-foreground">4.34 lb</strong>,
+          so you pay for 4.34 lb, more than four times what the candle weighs,
+          because of the empty space in the box.
+        </p>
+        <p class="mt-3 text-muted-foreground">
+          So the cheapest FBT fix is usually the packaging, not the price.
+          Check the chargeable-weight panel in the calculator before you send a
+          new SKU in. If it says dimensional weight applies, a smaller box can
+          drop the unit into a lighter tier.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          Why the FBT rates you find online are probably out of date
+        </h2>
+        <p class="mt-3 text-muted-foreground">
+          TikTok changed the FBT rate card three times in 2026 alone: lower
+          single-unit fulfillment fees from May 20, higher per-unit fees on
+          multi-unit orders from June 18, and a heavy and bulky tier added from
+          July 13. On June 1 the flat per-order return handling fee became
+          itemized per-unit fees that depend on what happens to the returned
+          unit (resold, liquidated or disposed of).
+        </p>
+        <p class="mt-3 text-muted-foreground">
+          Many fee guides and calculators still quote the January figures. This
+          page leaves the dollar rates for you to enter from TikTok&rsquo;s
+          <a class={link} href={RATE_CARD_URL} rel="nofollow noopener" target="_blank">FBT Rate Card</a>
+          and only builds in the rules, which change less often. When the rate
+          card changes, update the inputs.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          Storage is where slow sellers lose money
+        </h2>
+        <p class="mt-3 text-muted-foreground">
+          Storage per unit = cubic feet per unit × monthly rate × months past
+          day 60. A unit that sells in six weeks never pays storage. A unit that
+          sits for five months pays three months of it, at rates that go up as
+          stock ages.
+        </p>
+        <p class="mt-3 text-muted-foreground">
+          The worst case is a bulky product that sells slowly. Using an
+          illustrative $1.00 per ft³ per month (not TikTok&rsquo;s rate; use
+          yours): a 12 × 10 × 6 in unit is 0.42 ft³, so 120 days in storage
+          adds 0.42 × $1.00 × 2 = $0.83 per unit. That&rsquo;s before the
+          dimensional-weight fulfillment fee. Send in inventory for about 60
+          days of sales rather than a whole production run, and storage mostly
+          disappears.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          FBT vs shipping it yourself
+        </h2>
+        <p class="mt-3 text-muted-foreground">
+          On cost alone, compare the FBT total with what one order costs you
+          now: the label, plus the mailer, the filler and your time (or your
+          3PL&rsquo;s pick-and-pack fee). If you value your time at zero,
+          self-shipping will look cheaper than it is.
+        </p>
+        <p class="mt-3 text-muted-foreground">
+          Cost isn&rsquo;t the whole comparison. TikTok
+          <a class={link} href={FBT_OVERVIEW_URL} rel="nofollow noopener" target="_blank">advertises</a>
+          free 3-day delivery and 24-hour processing for eligible FBT items,
+          and faster delivery can sell more. The calculator measures only
+          the cost side, so read a small FBT premium as the price of that
+          speed, not automatically as a loss.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">Common questions</h2>
+        <div class="mt-4 space-y-5">
+          {
+            faq.map((f) => (
+              <div>
+                <h3 class="font-semibold text-foreground">{f.q}</h3>
+                <p class="mt-1.5 text-muted-foreground">{f.a}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">Keep going</h2>
+        <p class="mt-3 text-muted-foreground">
+          Put your FBT cost per unit into the
+          <a class={link} href="/tiktok-shop-fee-calculator/">fee and net profit calculator</a>
+          as fulfillment, or use it in the
+          <a class={link} href="/tiktok-shop-break-even-calculator/">break-even price calculator</a>
+          to see what the product needs to sell for. For the product-cost side,
+          see <a class={link} href="/how-to-calculate-cogs-tiktok-shop/">how to calculate COGS for TikTok Shop</a>.
+          Everything else is in the <a class={link} href="/tools/">free tools hub</a>.
+        </p>
+        <p class="mt-4 text-sm text-muted-foreground">
+          These are estimates. <a class={link} href="/">MarginReady</a> reads
+          your settled TikTok Shop transactions, including the fulfillment
+          fees TikTok actually charged, and shows real profit per SKU.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">Sources</h2>
+        <ul class="mt-3 space-y-2 text-sm text-muted-foreground">
+          <li>
+            <a class={link} href={RATE_CARD_URL} rel="nofollow noopener" target="_blank"
+              >TikTok Shop Seller Center: FBT Rate Card &amp; Frequently Asked Questions</a
+            >. What the fulfillment fee includes, the chargeable-weight rule, storage calculation,
+            2026 rate-card and return-handling changes, multi-unit pricing.
+          </li>
+          <li>
+            <a class={link} href={FBT_OVERVIEW_URL} rel="nofollow noopener" target="_blank"
+              >TikTok Shop Seller Center: Fulfilled by TikTok (FBT)</a
+            >. 60 days of free storage per inbound shipment, delivery and processing claims.
+          </li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</Layout>
