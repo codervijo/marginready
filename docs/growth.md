@@ -285,3 +285,64 @@ https://search.google.com/search-console directly.
   URL was also pinged to IndexNow (Bing/Yandex/…, not Google).
 - **Result:** TBD — review 2026-10-16
 - **Learning:** TBD.
+
+## 2026-09-23 — checkpoint: 3-month roll-up; the 4 manually requested URLs are still unknown to Google
+- **Status:** testing
+- **KPI:** per-URL coverage (fast signal), per-page impressions + position (28d),
+  weekly impressions trend (90d)
+- **Baseline (fresh read, `portfolio project seo marginready.com --refresh` +
+  `gsc.query_with_dims`, 2026-09-23):**
+  - Site 28d: **244 impressions / 1 click / 0.4% CTR**. Sitemap: 9 URLs, `OK`,
+    still last fetched **3 months ago**.
+  - Coverage **5 of 9 indexed**. `/` (crawled 5d ago), fee, payout, ROAS (4d ago)
+    and payout-less (11d ago) are `submitted_indexed`. Still
+    `url_is_unknown_to_google`: `/tools/`, `/tiktok-shop-break-even-calculator/`,
+    `/tiktok-shop-fbt-fee-calculator/`, `/how-to-calculate-cogs-tiktok-shop/`.
+  - Weekly impressions: 0 every week through 2026-07-27. Week of 08-03: 1.
+    Then 61 / 74 / 88 / 35 / 67 / 54 for the weeks of 08-10 through 09-14.
+    **First click** came in the week of 09-14.
+  - Per page, 28d (90d in parentheses):
+    - `/tiktok-shop-payout-schedule/`: 118 imp @ 22.4 (176 @ 31.3)
+    - `/tiktok-shop-fee-calculator/`: 102 imp @ 64.7 (151 @ 67.7)
+    - `/why-tiktok-shop-payout-is-less-than-sales/`: 24 imp @ 14.2, **1 click**
+      (29 @ 21.7)
+    - `/tiktok-shop-roas-calculator/`: 13 imp @ 60.2 (30 @ 65.1)
+    - `/`: 6 imp @ 1.8 (branded)
+  - Queries, 28d: "tiktok shop payout" 27 @ 42.6 (v1.B.1 baseline 29 @ 45.7);
+    "tiktok shop fee calculator" 10 @ 57.3 (v1.A.1 baseline 12 @ 63.1);
+    "tiktok shop profit calculator" 7 @ 65.3 (was 8 @ 70.6). FBT-intent queries
+    ("tiktok fbt calculator" 2 @ 62.5, "tiktok (fbt calculator)" 1 @ 54.0) still
+    land on the fee calculator.
+- **Action:** measurement only, no site change. It is an early run of the ~09-25
+  indexing check in `docs/CLAUDE.md`, plus a 3-month roll-up of growth work.
+- **Result:** What worked over 2026-06-23 → 09-23:
+  - ✓ **v1.B content cluster + footer link graph (07-31).** Impressions went from
+    0 to ~60–90/week within ~10 days of deploy. Every indexed content page came
+    from this cluster or got indexed only after this cluster linked to it.
+  - ✓ **The payout topic is the site's strongest.** Payout-less is the best-ranked
+    content page (14.2) and got the first click. The payout schedule page has the
+    most impressions, and its position improved from 31.3 (90d) to 22.4 (28d).
+  - ✓ **Trailing-slash canonical (07-10).** No redirect or duplicate problems in
+    coverage.
+  - ↷ **Fee calculator.** It is seen for the widest range of queries but stays
+    around position 65, with no clicks. Visibility is not the problem; ranking is.
+  - ✗ **Manual GSC index requests + IndexNow (09-18).** 5 days later, none of the
+    4 requested URLs has left `url_is_unknown_to_google`, and the sitemap has not
+    been re-fetched.
+  - ↷ **v1.A.1 / v1.B.1 / v1.C (09-18).** Too early to judge: GSC lags ~3 days,
+    so at most ~2 days of post-deploy data exist. The small position gains above
+    mostly predate the changes. Don't credit them to 09-18 yet.
+- **Learning:** Internal links are still the only discovery channel that has
+  worked on this domain. The sitemap and manual requests haven't moved anything
+  within a week. `/tools/` and the break-even calculator have been linked from
+  every page's footer since 07-31 and are still unknown after ~8 weeks. Missing
+  links aren't the explanation: the break-even calculator also has body-content
+  links from `/` and 6 content pages, and `/tools/` has links from `/` and 4 pages.
+  The cause is still unexplained. A likely lead, not proven, is Google's crawl
+  budget on a low-authority domain: it keeps re-crawling the already-indexed pages
+  (4–11d ago) but isn't following their links to new URLs. Diagnose this before
+  shipping more pages. Payout
+  intent is where the site ranks best, so it is the best topic to expand into
+  next.
+- **Review:** 2026-10-16, together with the three 2026-09-18 entries. Re-check
+  coverage on ~2026-09-30.
