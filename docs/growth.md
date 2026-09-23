@@ -346,3 +346,30 @@ https://search.google.com/search-console directly.
   next.
 - **Review:** 2026-10-16, together with the three 2026-09-18 entries. Re-check
   coverage on ~2026-09-30.
+
+## 2026-09-23 — v1.C.1: in-body links from the crawled payout pages to /tools/ and break-even
+- **Status:** active
+- **Hypothesis:** `/tools/` and `/tiktok-shop-break-even-calculator/` stay
+  `url_is_unknown_to_google` even though their links are in the server HTML
+  (confirmed 2026-09-23 with curl as Googlebot; no JS injection, `robots.txt` is
+  `Allow: /`). Most of those links sit in the footer/nav or in small CTA lines at
+  the end of each page. Links in the main prose of the two payout pages, which
+  Google re-crawls every 4–11 days, with descriptive anchors, should get both URLs
+  discovered. `/tools/` in turn links the FBT and COGS pages.
+- **KPI:** per-URL coverage for `/tools/`, break-even, FBT and COGS leaving
+  `url_is_unknown_to_google`.
+- **Baseline (2026-09-23):** all 4 `url_is_unknown_to_google`. Payout schedule was
+  crawled 4d ago, payout-less 11d ago. Sitemap `sitemap-index.xml` returns 200 and
+  lists all 9 URLs (no `lastmod`), and it is the one registered on
+  `sc-domain:marginready.com`; Google last fetched it about 3 months ago.
+  `/sitemap.xml` 404s, but that is expected: nothing references it.
+- **Action:** payout schedule, "What this means for planning": added in-prose links
+  "TikTok Shop break-even price calculator" and "free TikTok Shop seller
+  calculators" (`/tools/`). Payout-less, "Working an example end to end": the same
+  two links, placed after the worked example. No footer changes and no sitemap
+  change.
+- **Confound:** both payout pages now differ from their 2026-09-18 v1.B.1
+  baselines. The change is small (2 sentences each), but note it at the 10-16
+  review.
+- **Result:** TBD — check coverage ~2026-09-30 (fast signal); review 2026-10-21.
+- **Learning:** TBD.
