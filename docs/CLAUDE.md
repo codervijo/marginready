@@ -25,7 +25,9 @@ dashboard for a working product when picking up work here.
 
 **Pending follow-ups (check these first when picking the project back up):**
 
-- [ ] **~2026-09-25: indexing check.** Run
+- [x] **Done 2026-09-23 (early):** all 4 were still unknown. Diagnosed and shipped
+  v1.C.1; see its growth entry. Next coverage check ~2026-09-30.
+  Original item — **~2026-09-25: indexing check.** Run
   `cd ~/work/projects/sites/portfolio && uv run portfolio project seo marginready.com --refresh`.
   Confirm `/tools/`, `/tiktok-shop-break-even-calculator/`,
   `/tiktok-shop-fbt-fee-calculator/` and `/how-to-calculate-cogs-tiktok-shop/`
