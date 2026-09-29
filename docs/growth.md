@@ -371,5 +371,7 @@ https://search.google.com/search-console directly.
 - **Confound:** both payout pages now differ from their 2026-09-18 v1.B.1
   baselines. The change is small (2 sentences each), but note it at the 10-16
   review.
-- **Result:** TBD — check coverage ~2026-09-30 (fast signal); review 2026-10-21.
+- **Deployed:** 2026-09-29 (pushed 6 days after the commit); links verified live.
+- **Result:** TBD — check coverage ~2026-10-03 (fast signal); review 2026-10-27
+  (28d from deploy).
 - **Learning:** TBD.
