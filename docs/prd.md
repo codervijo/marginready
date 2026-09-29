@@ -1,10 +1,10 @@
 ---
 project: marginready.com
 prd_version: 1
-project_version: v1.C
+project_version: v1.F
 status: active
 owner: Vijo
-last_updated: 2026-09-23
+last_updated: 2026-09-29
 ---
 
 # marginready.com — PRD
@@ -46,7 +46,9 @@ busy to reconcile fees and COGS manually.
 Two-level versioning convention (canonical: `sites/portfolio/AI_AGENTS.md`):
 
 - `vN` = major capability tier; SemVer-MAJOR semantics.
-- `vN.X` = phase letter within a tier; internal slicing.
+- `vN.X` = phase letter within a tier; internal slicing. Two levels only, never
+  `vN.X.Y`: follow-up work gets the next free letter. `vN.A` is the tier's kickoff /
+  decisions-lock phase; build starts at `.B` (applies from v2 on).
 
 | Version | Theme | Acceptance |
 |---|---|---|
@@ -60,14 +62,15 @@ Two-level versioning convention (canonical: `sites/portfolio/AI_AGENTS.md`):
 |---|---|---|---|
 | **v0.A** | scaffolded | `portfolio new bootstrap` ran; standard files written; git initialized | ✅ |
 | **v1.A** | frontend prototype + first tool | Landing page, mock-data app screens (`/connect/`, `/cogs/`, `/dashboard/`), `/tiktok-shop-fee-calculator/`; CF deploy, trailing-slash canonical, IndexNow | ✅ |
-| **v1.A.1** | fee calculator upgrade | Every fee fact cited + Sources; uncited claims removed; worked examples (test-guarded); visible FAQ; per-unit net profit; title targets "profit calculator" | ✅ |
 | **v1.B** | SEO content cluster | `/tools/` hub, `/tiktok-shop-break-even-calculator/`, `/tiktok-shop-roas-calculator/`, `/tiktok-shop-payout-schedule/`, `/why-tiktok-shop-payout-is-less-than-sales/`; site-wide internal-link graph; prototype screens noindexed + sitemap-excluded | ✅ |
-| **v1.B.1** | payout page upgrade | Payout-date estimator on `/tiktok-shop-payout-schedule/`, worked timelines, late-payout checklist, visible FAQ matching schema | ✅ |
 | **v1.C** | FBT + COGS pages | `/tiktok-shop-fbt-fee-calculator/` (chargeable weight, storage, returns, vs self-ship), `/how-to-calculate-cogs-tiktok-shop/` (landed-cost calculator); stale FBT figures removed from fee calculator | ✅ |
-| **v1.C.1** | discovery fix | Diagnosed 2026-09-23: links to `/tools/` and break-even are real `<a href>` in server HTML (JS theory disproved), `robots.txt` allows all, `sitemap-index.xml` 200 with all 9 URLs and registered on `sc-domain:marginready.com`. Shipped: in-prose links to `/tools/` and break-even from both payout pages. No footer or sitemap change | ✅ deployed 2026-09-29 |
-| **v1.D — deepening** | deepen the two ranking payout pages | Sections on `/tiktok-shop-payout-schedule/` and `/why-tiktok-shop-payout-is-less-than-sales/`, driven only by queries ranking 11–40 in GSC; no topic broadening; one commit per page. **Gated.** Decision **(b), 2026-09-23:** hold until after the 2026-10-16 review. Reason: the 28d table (`docs/gsc-queries-0923.csv`) has 2 queries in 11–40, 1 impression each, and 0 named queries for payout-less, so there is nothing to deepen from yet; waiting also keeps the 09-18 attribution clean. Re-pull the table after 10-16 | deferred |
-| **v1.D — new cluster pages** | new payout-cluster pages | Sourced only from the GSC query table, never from a guessed keyword list. Deferred until after the 2026-10-16 review | deferred |
-| **v2.A** | real TikTok Shop OAuth + sync | Replace mock data: OAuth against sandbox, nightly sync job, data model, real per-SKU settled profit | planned |
+| **v1.D** | payout page upgrade | Payout-date estimator on `/tiktok-shop-payout-schedule/`, worked timelines, late-payout checklist, visible FAQ matching schema | ✅ |
+| **v1.E** | fee calculator upgrade | Every fee fact cited + Sources; uncited claims removed; worked examples (test-guarded); visible FAQ; per-unit net profit; title targets "profit calculator" | ✅ |
+| **v1.F** | discovery fix | Diagnosed 2026-09-23: links to `/tools/` and break-even are real `<a href>` in server HTML (JS theory disproved), `robots.txt` allows all, `sitemap-index.xml` 200 with all 9 URLs and registered on `sc-domain:marginready.com`. Shipped: in-prose links to `/tools/` and break-even from both payout pages. No footer or sitemap change | ✅ deployed 2026-09-29 |
+| **v1.G** | deepen the two ranking payout pages | Sections on `/tiktok-shop-payout-schedule/` and `/why-tiktok-shop-payout-is-less-than-sales/`, driven only by queries ranking 11–40 in GSC; no topic broadening; one commit per page. **Gated.** Decision **(b), 2026-09-23:** hold until after the 2026-10-16 review. Reason: the 28d table (`docs/gsc-queries-0923.csv`) has 2 queries in 11–40, 1 impression each, and 0 named queries for payout-less, so there is nothing to deepen from yet; waiting also keeps the 09-18 attribution clean. Re-pull the table after 10-16 | deferred |
+| **v1.H** | new payout-cluster pages | Sourced only from the GSC query table, never from a guessed keyword list. Deferred until after the 2026-10-16 review | deferred |
+| **v2.A** | kickoff / decisions lock | Lock v2 scope, data model, OAuth/token-storage design and any ADR before build | planned |
+| **v2.B** | real TikTok Shop OAuth + sync | Replace mock data: OAuth against sandbox, nightly sync job, data model, real per-SKU settled profit | planned |
 
 **Ongoing experiment, not a phase gate: link track (started 2026-09-23).** Off-site
 distribution for the free calculators: community posts in r/TikTokShop and Facebook

@@ -73,3 +73,23 @@ to surface "last AI prompt" per project. Keep entries append-only.
 > "push". Pushed 4 commits (`1d5b7d2..9d90346`); Cloudflare deployed in ~1 min and
 > the new in-body links were verified live on both payout pages. Coverage check moved
 > to ~2026-10-03 to give Google time to re-crawl.
+
+## 2026-09-29 — phase IDs flattened to two-level vN.X
+
+> "make notes for growth docs as well. then make sure our version numbering follows
+> our canonical numbering scheme". Canonical (`sites/portfolio/AI_AGENTS.md`
+> § Versioning) allows two levels only, never three-level IDs, and makes `vN.A` the
+> kickoff phase. Flattened in ship order. Older commits and log entries keep the old IDs:
+>
+> | Old | New |
+> |---|---|
+> | v1.B.1 payout page upgrade | v1.D |
+> | v1.A.1 fee calculator upgrade | v1.E |
+> | v1.C.1 discovery fix | v1.F |
+> | v1.D deepening (09-23 text) | v1.G |
+> | v1.D new cluster pages (09-23 text) | v1.H |
+> | v2.A OAuth + sync | v2.A kickoff / decisions lock + v2.B build |
+>
+> v1 gets no retroactive kickoff row. The `.A` rule applies from v2 on. Also fixed
+> this project's AI_AGENTS.md § Versioning, which wrongly allowed three-level IDs, and
+> added a growth.md note (link track not started, v1.G held, mapping).

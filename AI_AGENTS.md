@@ -283,8 +283,11 @@ in `sites/portfolio/AI_AGENTS.md`):
 - **`vN.X`** — phase letter within a tier (A / B / C / …). Internal slicing of
   build work; signals "order/scope can shift." Each phase still ships
   independently.
-- **`vN.X.Y`** — numeric sub-phase for follow-up work that lands AFTER `vN.X`
-  shipped (e.g. polish, bug fixes, scope cuts).
+- **`vN.A` is the kickoff / decisions-lock phase** of each tier: lock scope,
+  schema/API shape and any ADR before implementation; build work starts at `.B`.
+  Applies from v2 on (v1 predates the rule and is left as shipped).
+- **Two levels only — never three-level identifiers.** Follow-up work that lands
+  after a phase shipped (polish, fixes, upgrades) takes the next free letter.
 
 Two-layer notation separates **external version** (what consumers see) from
 **internal phasing** (how the team slices work). Letters signal *un-promised* —
@@ -293,7 +296,7 @@ nobody mistakes `v1.B` for a SemVer minor release.
 **Always use this numbering when planning or shipping work on this project.**
 Specifically:
 
-- Every entry in `docs/prd.md`'s phases table uses `vN.X` (or `vN.X.Y`).
+- Every entry in `docs/prd.md`'s phases table uses `vN.X` — two levels only.
 - Every commit message that ships a phase mentions its version (e.g.
   `v1.B — auth flow`).
 - Every entry in `docs/Prompts.md` references the version of the work it
@@ -304,6 +307,8 @@ doubt, the canonical statement is `sites/portfolio/AI_AGENTS.md`.
 
 Track this project's progress in `docs/prd.md` against this taxonomy. v0.A is
 the bootstrap (this scaffold); v1.A is the first real shipped capability.
+Phases were flattened to two levels on 2026-09-29; the old→new mapping is in
+`docs/Prompts.md` (2026-09-29), since older commits and log entries use the old IDs.
 
 ## Conventions
 
@@ -320,7 +325,7 @@ the bootstrap (this scaffold); v1.A is the first real shipped capability.
   request conflicts with one, stop and ask — the design is wrong, not the API.
 - **`/connect/`, `/cogs/`, `/dashboard/` are `noindex` on purpose.** They're
   mock-data prototype screens. Don't "fix their SEO", don't re-add them to the
-  sitemap, don't write filler copy onto them. They become real in v2.A.
+  sitemap, don't write filler copy onto them. They become real in v2.B.
 - **Don't state a TikTok fee, rate, or payout figure without a citeable Seller
   Center source.** The public calculators are explicitly *estimators* driven by
   user-entered rates — that's a deliberate distinction from the product's real

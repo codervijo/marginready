@@ -18,7 +18,7 @@ and *not* Vite-standalone. Makefile forwards to the central builder.
 
 **Current state (2026-07-31):** the app screens (`/connect/`, `/cogs/`,
 `/dashboard/`) are a **frontend prototype on mock data** — no OAuth, no API,
-no database yet (that's v2.A). What is genuinely real and shipped is the
+no database yet (that's v2.B). What is genuinely real and shipped is the
 public content surface: the free calculators and guides, which compute from
 user-entered numbers via pure functions in `src/lib/`. Don't mistake the
 dashboard for a working product when picking up work here.
@@ -26,7 +26,7 @@ dashboard for a working product when picking up work here.
 **Pending follow-ups (check these first when picking the project back up):**
 
 - [x] **Done 2026-09-23 (early):** all 4 were still unknown. Diagnosed and shipped
-  v1.C.1 (deployed 2026-09-29); see its growth entry. Next coverage check ~2026-10-03.
+  v1.F (deployed 2026-09-29); see its growth entry. Next coverage check ~2026-10-03.
   Original item — **~2026-09-25: indexing check.** Run
   `cd ~/work/projects/sites/portfolio && uv run portfolio project seo marginready.com --refresh`.
   Confirm `/tools/`, `/tiktok-shop-break-even-calculator/`,
@@ -37,7 +37,7 @@ dashboard for a working product when picking up work here.
   growth entry.
 - [ ] **Confirm the US referral fee rate** (see `docs/prd.md` § Open questions). An
   unverified claim says 8% since 2026-08-04; every page defaults to 6%.
-- [ ] **2026-10-16: v1.C + v1.B.1 + v1.A.1 growth reviews.** Fill in Result/Learning for all three
+- [ ] **2026-10-16: v1.C + v1.D + v1.E growth reviews** (logged as v1.C / v1.B.1 / v1.A.1). Fill in Result/Learning for all three
   2026-09-18 entries in `docs/growth.md` (FBT-intent query impressions and
   position, first impressions on the two new pages, payout page position).
 

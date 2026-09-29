@@ -375,3 +375,21 @@ https://search.google.com/search-console directly.
 - **Result:** TBD — check coverage ~2026-10-03 (fast signal); review 2026-10-27
   (28d from deploy).
 - **Learning:** TBD.
+
+## 2026-09-29 — notes: link track not started, v1.G held, phase IDs renumbered
+- **Status:** note. There's no experiment here and nothing to review.
+- **Link track:** opened 2026-09-23 as an ongoing experiment (see `docs/prd.md` and
+  `docs/links-log.md`). **Nothing has been posted or submitted yet.** Posts need the
+  operator's own Reddit/Facebook accounts. The 2026-05-28 lesson applies: don't open
+  a hypothesis entry for it until the first post is live, so its Action is real.
+  Its KPI (referring domains + referral visits) can't be measured today. Ahrefs has
+  0 units until 2026-10-03, and the site has no analytics (placing that in the PRD
+  is still an open question to the operator).
+- **v1.G deepening held (decision b, 2026-09-23):** the 28d query table has only 2
+  queries ranking 11–40, 1 impression each, so there was nothing to deepen from. The
+  hold also keeps the 2026-10-16 review attributable to the 09-18 changes, apart from
+  the small v1.F link edits (flagged in that entry).
+- **Phase renumbering (2026-09-29):** IDs were flattened to canonical two-level
+  `vN.X`. Entries above keep their original IDs (append-only). Mapping:
+  v1.B.1 → **v1.D**, v1.A.1 → **v1.E**, v1.C.1 → **v1.F**. The "v1.D" in 2026-09-23
+  text (deepening / new cluster) is now **v1.G** / **v1.H**.
