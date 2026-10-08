@@ -374,6 +374,13 @@ https://search.google.com/search-console directly.
 - **Deployed:** 2026-09-29 (pushed 6 days after the commit); links verified live.
 - **Result:** TBD — check coverage ~2026-10-03 (fast signal); review 2026-10-27
   (28d from deploy).
+- **Interim coverage check (2026-10-07, `project seo --refresh`):** inconclusive.
+  All 4 target URLs are still `url_is_unknown_to_google`. Both payout pages were
+  last crawled ~2 weeks ago, which is **before** the 2026-09-29 deploy, so Google hasn't
+  yet seen the new links. `/` was crawled 1h ago; the sitemap was still last fetched 3 months
+  ago; 5 of 9 indexed (unchanged). The test only starts once a payout page is
+  re-crawled after 09-29. If that has happened by 10-27 and the 4 URLs are still
+  unknown, the in-body-link hypothesis fails.
 - **Learning:** TBD.
 
 ## 2026-09-29 — notes: link track not started, v1.G held, phase IDs renumbered
