@@ -413,6 +413,9 @@ https://search.google.com/search-console directly.
   existing schema. `seo.test.js` now guards it.
 - **State (2026-10-09):** committed, **not deployed**. CHECK_095 probes the live site, so it
   has not been re-run against this change.
+- **Deployed:** 2026-10-09 (pushed `e0ec362`); 4 visible answers verified live on each of the
+  three pages. `lamill project check` re-run after deploy: CHECK_095 passes (78 passed,
+  9 failed, was 77 / 10).
 - **Site snapshot (2026-10-09, `project seo --refresh`):** GSC 28d 227 impressions /
   2 clicks / 0.9% CTR. 5 of 9 indexed, unchanged; `/tools/`, break-even, FBT and COGS are
   still `url_is_unknown_to_google`. Payout schedule was crawled 1d ago (after the
