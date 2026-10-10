@@ -27,6 +27,10 @@ describe('SEO baseline (src/pages/index.astro)', () => {
     expect(html).toMatch(/<link\s+rel="canonical"/);
   });
 
+  it('has an indexable <meta name="robots">', () => {
+    expect(html).toMatch(/<meta\s+name="robots"\s+content="index, follow"/);
+  });
+
   it('has Open Graph tags', () => {
     expect(html).toMatch(/property="og:title"/);
     expect(html).toMatch(/property="og:url"/);

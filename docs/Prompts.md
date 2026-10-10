@@ -117,3 +117,10 @@ to surface "last AI prompt" per project. Keep entries append-only.
 > `twitter:image` on `/` and lengthened the homepage meta description 112 → 155 chars.
 > Suite green (150), build passes. Committed, not deployed. Renumbered as before:
 > deepening v1.H → v1.I, new cluster pages v1.I → v1.J.
+
+## 2026-10-09 — v1.H follow-up: homepage meta robots
+
+> "commit and push" → v1.H pushed (`32489ff`), verified live, CHECK_071 and CHECK_076 pass.
+> "fix the meta robots failure" → added `<meta name="robots" content="index, follow">` to
+> `/` (CHECK_075), with a test. Suite green (151), build passes. Folded into v1.H.
+> Committed, not deployed.
