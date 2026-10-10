@@ -96,6 +96,17 @@ describe.each(CONTENT_PAGES)('SEO baseline (src/pages/%s)', (file) => {
     const h1s = body.match(/<h1[\s>]/g) ?? [];
     expect(h1s).toHaveLength(1);
   });
+
+  // FAQPage schema must mirror a FAQ the reader can see: both are built from
+  // the same `faq` array, so the answers can't exist in JSON-LD only.
+  it('renders any FAQ schema as a visible FAQ', () => {
+    const raw = readFileSync(join(process.cwd(), 'src', 'pages', file), 'utf8');
+    if (!raw.includes('"FAQPage"')) return;
+    expect(raw).toMatch(/mainEntity:\s*faq\.map\(/);
+    expect(body).toMatch(/faq\.map\(/);
+    expect(body).toMatch(/\{f\.q\}/);
+    expect(body).toMatch(/\{f\.a\}/);
+  });
 });
 
 // App prototype screens run on mock data. They must stay noindexed so thin

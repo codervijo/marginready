@@ -400,3 +400,26 @@ https://search.google.com/search-console directly.
   `vN.X`. Entries above keep their original IDs (append-only). Mapping:
   v1.B.1 → **v1.D**, v1.A.1 → **v1.E**, v1.C.1 → **v1.F**. The "v1.D" in 2026-09-23
   text (deepening / new cluster) is now **v1.G** / **v1.H**.
+
+## 2026-10-09 — v1.G: visible FAQ on the three pages that had FAQ schema only
+- **Status:** note. This is a schema/markup correctness fix and not a ranking bet, so it has no
+  hypothesis to review.
+- **Trigger:** `lamill project check marginready.com` CHECK_095 (live-faq-answers-in-html)
+  reported 12 FAQ answers present in FAQPage JSON-LD but missing from body HTML.
+- **Action:** `/tiktok-shop-break-even-calculator/`, `/tiktok-shop-roas-calculator/` and
+  `/why-tiktok-shop-payout-is-less-than-sales/` each gained a "Common questions" section
+  (4 questions each). The visible section and the JSON-LD are built from the same `faq`
+  array, as on the fee, payout, FBT and COGS pages. Answer text is unchanged from the
+  existing schema. `seo.test.js` now guards it.
+- **State (2026-10-09):** committed, **not deployed**. CHECK_095 probes the live site, so it
+  has not been re-run against this change.
+- **Site snapshot (2026-10-09, `project seo --refresh`):** GSC 28d 227 impressions /
+  2 clicks / 0.9% CTR. 5 of 9 indexed, unchanged; `/tools/`, break-even, FBT and COGS are
+  still `url_is_unknown_to_google`. Payout schedule was crawled 1d ago (after the
+  2026-09-29 v1.F deploy); payout-less 2w ago. Sitemap still last fetched 3 months ago.
+- **Confound:** once deployed, payout-less changes again (about 4 Q&A blocks of text)
+  ahead of the 2026-10-16 reviews and the 2026-10-27 v1.F review. Record the deploy date
+  here and account for it at both.
+- **Phase renumbering (2026-10-09):** this fix took **v1.G**. Deepening the payout pages
+  moved v1.G → **v1.H**; new payout-cluster pages moved v1.H → **v1.I**. Entries above
+  keep the IDs they were written with (append-only).

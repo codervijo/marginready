@@ -29,43 +29,33 @@ const webApplicationLd = {
   publisher: { "@id": "https://marginready.com/#organization" },
 };
 
+const faq = [
+  {
+    q: "How do I calculate break-even price on TikTok Shop?",
+    a: "Split your costs into two groups. Percentage costs scale with price (referral fee, affiliate commission, returns); fixed costs do not (COGS, fulfillment, ad spend per unit). Break-even price = fixed cost per unit ÷ (1 − referral rate − affiliate rate − return rate). With $15 COGS and a 6% referral fee and nothing else, that is $15 ÷ 0.94 = $15.96.",
+  },
+  {
+    q: "How much should I mark up a product on TikTok Shop?",
+    a: "There is no universal multiple — it depends entirely on your own percentage costs. The calculator on this page shows the exact markup multiple over your product cost needed both to break even and to reach the net margin you want. The heavier your affiliate rate and return rate, the higher that multiple has to be.",
+  },
+  {
+    q: "Why can't I reach my target margin at any price?",
+    a: "Because percentage costs scale with price, raising the price raises them too. If your referral fee, affiliate commission, and return rate together consume more of each dollar than the margin you want to keep, no price works. You have to cut a percentage cost rather than raise the price.",
+  },
+  {
+    q: "Should I include ad spend in break-even price?",
+    a: "Yes, if you want a price that covers acquisition. Divide total ad spend by units sold to get ad spend per unit and enter it as a fixed cost. If you would rather solve for the ad efficiency your current price can support, use the break-even ROAS calculator instead.",
+  },
+];
+
 const faqLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "How do I calculate break-even price on TikTok Shop?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Split your costs into two groups. Percentage costs scale with price (referral fee, affiliate commission, returns); fixed costs do not (COGS, fulfillment, ad spend per unit). Break-even price = fixed cost per unit ÷ (1 − referral rate − affiliate rate − return rate). With $15 COGS and a 6% referral fee and nothing else, that is $15 ÷ 0.94 = $15.96.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How much should I mark up a product on TikTok Shop?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "There is no universal multiple — it depends entirely on your own percentage costs. The calculator on this page shows the exact markup multiple over your product cost needed both to break even and to reach the net margin you want. The heavier your affiliate rate and return rate, the higher that multiple has to be.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Why can't I reach my target margin at any price?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Because percentage costs scale with price, raising the price raises them too. If your referral fee, affiliate commission, and return rate together consume more of each dollar than the margin you want to keep, no price works. You have to cut a percentage cost rather than raise the price.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Should I include ad spend in break-even price?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes, if you want a price that covers acquisition. Divide total ad spend by units sold to get ad spend per unit and enter it as a fixed cost. If you would rather solve for the ad efficiency your current price can support, use the break-even ROAS calculator instead.",
-      },
-    },
-  ],
+  mainEntity: faq.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
 };
 ---
 
@@ -224,6 +214,20 @@ const faqLd = {
             href="/tiktok-shop-fee-calculator/">TikTok Shop fee calculator</a
           > for profit at a price you have already set.
         </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">Common questions</h2>
+        <div class="mt-4 space-y-5">
+          {
+            faq.map((f) => (
+              <div>
+                <h3 class="font-semibold text-foreground">{f.q}</h3>
+                <p class="mt-1.5 text-muted-foreground">{f.a}</p>
+              </div>
+            ))
+          }
+        </div>
       </section>
     </div>
   </div>

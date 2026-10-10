@@ -27,43 +27,33 @@ const articleLd = {
   publisher: { "@id": "https://marginready.com/#organization" },
 };
 
+const faq = [
+  {
+    q: "Why is my TikTok Shop payout less than my sales?",
+    a: "Your dashboard reports GMV — gross order value before anything is deducted. Your payout is settlement, which is GMV minus the referral fee, creator commissions, fulfillment, refunds and their admin fees, and whatever is currently held in reserve. The two numbers measure different things, so they are never expected to match.",
+  },
+  {
+    q: "What is the difference between GMV and settlement on TikTok Shop?",
+    a: "GMV is the total value of orders placed. Settlement is what TikTok actually pays you for delivered orders after every platform deduction. GMV is a demand metric; settlement is a cash metric. Profit can only be calculated from settlement, because only settlement reflects the fees TikTok really charged.",
+  },
+  {
+    q: "Do I pay TikTok Shop referral fees on discounted orders?",
+    a: "Yes — and on the discount itself when it is a platform discount. TikTok's referral fee formula is the fee rate multiplied by customer payment plus platform discount minus tax. The platform-funded discount is added back before the fee is calculated, so your fee is based on a figure higher than what the customer actually paid you.",
+  },
+  {
+    q: "What is the TikTok Shop refund administration fee?",
+    a: "When an order is refunded, TikTok retains a refund administration fee equal to 20% of the original referral fee, capped at $5 per SKU type. So a refund does not return you to zero — you keep the loss of the product and shipping, and a slice of the original fee is retained.",
+  },
+];
+
 const faqLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Why is my TikTok Shop payout less than my sales?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Your dashboard reports GMV — gross order value before anything is deducted. Your payout is settlement, which is GMV minus the referral fee, creator commissions, fulfillment, refunds and their admin fees, and whatever is currently held in reserve. The two numbers measure different things, so they are never expected to match.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What is the difference between GMV and settlement on TikTok Shop?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "GMV is the total value of orders placed. Settlement is what TikTok actually pays you for delivered orders after every platform deduction. GMV is a demand metric; settlement is a cash metric. Profit can only be calculated from settlement, because only settlement reflects the fees TikTok really charged.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Do I pay TikTok Shop referral fees on discounted orders?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes — and on the discount itself when it is a platform discount. TikTok's referral fee formula is the fee rate multiplied by customer payment plus platform discount minus tax. The platform-funded discount is added back before the fee is calculated, so your fee is based on a figure higher than what the customer actually paid you.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What is the TikTok Shop refund administration fee?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "When an order is refunded, TikTok retains a refund administration fee equal to 20% of the original referral fee, capped at $5 per SKU type. So a refund does not return you to zero — you keep the loss of the product and shipping, and a slice of the original fee is retained.",
-      },
-    },
-  ],
+  mainEntity: faq.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
 };
 
 // Illustrative reconciliation. Inputs chosen for clarity, NOT survey data —
@@ -345,6 +335,20 @@ const takePct = ((gmv - settled) / gmv) * 100;
             >break-even price calculator</a
           >.
         </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">Common questions</h2>
+        <div class="mt-4 space-y-5">
+          {
+            faq.map((f) => (
+              <div>
+                <h3 class="font-semibold text-foreground">{f.q}</h3>
+                <p class="mt-1.5 text-muted-foreground">{f.a}</p>
+              </div>
+            ))
+          }
+        </div>
       </section>
 
       <section>

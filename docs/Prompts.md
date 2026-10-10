@@ -93,3 +93,19 @@ to surface "last AI prompt" per project. Keep entries append-only.
 > v1 gets no retroactive kickoff row. The `.A` rule applies from v2 on. Also fixed
 > this project's AI_AGENTS.md § Versioning, which wrongly allowed three-level IDs, and
 > added a growth.md note (link track not started, v1.G held, mapping).
+
+## 2026-10-09 — v1.G: visible FAQ matching schema
+
+> "how is the live site doing?" → "use lamill tool" → "fix the FAQ answers missing from
+> visible HTML" → "make it v1.G, push the others down, then commit". `lamill project check`
+> CHECK_095 flagged 12 FAQ answers in JSON-LD only. Break-even, ROAS and payout-less pages
+> now render a "Common questions" section from the same `faq` array that feeds the schema;
+> answer text unchanged; test guard added. Suite green (150), build passes. Not deployed.
+>
+> Renumbered to make room:
+>
+> | Old | New |
+> |---|---|
+> | (new) visible FAQ matching schema | v1.G |
+> | v1.G deepen the two ranking payout pages | v1.H |
+> | v1.H new payout-cluster pages | v1.I |

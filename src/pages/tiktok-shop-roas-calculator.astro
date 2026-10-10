@@ -30,43 +30,33 @@ const webApplicationLd = {
   publisher: { "@id": "https://marginready.com/#organization" },
 };
 
+const faq = [
+  {
+    q: "What is break-even ROAS on TikTok Shop?",
+    a: "Break-even ROAS is 1 divided by your contribution margin rate — the share of each revenue dollar left after every non-ad cost (referral fee, affiliate commission, returns, COGS, fulfillment). If 64 cents of every dollar survives those costs, your break-even ROAS is 1 ÷ 0.64 = 1.56x. Below that, each ad dollar loses money.",
+  },
+  {
+    q: "Is a 2x ROAS good on TikTok Shop?",
+    a: "It depends entirely on your margins — 2x is not universally good or bad. A product with a 50% contribution margin breaks even at exactly 2x, so 2x earns nothing. A product with a 25% contribution margin needs 4x just to break even, so 2x is a heavy loss. Compute your own break-even before judging any ROAS number.",
+  },
+  {
+    q: "Why is my TikTok Shop ROAS profitable but my bank account isn't?",
+    a: "TikTok Ads Manager measures ROAS against gross revenue, before the referral fee, affiliate commissions, returns, COGS, and fulfillment come out. A campaign showing a healthy ROAS can still be unprofitable once those land. Break-even ROAS is the threshold that accounts for all of them.",
+  },
+  {
+    q: "How do I calculate max cost per order for TikTok Shop ads?",
+    a: "Your maximum cost per order at break-even equals your contribution per order — price minus referral fee, affiliate commission, returns, COGS, and fulfillment. To keep a target margin instead, subtract that margin's dollar value from the contribution.",
+  },
+];
+
 const faqLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "What is break-even ROAS on TikTok Shop?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Break-even ROAS is 1 divided by your contribution margin rate — the share of each revenue dollar left after every non-ad cost (referral fee, affiliate commission, returns, COGS, fulfillment). If 64 cents of every dollar survives those costs, your break-even ROAS is 1 ÷ 0.64 = 1.56x. Below that, each ad dollar loses money.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Is a 2x ROAS good on TikTok Shop?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "It depends entirely on your margins — 2x is not universally good or bad. A product with a 50% contribution margin breaks even at exactly 2x, so 2x earns nothing. A product with a 25% contribution margin needs 4x just to break even, so 2x is a heavy loss. Compute your own break-even before judging any ROAS number.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Why is my TikTok Shop ROAS profitable but my bank account isn't?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "TikTok Ads Manager measures ROAS against gross revenue, before the referral fee, affiliate commissions, returns, COGS, and fulfillment come out. A campaign showing a healthy ROAS can still be unprofitable once those land. Break-even ROAS is the threshold that accounts for all of them.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How do I calculate max cost per order for TikTok Shop ads?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Your maximum cost per order at break-even equals your contribution per order — price minus referral fee, affiliate commission, returns, COGS, and fulfillment. To keep a target margin instead, subtract that margin's dollar value from the contribution.",
-      },
-    },
-  ],
+  mainEntity: faq.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
 };
 ---
 
@@ -227,6 +217,20 @@ const faqLd = {
             href="/">MarginReady</a
           > shows true profit per SKU from your real settled payouts instead of estimates.
         </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">Common questions</h2>
+        <div class="mt-4 space-y-5">
+          {
+            faq.map((f) => (
+              <div>
+                <h3 class="font-semibold text-foreground">{f.q}</h3>
+                <p class="mt-1.5 text-muted-foreground">{f.a}</p>
+              </div>
+            ))
+          }
+        </div>
       </section>
     </div>
   </div>
