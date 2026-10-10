@@ -109,3 +109,11 @@ to surface "last AI prompt" per project. Keep entries append-only.
 > | (new) visible FAQ matching schema | v1.G |
 > | v1.G deepen the two ranking payout pages | v1.H |
 > | v1.H new payout-cluster pages | v1.I |
+
+## 2026-10-09 — v1.H: homepage share image + meta description
+
+> "fix the og:image and meta description failures". `lamill project check` CHECK_076 and
+> CHECK_071, both homepage-only. Added `public/og.png` (1200×630) with `og:image` /
+> `twitter:image` on `/` and lengthened the homepage meta description 112 → 155 chars.
+> Suite green (150), build passes. Committed, not deployed. Renumbered as before:
+> deepening v1.H → v1.I, new cluster pages v1.I → v1.J.

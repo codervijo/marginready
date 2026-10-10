@@ -426,3 +426,18 @@ https://search.google.com/search-console directly.
 - **Phase renumbering (2026-10-09):** this fix took **v1.G**. Deepening the payout pages
   moved v1.G → **v1.H**; new payout-cluster pages moved v1.H → **v1.I**. Entries above
   keep the IDs they were written with (append-only).
+
+## 2026-10-09 — v1.H: homepage share image and longer meta description
+- **Status:** note. Conformance fix with no ranking hypothesis, so nothing to review.
+- **Trigger:** `lamill project check` CHECK_076 (no `og:image`) and CHECK_071 (homepage
+  meta description 112 chars, under the 120–160 range). Both checks read `/` only.
+- **Action:** added `public/og.png` (1200×630, brand mark + the homepage title) with
+  `og:image`, its width/height/alt and `twitter:image` on `/`. Homepage meta description
+  rewritten to 155 chars; it now also mentions the free fee and break-even calculators.
+  Content pages untouched: they still have no `og:image`.
+- **State (2026-10-09):** committed, **not deployed**. The live checks have not been re-run
+  against it.
+- **Confound:** the homepage description is a SERP-facing change on `/` (6 branded
+  impressions @ 1.8 over 28d as of 2026-09-23). Record the deploy date here.
+- **Phase renumbering (2026-10-09):** this took **v1.H**. Deepening the payout pages moved
+  v1.H → **v1.I**; new payout-cluster pages moved v1.I → **v1.J**.

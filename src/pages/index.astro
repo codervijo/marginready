@@ -5,7 +5,8 @@ import { Landing } from "../components/Landing";
 const site = "https://marginready.com";
 const title = "MarginReady — Real profit per product on TikTok Shop";
 const description =
-  "MarginReady shows settled revenue, platform fees, product costs, and net profit per SKU for TikTok Shop sellers.";
+  "MarginReady shows TikTok Shop sellers settled revenue, platform fees, product costs, and real net profit per SKU, plus free fee and break-even calculators.";
+const ogImage = site + "/og.png";
 ---
 
 <Layout>
@@ -24,11 +25,19 @@ const description =
     />
     <meta property="og:url" content={site + "/"} />
     <meta property="og:site_name" content="MarginReady" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="MarginReady — real profit per product on TikTok Shop"
+    />
 
     <!-- Twitter card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
     <!-- JSON-LD structured data -->
     <script type="application/ld+json" is:inline>

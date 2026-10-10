@@ -30,6 +30,7 @@ describe('SEO baseline (src/pages/index.astro)', () => {
   it('has Open Graph tags', () => {
     expect(html).toMatch(/property="og:title"/);
     expect(html).toMatch(/property="og:url"/);
+    expect(html).toMatch(/property="og:image"/);
   });
 
   it('has Twitter card meta', () => {
