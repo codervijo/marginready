@@ -13,8 +13,9 @@ The user is a US TikTok Shop seller doing ~$5k–$50k/month across 10–80 SKUs
 who knows their GMV but not their profit.
 
 Stack: **Astro** + React islands + Tailwind v4 + pnpm, deployed to
-**Cloudflare Workers (Static Assets)** via `wrangler.jsonc` — *not* Pages,
-and *not* Vite-standalone. Makefile forwards to the central builder.
+**Cloudflare Pages** (project `marginready`, Git integration; verified 2026-10-09,
+see `AI_AGENTS.md` § Deployment info), *not* Vite-standalone. Makefile forwards to the
+central builder.
 
 **Current state (2026-07-31):** the app screens (`/connect/`, `/cogs/`,
 `/dashboard/`) are a **frontend prototype on mock data** — no OAuth, no API,
@@ -63,15 +64,15 @@ cd ~/work/projects/sites && docker run --rm -v "$PWD":/usr/src/app \
   bash -lc 'export PATH=/root/.volta/bin:$PATH; npx vitest run && npx astro build'
 ```
 
-Deploy: Cloudflare **Workers** (Static Assets) — `wrangler deploy`, or CF's Git
-integration on push to `main`.
+Deploy: Cloudflare **Pages** — CF's Git integration on push to `main`. `wrangler deploy`
+is unverified here (it targets a Worker, not this Pages project).
 
 ## Conventions
 
   - Build path: this project's `Makefile` → `../Makefile` (parent
     workspace) → `~/work/projects/builder/` (central builder).
   - Stack: pnpm-only. No `package-lock.json` / `bun.lockb` / `yarn.lock`.
-  - Deploy: Cloudflare **Workers** (Static Assets) via `wrangler.jsonc`. No
+  - Deploy: Cloudflare **Pages** (Git integration). No
     `_redirects` SPA fallback (uses CF's `not_found_handling` instead).
   - `trailingSlash: 'always'` + `build.format: 'directory'`. **Every internal
     link must end in `/`** or it costs a redirect hop; there's a test guarding

@@ -124,3 +124,15 @@ to surface "last AI prompt" per project. Keep entries append-only.
 > "fix the meta robots failure" → added `<meta name="robots" content="index, follow">` to
 > `/` (CHECK_075), with a test. Suite green (151), build passes. Folded into v1.H.
 > Committed, not deployed.
+
+## 2026-10-09 — deploy platform corrected in docs: Cloudflare Pages
+
+> "fix the deploy-drift failure" → "do 2, then commit and push". CHECK_143 is a warning,
+> not drift: its classifier only recognises a `*.pages.dev` / `*.workers.dev` host in the
+> redirect chain, which a custom domain never shows, so no change in this repo can make it
+> pass. The declaration (`cf-pages`) is right: `marginready.pages.dev` serves each push and
+> `lamill project hosting` lists the deploys from the Pages API. `AI_AGENTS.md` and
+> `docs/CLAUDE.md` said "Workers (Static Assets)"; corrected to Pages. Not checked: whether
+> a same-name Worker also exists (no Cloudflare account access), and whether
+> `wrangler deploy` works here. The check fix belongs in `sites/portfolio`, not raised yet.
+> Also logged the robots tag deploy (`07bf497`, live, CHECK_075 passing).

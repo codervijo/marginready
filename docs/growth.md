@@ -440,8 +440,8 @@ https://search.google.com/search-console directly.
 - **Deployed:** 2026-10-09 (pushed `32489ff`); `og.png` serves 200 `image/png` and the tag is
   live on `/`. `lamill project check` re-run after deploy: CHECK_071 and CHECK_076 pass.
 - **Follow-up (2026-10-09):** added `<meta name="robots" content="index, follow">` to `/`
-  for CHECK_075. It states the default, so no indexing behaviour changes. Committed,
-  **not deployed**; folded into v1.H, no new phase letter.
+  for CHECK_075. It states the default, so no indexing behaviour changes. Folded into v1.H, no new phase letter. Deployed 2026-10-09 (pushed `07bf497`), tag verified
+  live; CHECK_075 passes (81 passed, 6 failed).
 - **Confound:** the homepage description is a SERP-facing change on `/` (6 branded
   impressions @ 1.8 over 28d as of 2026-09-23). Record the deploy date here.
 - **Phase renumbering (2026-10-09):** this took **v1.H**. Deepening the payout pages moved
