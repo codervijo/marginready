@@ -39,9 +39,48 @@ dashboard for a working product when picking up work here.
   growth entry.
 - [ ] **Confirm the US referral fee rate** (see `docs/prd.md` § Open questions). An
   unverified claim says 8% since 2026-08-04; every page defaults to 6%.
-- [ ] **2026-10-16: v1.C + v1.D + v1.E growth reviews** (logged as v1.C / v1.B.1 / v1.A.1). Fill in Result/Learning for all three
-  2026-09-18 entries in `docs/growth.md` (FBT-intent query impressions and
-  position, first impressions on the two new pages, payout page position).
+- [x] **Done 2026-10-23: v1.C + v1.D + v1.E growth reviews** (logged as v1.C / v1.B.1 /
+  v1.A.1). v1.D shipped (payout schedule 28.7 → 19.0). v1.E failed (fee calculator still
+  ~56, profit-calculator query unmoved). v1.C untested: FBT and COGS pages are still
+  unknown to Google, so it was extended. Query table re-pulled to `docs/gsc-queries-1023.csv`;
+  it still has only 2 queries in positions 11–40, at 1 impression each.
+- [ ] **v1.I in progress** (operator chose (b) on 2026-10-23: deepen without GSC query
+  material). Payout schedule page done, uncommitted. Payout-less not started: it ranks
+  4.6 and has 2 confounds already, so get the operator's go before editing it. v1.K (was v1.J) still
+  deferred.
+- [ ] **v1.J page-quality fixes done 2026-10-23, uncommitted.** Left open from the audit,
+  not scheduled: "Common questions" (7 pages) and "Sources" (4) are identical H2s across pages;
+  FBT has a duplicate "FBT vs shipping it yourself" H2 and step-label H2s; no content page has
+  `og:image`; payout-less still has H1 = title and a 232-char description (held).
+- [ ] **2026-11-20: v1.C re-review.** If the FBT and COGS pages are still unknown, close
+  the entry as `abandoned` (untested).
+- [ ] **2026-10-27: v1.F review** (in-body links from the payout pages). Payout schedule
+  was re-crawled after the 09-29 deploy (seen 2026-10-09, "crawled 1d ago"); payout-less
+  had not been. If `/tools/`, break-even, FBT and COGS are still
+  `url_is_unknown_to_google` by then, the in-body-link hypothesis fails.
+- [ ] **Remaining `lamill project check` failures (2026-10-09: 81 passed, 6 failed).**
+  None is scheduled; each needs the operator's call before work starts.
+  - CHECK_143 deploy-drift: not fixable in this repo. The classifier only recognises a
+    `*.pages.dev` / `*.workers.dev` host in the redirect chain, which a custom domain
+    never shows. A fix belongs in `sites/portfolio` and has not been raised there.
+  - CHECK_080 has-analytics: none installed; where it goes in the PRD is still open
+    (also blocks measuring the link track's referral visits).
+  - CHECK_147 url-indexed: the unknown URLs above (3 as of 2026-10-23; break-even is now
+    indexed); tracked by the v1.F review.
+  - CHECK_152 content-derivable: `[content]` in `lamill.toml` is empty.
+  - CHECK_039 has-tsconfig: no `tsconfig.json`.
+  - CHECK_040 git-remote-name: remote repo is `marginready`, convention wants
+    `marginready.com`.
+- [ ] **Deploy facts left unverified on 2026-10-09** (no Cloudflare account access):
+  whether the Pages build reads `wrangler.jsonc`, whether `wrangler deploy` does anything
+  useful here, and whether a Worker named `marginready` also exists. `AI_AGENTS.md`
+  § Deployment info still describes `wrangler.jsonc` as the config.
+- [ ] **Share image is homepage-only.** `public/og.png` was generated with ImageMagick in
+  Liberation Sans, not the site font; the 8 content pages have no `og:image`. Open only
+  if the operator wants it restyled or extended (relevant if the link track starts
+  posting calculator URLs).
+- [ ] **Link track has not started** (`docs/links-log.md` is empty). Needs the operator's
+  own Reddit/Facebook accounts.
 
 ## Commands
 

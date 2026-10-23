@@ -136,3 +136,35 @@ to surface "last AI prompt" per project. Keep entries append-only.
 > a same-name Worker also exists (no Cloudflare account access), and whether
 > `wrangler deploy` works here. The check fix belongs in `sites/portfolio`, not raised yet.
 > Also logged the robots tag deploy (`07bf497`, live, CHECK_075 passing).
+
+## 2026-10-23 — growth reviews for v1.C, v1.D, v1.E
+
+> "where were we?" → "do the 10-16 growth reviews". Pulled `lamill project seo --refresh`
+> and a `gsc.query_with_dims` split (28d window 09-23 → 10-20, all after the 09-18 deploys).
+> v1.D (payout schedule) → shipped: position 28.7 → 19.0. v1.E (fee calculator) → failed:
+> still ~56, impressions halved, the "profit calculator" query didn't move. v1.C → extended
+> to 2026-11-20: the FBT and COGS pages are still unknown to Google, so the bet is untested.
+> Break-even is now indexed (6 of 9). Payout-less is at 4.6. Checkpoint 09-23 also reviewed.
+> Query table saved as `docs/gsc-queries-1023.csv`; v1.I / v1.J are left to the operator.
+> Docs only; nothing committed.
+
+## 2026-10-23 — v1.I: payout schedule page deepened
+
+> v1.I gate question → "b" (deepen anyway). With no GSC queries in 11–40, the section ideas
+> came from the live SERP for "tiktok shop payout": its AI Overview cites Seller Center's
+> "Scheduling your payouts", which the page didn't use. Added the payout-schedule section
+> (daily / business-day / weekly / monthly), a new FAQ, and TikTok's named failed-payout
+> causes with the next-day retry. That replaced the FAQ claim that TikTok documents no
+> reasons, which had gone stale. All three sources re-read. PRD v1.I row updated; growth
+> entry opened. Suite green (151), build passes. Payout-less untouched. Not committed.
+
+## 2026-10-23 — v1.J: page-quality fixes from the skill audit
+
+> "are the pages … thick and useful using our custom skill?" → payout schedule fixes 1, 2, 4
+> (H1 ≠ title, description 147, worked schedule example + test) → "analyse all current
+> pages" → audit table of 9 pages → "v1.J with 1–3, then do it". Cited the 6% referral fee
+> on break-even, ROAS and COGS; `/tools/` hub 254 → 732 words (order of use, how numbers
+> chain); descriptions ≤ 155 and H1 ≠ title on 5 pages; 3 new `seo.test.js` guards (the cite
+> guard caught nothing new; the fee page already cites a different Seller Center page).
+> Payout-less held. New payout-cluster pages renumbered v1.J → v1.K. Suite green (176),
+> build passes. Not committed.

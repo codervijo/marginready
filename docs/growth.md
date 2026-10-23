@@ -194,7 +194,7 @@ https://search.google.com/search-console directly.
   for the full numbers.
 
 ## 2026-09-18 — v1.C: capture the FBT queries already landing on the fee calculator
-- **Status:** active
+- **Status:** testing *(reviewed 2026-10-23, extended to 2026-11-20; see Result)*
 - **Hypothesis:** GSC shows FBT-intent queries ("fulfilled by tiktok calculator",
   "tiktok fbt calculator", "tiktok (fbt calculator)") matched to
   `/tiktok-shop-fee-calculator/` at positions 54–75, a page that only mentions FBT
@@ -224,12 +224,31 @@ https://search.google.com/search-console directly.
   verified live. Reaches Bing/Yandex/Naver/Seznam/Yep only, **not Google**. Google's
   Indexing API only covers JobPosting/BroadcastEvent pages and the portfolio GSC scope
   is read-only, so Google requests stay a manual Search Console step.
-- **Result:** TBD — review 2026-10-16
-- **Learning:** TBD. Also check whether `/tools/` and the break-even calculator
-  left `url_is_unknown_to_google` after the manual index requests (2026-09-18).
+- **Result:** Reviewed 2026-10-23 (7 days late). The `lamill project seo --refresh` run
+  and the `gsc.query_with_dims` pull used GSC's 28d window, 2026-09-23 → 10-20, which falls
+  entirely after the 09-18 deploy. Saved as `docs/gsc-queries-1023.csv`.
+  - `/tiktok-shop-fbt-fee-calculator/` and `/how-to-calculate-cogs-tiktok-shop/`:
+    **0 impressions.** Both are still `url_is_unknown_to_google` 5 weeks after shipping
+    and after the manual index request.
+  - FBT-intent queries: **none in the 28d table on any page** (baseline: 6 imp across
+    3 queries, all on the fee calculator, @ 54–75). The 90d table still shows them on the
+    fee calculator only, so those impressions predate 09-23.
+  - COGS queries: none visible.
+  - `/tools/`: still `url_is_unknown_to_google`. `/tiktok-shop-break-even-calculator/`:
+    **now `submitted_indexed`**, crawled ~4d ago. This is the first of the 4 requested URLs
+    to be discovered.
+- **Learning:** **The hypothesis has not been tested, because Google never found the
+  pages.** An unindexed page can't earn impressions, so 0 says nothing about whether a
+  dedicated FBT page outranks the fee calculator (the same trap as 2026-05-28). The
+  FBT queries leaving the fee calculator are probably explained by v1.E removing that
+  page's FBT figures. That fits the timing but isn't proven. What happens next depends on
+  discovery, which the v1.F review (2026-10-27) tracks. Break-even being indexed after
+  the v1.F links went live is the first sign those links work. Re-review 2026-11-20. If
+  both pages are still unknown then, close this entry as `abandoned` (untested), not
+  `failed`.
 
 ## 2026-09-18 — v1.B.1: strengthen the payout schedule page (best position on the site)
-- **Status:** active
+- **Status:** shipped *(reviewed 2026-10-23)*
 - **Hypothesis:** `/tiktok-shop-payout-schedule/` is the site's strongest page
   (121 imp @ 28.7 over 28d) but ranks ~46 for its head query "tiktok shop payout".
   It had no tool, no worked examples, and its FAQPage schema had no visible FAQ
@@ -251,11 +270,26 @@ https://search.google.com/search-console directly.
   Affiliate payout timing deliberately left out: no official source found.
   Operator requested Google indexing for the page in Search Console on
   2026-09-18, and it was also pinged to IndexNow (see the v1.C entry).
-- **Result:** TBD — review 2026-10-16
-- **Learning:** TBD.
+- **Result:** Reviewed 2026-10-23, using the GSC 28d window 2026-09-23 → 10-20 (all
+  post-deploy).
+  - Page: **127 imp / 0 clicks / pos 19.0** (baseline 121 / 0 / 28.7; the 2026-09-23
+    checkpoint had 118 @ 22.4).
+  - "tiktok shop payout": 33 @ **40.6** (baseline 90d 29 @ 45.7; 09-23 28d 27 @ 42.6).
+  - Named queries, 28d: 4 (09-23: 3). New ones: "tiktok shop payment settlement" 3 @ 51.0,
+    "tiktok shop seller payouts" 1 @ 37.0. "when does tiktok shop pay you" moved to 1 @ 31.0.
+    Named queries account for 38 of the page's 127 impressions; GSC anonymises the rest.
+  - Crawled ~4d ago.
+- **Learning:** **Worked on position, not yet on clicks.** Average position improved by
+  ~10 places at flat impressions, and the head query by ~5. Part of that gain predates
+  09-18 (22.4 at the 09-23 checkpoint, a mostly pre-deploy window). The page is also
+  confounded by the v1.F in-prose links (2 sentences, deployed 09-29). Still 0 clicks: the
+  head query sits on page 4–5, and the 19.0 average is lifted by low-volume long-tail
+  queries. The query table still has only 2 queries ranking 11–40, at 1 impression each,
+  so there's no query-led reason yet to deepen the page (v1.I).
+- **Status update (2026-10-23):** `active` → `shipped`
 
 ## 2026-09-18 — v1.A.1: strengthen the fee calculator page (fix uncited claims, target "profit calculator")
-- **Status:** active
+- **Status:** failed *(reviewed 2026-10-23)*
 - **Hypothesis:** `/tiktok-shop-fee-calculator/` gets the most query variety on the
   site but ranks ~69. It stated fee facts with no on-page source, including an
   unsourced "~20–30% effective take" plus a 3% promo and a UK 9% rate that can't be
@@ -283,8 +317,29 @@ https://search.google.com/search-console directly.
   uses 6% as an editable default. Operator to confirm in Seller Center.
   Post-deploy (2026-09-18): operator requested Google indexing in Search Console; the
   URL was also pinged to IndexNow (Bing/Yandex/…, not Google).
-- **Result:** TBD — review 2026-10-16
-- **Learning:** TBD.
+- **Result:** Reviewed 2026-10-23, using the GSC 28d window 2026-09-23 → 10-20 (all
+  post-deploy).
+  - Page: **52 imp / 0 clicks / pos 56.2** (2026-09-23 checkpoint, 28d: 102 @ 64.7;
+    baseline 90d: 143 @ 68.6).
+  - Queries, 28d (09-23 28d figure in parentheses where one exists, else the 90d baseline):
+    - "tiktok shop fee calculator": 15 @ 53.5 (10 @ 57.3)
+    - "tiktok shop profit calculator": 10 @ **66.8** (7 @ 65.3)
+    - "tiktok shop calculator": 2 @ 59.0 (90d 8 @ 77.9)
+    - "tiktok shop fees calculator": 1 @ 52.0 (90d 7 @ 59.1)
+    - New: "tiktok shop price calculator" 6 @ 57.8 and "tiktok shop affiliate commission
+      calculator" 3 @ 69.0.
+  - FBT and shipping queries no longer match this page.
+- **Learning:** **The bet failed.** Position improved by ~8 places, but impressions
+  halved, clicks are still 0, and the named target "profit calculator" didn't move
+  (65.3 → 66.8). The title change didn't earn that query. Some of the impression drop is
+  probably the FBT and shipping long tail leaving after the FBT figures were removed (see
+  v1.C), and site-wide weekly impressions are also down (64 / 54 / 40 for the weeks of
+  09-28, 10-05 and 10-12). That attribution isn't proven. Inference, not proven: on a
+  low-authority domain, an on-page rewrite (citations, visible FAQ, worked examples) doesn't
+  move a page that sits around position 56. The citation fixes still stand on correctness
+  grounds. Don't rewrite this page again as a ranking lever; ranking it will take something
+  off-page.
+- **Status update (2026-10-23):** `active` → `failed`
 
 ## 2026-09-23 — checkpoint: 3-month roll-up; the 4 manually requested URLs are still unknown to Google
 - **Status:** testing
@@ -346,6 +401,22 @@ https://search.google.com/search-console directly.
   next.
 - **Review:** 2026-10-16, together with the three 2026-09-18 entries. Re-check
   coverage on ~2026-09-30.
+- **Review result (2026-10-23):**
+  - Site, GSC 28d (09-23 → 10-20): **201 imp / 1 click / 0.5% CTR** (checkpoint: 244 / 1).
+  - Coverage **6 of 9 indexed** (was 5): break-even joined. `/tools/`, FBT and COGS are
+    still unknown. Sitemap now last fetched **4 months ago**.
+  - Weekly impressions, weeks of 09-21 → 10-12: 35 / 64 / 54 / 40. The week of 10-19
+    shows 14, but only 2 days of it are in GSC. Total clicks to date: 2.
+  - Per page, 28d (checkpoint in parentheses):
+    - payout schedule: 127 @ 19.0 (118 @ 22.4)
+    - fee calculator: 52 @ 56.2 (102 @ 64.7)
+    - **payout-less: 22 @ 4.6, 1 click** (24 @ 14.2)
+    - ROAS: 12 @ 44.5 (13 @ 60.2)
+    - `/`: 3 @ 3.3
+  - Payout-less is now the best-ranked page on the site. It has two confounds: the v1.F
+    links (09-29) and the v1.G visible FAQ (10-09), so its gain can't be pinned on one
+    change. The payout topic is still the site's strongest. Per-page detail is in the three
+    2026-09-18 entries.
 
 ## 2026-09-23 — v1.C.1: in-body links from the crawled payout pages to /tools/ and break-even
 - **Status:** active
@@ -446,3 +517,55 @@ https://search.google.com/search-console directly.
   impressions @ 1.8 over 28d as of 2026-09-23). Record the deploy date here.
 - **Phase renumbering (2026-10-09):** this took **v1.H**. Deepening the payout pages moved
   v1.H → **v1.I**; new payout-cluster pages moved v1.I → **v1.J**.
+
+## 2026-10-23 — v1.I: deepen the payout schedule page from Seller Center docs it didn't use
+- **Status:** active
+- **Hypothesis:** `/tiktok-shop-payout-schedule/` gets most of the site's impressions (127 @
+  19.0, 28d), but its head query "tiktok shop payout" sits at 40.6. The live SERP for that
+  query mixes seller, creator and affiliate intent. Its AI Overview cites Seller Center's
+  "Scheduling your payouts" article, which the page doesn't use. That article documents
+  things the page lacks or gets wrong: the choice of payout frequency (daily, business-day,
+  weekly, monthly), and the named causes and next-day retry for a failed payout. The page
+  currently says TikTok documents no failure reasons. Covering the article should improve the
+  head query's position and widen the long tail ("payout time", "payout method").
+- **KPI:** position + impressions for "tiktok shop payout" (28d); page avg position +
+  impressions; count of named queries matched to the page.
+- **Baseline (GSC 28d 2026-09-23 → 10-20, pulled 2026-10-23):** page 127 imp / 0 clicks /
+  pos 19.0; "tiktok shop payout" 33 @ 40.6; 4 named queries (see `docs/gsc-queries-1023.csv`).
+- **Action (2026-10-23, uncommitted):** new section "Daily, weekly or monthly: choosing when
+  payouts go out" (options, the missing-date rule, how to change it, that it can't
+  speed up settlement). New FAQ on weekly/monthly payouts. The failed-payout FAQ, Finances
+  states and late-payout checklist now give TikTok's three named causes and the next-day
+  retry. Checklist gained a payout-schedule step. Sources gained "Scheduling your payouts";
+  all three Seller Center sources were re-read on 2026-10-23 (verified-as-of → October 2026).
+  Follow-up same day, after a skill audit: the H1 no longer repeats the title ("TikTok Shop
+  payouts: when the money actually reaches your bank"); meta description cut 161 → 147
+  chars and now mentions payout schedules; the schedule section gained a worked example
+  (order A paid daily vs weekly-Friday vs monthly-1st), guarded by a test. Title and slug
+  unchanged. Payout-less untouched.
+- **Result:** TBD. Review 28d after deploy.
+- **Learning:** TBD.
+
+## 2026-10-23 — v1.J: page-quality fixes from the skill audit
+- **Status:** note. These are correctness and quality fixes with no ranking hypothesis of their
+  own; their effects show up in the entries they confound.
+- **Trigger:** a `write-lamill-seo-page` audit of all 9 indexable pages (2026-10-23).
+- **Action (uncommitted):**
+  - Break-even, ROAS and COGS now link "6% referral fee" inline to Seller Center's referral fee
+    page (re-read 2026-10-23: 6% from April 1, 2024; no 8% change shown). Break-even and ROAS
+    had stated it with no on-page source.
+  - `/tools/` hub went from 254 → 732 words. New: the order to use the tools in and which number
+    carries into the next one; why fee, break-even and ROAS agree on the same inputs (a claim
+    the lib tests check). Removed the uncited $1 minimum from its card text.
+  - Meta descriptions cut to ≤ 155 chars on `/tools/` (222 → 151), break-even (230 → 145), ROAS
+    (229 → 147), FBT (176 → 148) and COGS (162 → 153). H1 no longer repeats the title on
+    break-even, ROAS and COGS. Titles and slugs unchanged.
+  - New guards in `seo.test.js`: description ≤ 155, H1 ≠ title, and a Seller Center link
+    required wherever "6% referral" appears.
+  - Payout-less excluded on purpose (ranks 4.6; held until the 2026-10-27 v1.F review).
+- **Confounds:** `/tools/`, FBT and COGS are still `url_is_unknown_to_google`, so their changes
+  can't affect anything until they are discovered. Break-even and ROAS H1/description changes
+  are SERP-facing: account for them at the next review of either page. The `/tools/` change
+  does not affect the v1.F review, which only asks whether the URL is discovered.
+- **Phase renumbering (2026-10-23):** this took **v1.J**; new payout-cluster pages moved
+  v1.J → **v1.K**.
