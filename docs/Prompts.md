@@ -168,3 +168,9 @@ to surface "last AI prompt" per project. Keep entries append-only.
 > guard caught nothing new; the fee page already cites a different Seller Center page).
 > Payout-less held. New payout-cluster pages renumbered v1.J → v1.K. Suite green (176),
 > build passes. Not committed.
+
+## 2026-10-23 — v1.I + v1.J deployed
+
+> "commit and push" → 3 commits (`8fbe174` v1.I, `ea3bbca` v1.J, `e85935c` docs), live about 40s
+> after the push and spot-checked. `lamill project check`: 81 passed, 6 failed, unchanged.
+> "log it and commit" → deploy recorded in growth.md, prd.md and CLAUDE.md. v1.I review 2026-11-20.

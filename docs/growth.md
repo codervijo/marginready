@@ -543,14 +543,15 @@ https://search.google.com/search-console directly.
   chars and now mentions payout schedules; the schedule section gained a worked example
   (order A paid daily vs weekly-Friday vs monthly-1st), guarded by a test. Title and slug
   unchanged. Payout-less untouched.
-- **Result:** TBD. Review 28d after deploy.
+- **Deployed:** 2026-10-23 (pushed `8fbe174`); new section and H1 verified live.
+- **Result:** TBD — review 2026-11-20 (28d from deploy).
 - **Learning:** TBD.
 
 ## 2026-10-23 — v1.J: page-quality fixes from the skill audit
 - **Status:** note. These are correctness and quality fixes with no ranking hypothesis of their
   own; their effects show up in the entries they confound.
 - **Trigger:** a `write-lamill-seo-page` audit of all 9 indexable pages (2026-10-23).
-- **Action (uncommitted):**
+- **Action:**
   - Break-even, ROAS and COGS now link "6% referral fee" inline to Seller Center's referral fee
     page (re-read 2026-10-23: 6% from April 1, 2024; no 8% change shown). Break-even and ROAS
     had stated it with no on-page source.
@@ -567,5 +568,7 @@ https://search.google.com/search-console directly.
   can't affect anything until they are discovered. Break-even and ROAS H1/description changes
   are SERP-facing: account for them at the next review of either page. The `/tools/` change
   does not affect the v1.F review, which only asks whether the URL is discovered.
+- **Deployed:** 2026-10-23 (pushed `ea3bbca`); citations, H1s, `/tools/` hub and FBT description
+  verified live. `lamill project check` after deploy: 81 passed, 6 failed (unchanged).
 - **Phase renumbering (2026-10-23):** this took **v1.J**; new payout-cluster pages moved
   v1.J → **v1.K**.
