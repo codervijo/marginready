@@ -50,7 +50,7 @@ dashboard for a working product when picking up work here.
   deferred.
 - [ ] **v1.J page-quality fixes deployed 2026-10-23.** Left open from the audit,
   not scheduled: "Common questions" (7 pages) and "Sources" (4) are identical H2s across pages;
-  FBT has a duplicate "FBT vs shipping it yourself" H2 and step-label H2s; no content page has
+  FBT duplicate H2 and calculator card titles as H2s (logged as BUG-001 in `docs/bugs.md`); no content page has
   `og:image`; payout-less still has H1 = title and a 232-char description (held).
 - [ ] **2026-11-20: v1.C re-review.** If the FBT and COGS pages are still unknown, close
   the entry as `abandoned` (untested).
