@@ -7,15 +7,17 @@ const path = "/tiktok-shop-payout-schedule/";
 const url = site + path;
 const title = "TikTok Shop Payout Schedule — When Do You Actually Get Paid?";
 const description =
-  "When TikTok Shop actually pays you: 1–31 days after delivery by settlement tier, a 30-day reserve, and a $1 minimum. Work out the payout date for your own order.";
+  "When TikTok Shop pays sellers: 1–31 days after delivery by settlement tier, a 30-day reserve, a $1 minimum, and a daily to monthly payout schedule.";
 
 // Policy details verified against TikTok Shop Seller Center. Update when re-verified.
-const verifiedAsOf = "September 2026";
+const verifiedAsOf = "October 2026";
 
 const SETTLEMENT_POLICY_URL =
   "https://seller-us.tiktok.com/university/essay?knowledge_id=3995852763531009&lang=en";
 const FINANCES_FAQ_URL =
   "https://seller-us.tiktok.com/university/essay?knowledge_id=2470273945257771&lang=en";
+const PAYOUT_SCHEDULE_URL =
+  "https://seller-us.tiktok.com/university/essay?knowledge_id=8205104048391950&lang=en";
 
 const articleLd = {
   "@context": "https://schema.org",
@@ -46,11 +48,15 @@ const faq = [
   },
   {
     q: "Do I have to request a TikTok Shop payout?",
-    a: "No. Payouts are initiated automatically once your settled balance reaches the $1 minimum. Balances under $1 wait, and a negative balance is deducted from your next payout until the total clears $1.",
+    a: "No. Payouts are initiated automatically once your settled balance reaches the $1 minimum. Balances under $1 wait, and a negative balance is deducted from your next payout until the total clears $1. Some sellers can also choose how often payouts go out: daily, every business day, weekly or monthly.",
+  },
+  {
+    q: "Can I get TikTok Shop payouts weekly or monthly instead of daily?",
+    a: "If your shop is in TikTok's test group, yes. On the Seller Center website (not the app), open the payout setting in the Finances summary and choose daily, every business day, weekly on a day you pick, or monthly on a date you pick. The change applies immediately. It only controls when settled money is sent; it doesn't make orders settle any faster.",
   },
   {
     q: "Why did my TikTok Shop payout fail?",
-    a: "A Failed status means the transfer didn't reach your bank. Check the bank account under Finances > Payouts in Seller Center, since changes there apply to future payouts, then contact TikTok Shop seller support to have the failed transfer investigated. TikTok's documentation doesn't list specific failure reasons.",
+    a: "A Failed status means the transfer didn't reach your bank. TikTok names three things to check when a payout doesn't go out: a negative balance, a restriction on your account, or an invalid bank account. Once the problem is fixed, the payout is retried the next day. Bank details live under Finances > Payouts in Seller Center; if all three look fine, contact seller support.",
   },
 ];
 
@@ -112,7 +118,7 @@ const tiers = [
   <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
     <header class="mb-8">
       <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight">
-        TikTok Shop payout schedule: when do you actually get paid?
+        TikTok Shop payouts: when the money actually reaches your bank
       </h1>
       <p class="mt-4 text-muted-foreground">
         The short answer is a range, not a date:
@@ -251,19 +257,85 @@ const tiers = [
           </li>
           <li>
             <strong class="text-foreground">Failed</strong> — the transfer
-            didn&rsquo;t reach your bank. Check the account under Finances &gt;
-            Payouts and contact seller support.
+            didn&rsquo;t reach your bank. It&rsquo;s retried the day after the
+            cause is fixed; see the checklist below.
           </li>
         </ul>
         <p class="mt-3 text-muted-foreground">
           You don&rsquo;t request payouts. TikTok starts them automatically
-          once your settled balance reaches the minimum.
+          once your settled balance reaches the minimum, on whatever schedule
+          your shop is set to.
         </p>
         <p class="mt-3 text-muted-foreground">
           One more rule catches people out: there is a
           <strong class="text-foreground">$1 minimum payout</strong>. Anything
           below that is not paid out, and negative balances are deducted from
           your next payout until the total clears $1.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          Daily, weekly or monthly: choosing when payouts go out
+        </h2>
+        <p class="mt-3 text-muted-foreground">
+          Settlement decides when an order&rsquo;s money becomes yours. A
+          separate setting, the <strong class="text-foreground"
+            >payout schedule</strong
+          >, decides how often that settled money is sent to your bank. TikTok
+          is testing it with a group of sellers, so your shop may not have it
+          yet. If it does, the options are:
+        </p>
+        <ul class="mt-3 space-y-2 text-muted-foreground">
+          <li><strong class="text-foreground">Daily</strong></li>
+          <li><strong class="text-foreground">Every business day</strong></li>
+          <li>
+            <strong class="text-foreground">Weekly</strong>, on a day of the
+            week you pick
+          </li>
+          <li>
+            <strong class="text-foreground">Monthly</strong>, on a date you
+            pick. If that date doesn&rsquo;t exist in a month, the payout goes
+            out on the last day instead: a 30th payout date becomes February 28.
+          </li>
+        </ul>
+        <p class="mt-3 text-muted-foreground">
+          To change it, use the Seller Center website; the setting isn&rsquo;t
+          in the seller app. In the Finances summary, click the payout setting
+          (it reads &ldquo;Payout: daily&rdquo; or &ldquo;Payout
+          schedule&rdquo;), choose a frequency, and submit. The change applies
+          immediately. Move to a weekly day and anything pending waits for that
+          day; pick a monthly date and the payout is initiated within 24 hours.
+        </p>
+        <p class="mt-3 text-muted-foreground">
+          Take order A from the timelines below: delivered Thursday Sept 10 with
+          a 10-day settlement period, so its money is ready on Sunday Sept 20.
+        </p>
+        <ul class="mt-3 space-y-3 text-muted-foreground">
+          <li>
+            <strong class="text-foreground">Daily:</strong> payout starts
+            Sept 20 and reaches the bank between Monday Sept 21 and Wednesday
+            Sept 23.
+          </li>
+          <li>
+            <strong class="text-foreground">Weekly on Fridays:</strong> it waits
+            for Friday Sept 25, then reaches the bank between Monday Sept 28 and
+            Wednesday Sept 30. That&rsquo;s a week later than daily.
+          </li>
+          <li>
+            <strong class="text-foreground">Monthly on the 1st:</strong> it waits
+            for Thursday Oct 1, then reaches the bank between Friday Oct 2 and
+            Tuesday Oct 6. That&rsquo;s nearly two weeks later than daily, for an
+            order that was ready on Sept 20.
+          </li>
+        </ul>
+        <p class="mt-3 text-muted-foreground">
+          What the schedule can&rsquo;t do is speed anything up. A weekly or
+          monthly schedule still follows the settlement tiers and reserve above,
+          so it only adds waiting time on top of them. The trade is fewer, larger
+          deposits that are easier to match against your books, in exchange for
+          cash arriving later. On a tight restocking cycle, daily is usually the
+          right setting.
         </p>
       </section>
 
@@ -332,9 +404,15 @@ const tiers = [
             is taken out of the next payout first.
           </li>
           <li>
+            <strong class="text-foreground">Is your payout schedule weekly or monthly?</strong>
+            Settled money then waits for your chosen day or date.
+          </li>
+          <li>
             <strong class="text-foreground">Is it Processing or Failed?</strong>
-            Processing is normal for 1–3 business days. Failed means check your
-            bank details under Finances &gt; Payouts, then contact support.
+            Processing is normal for 1–3 business days. For Failed, TikTok points
+            to three causes: a negative balance, an account restriction, or an
+            invalid bank account (check it under Finances &gt; Payouts). Fix the
+            cause and the payout is retried the next day.
           </li>
         </ol>
       </section>
@@ -418,6 +496,14 @@ const tiers = [
               rel="nofollow noopener"
               target="_blank">TikTok Shop Seller Center — Finances Page FAQ</a
             > — 1–31 day payout window, 1–3 day bank processing, $1 minimum and automatic payouts, On Hold / Processing / Paid / Failed states, bank account settings.
+          </li>
+          <li>
+            <a
+              class="underline hover:text-foreground"
+              href={PAYOUT_SCHEDULE_URL}
+              rel="nofollow noopener"
+              target="_blank">TikTok Shop Seller Center — Scheduling your payouts</a
+            > — daily / business-day / weekly / monthly schedules (test group, web only), when a change applies, failed-payout causes and next-day retry.
           </li>
         </ul>
       </section>

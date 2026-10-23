@@ -49,6 +49,19 @@ describe('calcPayoutTimeline', () => {
     expect(calcPayoutTimeline(delivered, NaN).settlementDays).toBe(31);
   });
 
+  // Guards the "Daily, weekly or monthly" worked example on the payout page:
+  // order A's settled money waits for the chosen weekly day or monthly date.
+  it('bank windows for weekly (Fri) and monthly (1st) payout schedules', () => {
+    const weekly = parseIsoDate('2026-09-25'); // Friday
+    expect(weekly.getUTCDay()).toBe(5);
+    expect(iso(addBusinessDays(weekly, 1))).toBe('2026-09-28');
+    expect(iso(addBusinessDays(weekly, 3))).toBe('2026-09-30');
+    const monthly = parseIsoDate('2026-10-01'); // Thursday
+    expect(monthly.getUTCDay()).toBe(4);
+    expect(iso(addBusinessDays(monthly, 1))).toBe('2026-10-02');
+    expect(iso(addBusinessDays(monthly, 3))).toBe('2026-10-06');
+  });
+
   it('crosses month boundaries correctly', () => {
     const t = calcPayoutTimeline(parseIsoDate('2026-01-31'), 31);
     expect(iso(t.payoutInitiated)).toBe('2026-03-03');
