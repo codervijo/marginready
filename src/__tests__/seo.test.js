@@ -102,6 +102,30 @@ describe.each(CONTENT_PAGES)('SEO baseline (src/pages/%s)', (file) => {
     expect(h1s).toHaveLength(1);
   });
 
+  // v1.J: payout-less is held out until its rank settles (see docs/prd.md v1.J).
+  const HELD = file === 'why-tiktok-shop-payout-is-less-than-sales.astro';
+  const raw = readFileSync(join(process.cwd(), 'src', 'pages', file), 'utf8');
+
+  it('keeps the meta description within 155 characters', () => {
+    if (HELD) return;
+    const desc = raw.match(/const description =\s*"([^"]*)"/)[1];
+    expect(desc.length).toBeLessThanOrEqual(155);
+  });
+
+  it('has an H1 that does not repeat the title', () => {
+    if (HELD) return;
+    const norm = (s) => s.toLowerCase().replace(/&amp;/g, '&').replace(/[^a-z0-9]+/g, ' ').trim();
+    const title = raw.match(/const title =\s*"([^"]*)"/)[1];
+    const h1 = body.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)[1];
+    expect(norm(title)).not.toContain(norm(h1));
+  });
+
+  // Project rule: any fee fact in prose needs its Seller Center source on the page.
+  it('cites Seller Center wherever it states the 6% referral fee', () => {
+    if (!/\b6% (US )?referral/.test(body)) return;
+    expect(raw).toMatch(/https:\/\/seller-us\.tiktok\.com\/university\/essay\?knowledge_id=\d+/);
+  });
+
   // FAQPage schema must mirror a FAQ the reader can see: both are built from
   // the same `faq` array, so the answers can't exist in JSON-LD only.
   it('renders any FAQ schema as a visible FAQ', () => {

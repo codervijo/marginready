@@ -6,7 +6,7 @@ const path = "/tools/";
 const url = site + path;
 const title = "Free TikTok Shop Seller Calculators & Guides — MarginReady";
 const description =
-  "Free calculators and guides for TikTok Shop sellers: fee and net profit calculator, break-even price calculator, break-even ROAS calculator, FBT fee calculator, COGS guide, payout schedule, and GMV vs settlement explained.";
+  "Which TikTok Shop calculator to use first and how the numbers chain: landed COGS, fees and net profit, break-even price, break-even ROAS, FBT, payouts.";
 
 const tools = [
   {
@@ -48,7 +48,7 @@ const tools = [
     href: "/tiktok-shop-payout-schedule/",
     name: "TikTok Shop Payout Schedule",
     blurb:
-      "Estimate the date your money lands, and why: delivery-based settlement, the five tiers, the 30-day reserve, and the $1 minimum.",
+      "Estimate the date your money lands, and why: delivery-based settlement, settlement tiers, the reserve, and payout schedules.",
     tag: "Guide",
   },
   {
@@ -105,8 +105,12 @@ const collectionLd = {
       </h1>
       <p class="mt-4 text-muted-foreground max-w-2xl">
         Calculators and plain-English guides for the money questions TikTok Shop
-        never answers directly. No signup, no email — every calculator runs in
-        your browser on numbers you type in.
+        never answers directly: what a product really costs you, what you keep
+        at a given price, the lowest price that doesn&rsquo;t lose money, whether
+        your ads pay for themselves, and when and why the payout arrives. They
+        work best in order, because each one&rsquo;s answer is an input to the
+        next. No signup, no email — every calculator runs in your browser on
+        numbers you type in.
       </p>
     </header>
 
@@ -131,7 +135,104 @@ const collectionLd = {
       }
     </ul>
 
-    <div class="prose-tk mt-12 max-w-2xl">
+    <div class="prose-tk mt-12 max-w-2xl space-y-12">
+      <section>
+        <h2 class="text-xl font-semibold tracking-tight">
+          Work through them in this order
+        </h2>
+        <p class="mt-3 text-muted-foreground">
+          Most sellers open the fee calculator first and type in their supplier
+          price. That gets every later answer wrong, because the cost you
+          enter carries through all of them. This order fixes that:
+        </p>
+        <ol class="mt-4 list-decimal space-y-4 pl-5 text-muted-foreground">
+          <li>
+            <a class="underline hover:text-foreground" href="/how-to-calculate-cogs-tiktok-shop/"
+              ><strong class="text-foreground">Work out your landed COGS.</strong></a
+            >
+            &ldquo;Product cost / COGS per unit&rdquo; is an input on every
+            calculator here, and the supplier price is the wrong number for it.
+            Freight, duties, packaging, inbound shipping and the units that
+            arrive unsellable all belong in it. You come away with one figure:
+            cost per sellable unit.
+          </li>
+          <li>
+            <a class="underline hover:text-foreground" href="/tiktok-shop-fbt-fee-calculator/"
+              ><strong class="text-foreground">If you use FBT, cost it per unit.</strong></a
+            >
+            The FBT calculator turns your rate card and box size into one
+            all-in fulfillment cost per unit, including storage and returns.
+            That&rsquo;s the &ldquo;fulfillment per unit&rdquo; input in the next
+            three steps. If you ship orders yourself, use your label cost
+            instead and skip this step.
+          </li>
+          <li>
+            <a class="underline hover:text-foreground" href="/tiktok-shop-fee-calculator/"
+              ><strong class="text-foreground">Check what a price leaves you.</strong></a
+            >
+            At a price you already charge or plan to, the fee and profit
+            calculator shows net profit per order after the referral fee,
+            creator commission, fulfillment, returns and ad spend. If that
+            number is negative, go to step 4 before you sell another unit.
+          </li>
+          <li>
+            <a class="underline hover:text-foreground" href="/tiktok-shop-break-even-calculator/"
+              ><strong class="text-foreground">Find the price that works.</strong></a
+            >
+            The break-even calculator runs the same math backwards: from your
+            costs to the lowest price that doesn&rsquo;t lose money, and the
+            price you need for a target margin.
+          </li>
+          <li>
+            <a class="underline hover:text-foreground" href="/tiktok-shop-roas-calculator/"
+              ><strong class="text-foreground">Only then, set your ad targets.</strong></a
+            >
+            With a price settled, the ROAS calculator gives the return your ads
+            must reach to break even and the most you can pay per order. Set
+            them before the price is settled and they&rsquo;ll be wrong as soon
+            as the price changes, because the margin they come from changes
+            with it.
+          </li>
+          <li>
+            <a class="underline hover:text-foreground" href="/tiktok-shop-payout-schedule/"
+              ><strong class="text-foreground">Plan cash around the payout schedule.</strong></a
+            >
+            A profitable sale still pays out days or weeks later: settlement starts at
+            delivery, your tier sets the speed, and a reserve is held back.
+            Restock against when the money lands, not against the sale.
+          </li>
+          <li>
+            <a class="underline hover:text-foreground" href="/why-tiktok-shop-payout-is-less-than-sales/"
+              ><strong class="text-foreground">Reconcile what arrives.</strong></a
+            >
+            When the payout is smaller than your sales figure, the GMV vs
+            settlement guide walks every deduction between the two, so you can
+            tell a normal gap from a real problem.
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold tracking-tight">
+          Three calculators, one set of numbers
+        </h2>
+        <p class="mt-3 text-muted-foreground">
+          The fee, break-even and ROAS calculators take the same inputs (COGS,
+          referral fee, creator commission, fulfillment and return rate) and
+          answer the same question from different ends. The fee calculator goes
+          from a price to a profit. Break-even goes from a target margin to a
+          price. ROAS goes from a price to the most your ads can spend.
+        </p>
+        <p class="mt-3 text-muted-foreground">
+          Enter the same numbers in all three and they agree: put the
+          break-even price into the fee calculator and net profit comes out at
+          zero, and the same is true at the break-even ROAS. If your answers
+          don&rsquo;t line up, one of the inputs differs between them, and
+          finding which one is usually the useful part.
+        </p>
+      </section>
+
+      <section>
       <h2 class="text-xl font-semibold tracking-tight">
         Estimates are a starting point, not an answer
       </h2>
@@ -146,6 +247,7 @@ const collectionLd = {
         subtracts the cost per unit you enter, and shows true profit and margin for
         every SKU — from real settled payouts, not estimates.
       </p>
+      </section>
     </div>
   </div>
 </Layout>

@@ -7,7 +7,10 @@ const path = "/tiktok-shop-break-even-calculator/";
 const url = site + path;
 const title = "TikTok Shop Break-Even Calculator — What Price Do You Need?";
 const description =
-  "Free TikTok Shop break-even calculator. Enter your COGS, referral fee, affiliate commission, fulfillment, returns, and ad spend to find the lowest price that does not lose money — and the price you need for your target net margin.";
+  "Find the lowest TikTok Shop price that doesn't lose money, and the price for your target margin, after referral fee, commission, returns and ads.";
+
+const REFERRAL_FEE_URL =
+  "https://seller-us.tiktok.com/university/essay?knowledge_id=5982454398175018&lang=en";
 
 // Rates confirmed against TikTok Shop Seller Center. Update this date when re-verified.
 const ratesAsOf = "July 2026";
@@ -86,7 +89,7 @@ const faqLd = {
   <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
     <header class="mb-6">
       <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight">
-        TikTok Shop Break-Even Calculator
+        Find your TikTok Shop break-even price
       </h1>
       <p class="mt-3 text-muted-foreground max-w-2xl">
         Most sellers price backwards — they pick a number that &ldquo;feels
@@ -136,8 +139,14 @@ const faqLd = {
           &minus; affiliate rate &minus; return rate)
         </p>
         <p class="mt-3 text-muted-foreground">
-          A worked example: $15 product cost, the standard US 6% referral fee,
-          no affiliate and no returns. The denominator is 0.94, so break-even is
+          A worked example: $15 product cost, the standard US
+          <a
+            class="underline hover:text-foreground"
+            href={REFERRAL_FEE_URL}
+            rel="nofollow noopener"
+            target="_blank">6% referral fee</a
+          > (per TikTok Seller Center, since April 1, 2024), no affiliate and no
+          returns. The denominator is 0.94, so break-even is
           $15 ÷ 0.94 = <strong class="text-foreground">$15.96</strong>. Not
           $15.90 — the fee applies to the higher price too, which is exactly the
           circularity the division resolves.

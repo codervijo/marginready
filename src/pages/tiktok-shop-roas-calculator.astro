@@ -8,7 +8,10 @@ const url = site + path;
 const title =
   "TikTok Shop Break-Even ROAS Calculator — What ROAS Do You Need?";
 const description =
-  "Free break-even ROAS calculator for TikTok Shop ads. Enter your price, COGS, referral fee, affiliate commission, fulfillment, and returns to find your break-even ROAS, the ROAS for your target margin, and your max cost per order.";
+  "The ROAS your TikTok Shop ads need to break even, the ROAS for a target margin, and the most you can pay per order, from your price, COGS and fees.";
+
+const REFERRAL_FEE_URL =
+  "https://seller-us.tiktok.com/university/essay?knowledge_id=5982454398175018&lang=en";
 
 // Rates confirmed against TikTok Shop Seller Center. Update this date when re-verified.
 const ratesAsOf = "July 2026";
@@ -87,7 +90,7 @@ const faqLd = {
   <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
     <header class="mb-6">
       <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight">
-        TikTok Shop Break-Even ROAS Calculator
+        Find the ROAS your TikTok Shop ads need to break even
       </h1>
       <p class="mt-3 text-muted-foreground max-w-2xl">
         Ads Manager reports ROAS against gross revenue — before the referral
@@ -121,7 +124,13 @@ const faqLd = {
           break-even ROAS = 1 ÷ contribution margin rate
         </p>
         <p class="mt-3 text-muted-foreground">
-          Take a $50 product with $15 COGS and the standard US 6% referral fee.
+          Take a $50 product with $15 COGS and the standard US
+          <a
+            class="underline hover:text-foreground"
+            href={REFERRAL_FEE_URL}
+            rel="nofollow noopener"
+            target="_blank">6% referral fee</a
+          > (per TikTok Seller Center, since April 1, 2024).
           Contribution is $50 &minus; $3 &minus; $15 =
           <strong class="text-foreground">$32</strong>, or 64% of revenue. Your
           break-even ROAS is 1 ÷ 0.64 =
