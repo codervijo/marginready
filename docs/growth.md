@@ -488,6 +488,16 @@ https://search.google.com/search-console directly.
     indexing" in GSC (the 09-18 request was 6 weeks ago), and external links (the
     link track, which hasn't started). Neither is scheduled. This also decides the
     v1.C re-review on 2026-11-20.
+  - **What is enough, ranked (added 2026-10-31):**
+    1. External links. This is the only lever that raises how much Google crawls the
+       whole domain; Google's crawl budget follows site popularity.
+    2. A sitemap that works again. It was last downloaded 2026-06-19 and has no
+       `lastmod`, so resubmitting it with `lastmod` is a cheap step.
+    3. Manual "Request indexing". It is weak here: the 09-18 request covered all 4 URLs
+       and only break-even moved.
+    4. Time.
+  - **Implication for new pages:** new pages on this domain will probably stay
+    undiscovered until lever 1 or 2 works. 3 of the 9 existing URLs already are.
 
 ## 2026-09-29 — notes: link track not started, v1.G held, phase IDs renumbered
 - **Status:** note. There's no experiment here and nothing to review.

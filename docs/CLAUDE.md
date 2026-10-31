@@ -47,7 +47,7 @@ dashboard for a working product when picking up work here.
 - [ ] **v1.I in progress** (operator chose (b) on 2026-10-23: deepen without GSC query
   material). Payout schedule page deployed 2026-10-23 (review 2026-11-20). Payout-less not started: it ranks
   4.6 and has 2 confounds already, so get the operator's go before editing it. The v1.F
-  hold is over (reviewed 2026-10-31), but the operator's go is still needed. v1.K (was v1.J) still
+  hold is over (reviewed 2026-10-31), but the operator's go is still needed. v1.P (was v1.J, then v1.K, then v1.L) still
   deferred.
 - [ ] **v1.J page-quality fixes deployed 2026-10-23.** Left open from the audit,
   not scheduled: "Common questions" (7 pages) and "Sources" (4) are identical H2s across pages;

@@ -184,3 +184,19 @@ to surface "last AI prompt" per project. Keep entries append-only.
 > `failed`: `/tools/` was the target that mattered, and break-even's discovery can't be
 > credited to the links (6 pages crawled in one burst, all link it). That lifts the hold on
 > payout-less, which still needs the operator's go. Docs only; nothing committed.
+
+## 2026-10-31 — v1.K: keyword research via Treg
+
+> "expand our search surface … use tregs to find low KD high-medium SV keywords" → placed as
+> v1.K research-only (operator's pick); payout-cluster pages pushed to v1.L. Serpstat phrase-match
+> pulls on 9 seeds plus batch KD from Serpstat and SE Ranking, $0.21 total. Finding: seller-money
+> queries are small (fees ~1,300 SV in total) and mostly already covered. High-volume "tiktok shop"
+> terms are shopper or creator intent. The providers' KD disagrees (11 vs 69 on one keyword). Best
+> uncovered fit: affiliate commission (390). Shortlist in `docs/keywords.md`. Not committed.
+
+## 2026-10-31 — v1.L–v1.O planned from the keyword shortlist
+
+> "add those 4 to prd to build" → one phase per page: v1.L affiliate commission, v1.M ads cost,
+> v1.N "is TikTok Shop worth it", v1.O dropshipping margin. All use the proven calculator format.
+> Renumbered: the deferred payout-cluster row v1.L → **v1.P**. Discovery caveat noted on the rows.
+> PRD only; no code. Not committed.
