@@ -46,7 +46,8 @@ dashboard for a working product when picking up work here.
   it still has only 2 queries in positions 11–40, at 1 impression each.
 - [ ] **v1.I in progress** (operator chose (b) on 2026-10-23: deepen without GSC query
   material). Payout schedule page deployed 2026-10-23 (review 2026-11-20). Payout-less not started: it ranks
-  4.6 and has 2 confounds already, so get the operator's go before editing it. v1.K (was v1.J) still
+  4.6 and has 2 confounds already, so get the operator's go before editing it. The v1.F
+  hold is over (reviewed 2026-10-31), but the operator's go is still needed. v1.K (was v1.J) still
   deferred.
 - [ ] **v1.J page-quality fixes deployed 2026-10-23.** Left open from the audit,
   not scheduled: "Common questions" (7 pages) and "Sources" (4) are identical H2s across pages;
@@ -54,10 +55,11 @@ dashboard for a working product when picking up work here.
   `og:image`; payout-less still has H1 = title and a 232-char description (held).
 - [ ] **2026-11-20: v1.C re-review.** If the FBT and COGS pages are still unknown, close
   the entry as `abandoned` (untested).
-- [ ] **2026-10-27: v1.F review** (in-body links from the payout pages). Payout schedule
-  was re-crawled after the 09-29 deploy (seen 2026-10-09, "crawled 1d ago"); payout-less
-  had not been. If `/tools/`, break-even, FBT and COGS are still
-  `url_is_unknown_to_google` by then, the in-body-link hypothesis fails.
+- [x] **Done 2026-10-31: v1.F review → `failed`.** Both payout pages were re-crawled
+  10-19/20. Break-even was discovered, but that can't be credited to the links (6 pages
+  crawled in one burst, all link it). `/tools/`, FBT and COGS are still unknown. The
+  untried levers are a fresh GSC "Request indexing" and external links; neither is
+  scheduled. See the growth entry.
 - [ ] **Remaining `lamill project check` failures (2026-10-09: 81 passed, 6 failed).**
   None is scheduled; each needs the operator's call before work starts.
   - CHECK_143 deploy-drift: not fixable in this repo. The classifier only recognises a
@@ -66,7 +68,7 @@ dashboard for a working product when picking up work here.
   - CHECK_080 has-analytics: none installed; where it goes in the PRD is still open
     (also blocks measuring the link track's referral visits).
   - CHECK_147 url-indexed: the unknown URLs above (3 as of 2026-10-23; break-even is now
-    indexed); tracked by the v1.F review.
+    indexed). v1.F reviewed 2026-10-31 as failed; 3 still unknown.
   - CHECK_152 content-derivable: `[content]` in `lamill.toml` is empty.
   - CHECK_039 has-tsconfig: no `tsconfig.json`.
   - CHECK_040 git-remote-name: remote repo is `marginready`, convention wants

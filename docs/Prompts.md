@@ -174,3 +174,13 @@ to surface "last AI prompt" per project. Keep entries append-only.
 > "commit and push" → 3 commits (`8fbe174` v1.I, `ea3bbca` v1.J, `e85935c` docs), live about 40s
 > after the push and spot-checked. `lamill project check`: 81 passed, 6 failed, unchanged.
 > "log it and commit" → deploy recorded in growth.md, prd.md and CLAUDE.md. v1.I review 2026-11-20.
+
+## 2026-10-31 — v1.F growth review
+
+> "do the v1.F review" (4 days late). `lamill project seo --refresh` plus crawl times from the
+> URL Inspection cache. Both payout pages were re-crawled 10-19/20, after the 09-29 deploy,
+> and their in-body links are still live. Break-even is indexed. `/tools/`, FBT and COGS are
+> still `url_is_unknown_to_google`, and the sitemap was last downloaded 2026-06-19. Marked
+> `failed`: `/tools/` was the target that mattered, and break-even's discovery can't be
+> credited to the links (6 pages crawled in one burst, all link it). That lifts the hold on
+> payout-less, which still needs the operator's go. Docs only; nothing committed.

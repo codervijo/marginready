@@ -419,7 +419,7 @@ https://search.google.com/search-console directly.
     2026-09-18 entries.
 
 ## 2026-09-23 — v1.C.1: in-body links from the crawled payout pages to /tools/ and break-even
-- **Status:** active
+- **Status:** failed *(reviewed 2026-10-31; see Result)*
 - **Hypothesis:** `/tools/` and `/tiktok-shop-break-even-calculator/` stay
   `url_is_unknown_to_google` even though their links are in the server HTML
   (confirmed 2026-09-23 with curl as Googlebot; no JS injection, `robots.txt` is
@@ -452,7 +452,42 @@ https://search.google.com/search-console directly.
   ago; 5 of 9 indexed (unchanged). The test only starts once a payout page is
   re-crawled after 09-29. If that has happened by 10-27 and the 4 URLs are still
   unknown, the in-body-link hypothesis fails.
-- **Learning:** TBD.
+- **Result:** Reviewed 2026-10-31 (4 days late), `lamill project seo --refresh`, with
+  crawl times from the URL Inspection cache (`portfolio/data/gsc/marginready.com/2026-10-31.json`).
+  The test condition was met: both payout pages were re-crawled after the 09-29 deploy
+  (payout schedule 2026-10-19 15:07 UTC, payout-less 2026-10-20 02:25 UTC). Both in-body
+  links are still live on both pages (curl, 2026-10-31).
+  - `/tiktok-shop-break-even-calculator/`: **discovered**, now `submitted_indexed`, first
+    crawled 2026-10-19 17:36 UTC. That is 2.5h after the payout schedule crawl.
+  - `/tools/`: **still `url_is_unknown_to_google`**, no crawl time. It is linked from
+    both re-crawled payout pages in prose and in the nav/footer.
+  - FBT and COGS: still unknown, which follows from `/tools/` never being crawled.
+  - Index: 6 of 9 (baseline 5 of 9). The sitemap was last downloaded 2026-06-19 (4 months
+    ago), so the sitemap wasn't the discovery path either.
+  - Score: 1 of the 2 directly linked URLs, and 1 of the 4 in the KPI.
+- **Status update (2026-10-31):** `active` → `failed`. The hypothesis bet that the in-body
+  links would get both `/tools/` and break-even discovered. `/tools/` was the target that
+  mattered, because FBT and COGS are reached through it, and it didn't move. The
+  pre-committed fail rule ("all 4 still unknown") isn't literally met, so this is a call
+  rather than a mechanical result.
+- **Learning:**
+  - **Break-even's discovery can't be credited to the in-body links.** Google crawled 6
+    pages in one burst on 10-19/20 (fee calculator 12:37, payout schedule 15:07, ROAS 16:25,
+    break-even 17:36). Every one of them links break-even in the footer, and break-even
+    was manually requested on 09-18. The timing fits the in-body links but fits all of
+    those other paths too.
+  - **A followed link isn't enough on this domain.** `/tools/` got the same treatment
+    from the same crawled pages as break-even and still isn't known. So a crawled page
+    linking to a URL doesn't guarantee Google queues it. Google is picking which links
+    to follow, probably on crawl budget for a low-authority site. That reading is
+    inference; GSC doesn't say why.
+  - **Don't repeat this on sister sites** as a discovery fix for an established site
+    graph. More internal links from the same few crawled pages is the lever already
+    used up here.
+  - **Levers not yet tried for `/tools/`, FBT and COGS:** a fresh manual "Request
+    indexing" in GSC (the 09-18 request was 6 weeks ago), and external links (the
+    link track, which hasn't started). Neither is scheduled. This also decides the
+    v1.C re-review on 2026-11-20.
 
 ## 2026-09-29 — notes: link track not started, v1.G held, phase IDs renumbered
 - **Status:** note. There's no experiment here and nothing to review.
