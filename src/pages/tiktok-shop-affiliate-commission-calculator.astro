@@ -1,0 +1,290 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { AffiliateCommissionCalculator } from "../components/AffiliateCommissionCalculator";
+
+const site = "https://marginready.com";
+const path = "/tiktok-shop-affiliate-commission-calculator/";
+const url = site + path;
+const title = "TikTok Shop Affiliate Commission: What Rate Can You Afford?";
+const description =
+  "The highest creator commission one product can carry on TikTok Shop, and what each affiliate sale leaves you after the commission and referral fee.";
+
+// Seller Center sources, re-read 2026-10-31.
+const SETTLEMENT_REPORT_URL =
+  "https://seller-us.tiktok.com/university/essay?knowledge_id=2336057241700098";
+const COLLABORATIONS_URL =
+  "https://seller-us.tiktok.com/university/essay?knowledge_id=6837873164896001";
+const HOW_COMMISSION_WORKS_URL =
+  "https://seller-us.tiktok.com/university/essay?knowledge_id=6077860360177451&lang=en";
+const REFERRAL_FEE_URL =
+  "https://seller-us.tiktok.com/university/essay?knowledge_id=5982454398175018&lang=en";
+
+const webApplicationLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "TikTok Shop Affiliate Commission Calculator",
+  url,
+  description:
+    "Calculate the highest TikTok Shop affiliate commission rate a product can carry at a target margin, and the profit left on each affiliate sale after the commission and referral fee.",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  publisher: { "@id": "https://marginready.com/#organization" },
+};
+
+const faq = [
+  {
+    q: "Is TikTok Shop affiliate commission charged on the full price?",
+    a: "No. TikTok Shop's settlement report defines it as (product price excluding tax − seller discount) × commission rate. Your own discount lowers the commission; sales tax is not part of it.",
+  },
+  {
+    q: "Do I pay affiliate commission on refunded orders?",
+    a: "Not on a full refund: TikTok says the commission on a fully refunded order is 0. A partial refund reduces the commission in proportion to the amount refunded.",
+  },
+  {
+    q: "Does the referral fee still apply on an affiliate sale?",
+    a: "Yes. The commission comes on top of the referral fee, not instead of it. On a $30 sale at the US 6% referral fee and a 15% commission, $6.30 of the $30 goes to the two before your product cost.",
+  },
+  {
+    q: "Can I lower my commission rate later?",
+    a: "Yes, but not instantly for open collaborations: TikTok applies a change to an open collaboration's rate 30 days after you edit it, so the old rate keeps applying in the meantime. Pick a rate you can carry before you publish it.",
+  },
+  {
+    q: "What if I offer a creator a different rate from my open rate?",
+    a: "A creator gets one rate per product. TikTok says a target collaboration's rate always supersedes the open collaboration's rate, so a creator you invite directly is paid the target rate.",
+  },
+];
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const link = "underline hover:text-foreground";
+---
+
+<Layout>
+  <Fragment slot="head">
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={url} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:site_name" content="MarginReady" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(webApplicationLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
+  </Fragment>
+
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+    <header class="mb-6">
+      <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight">
+        How much affiliate commission can a product afford?
+      </h1>
+      <p class="mt-3 text-muted-foreground max-w-2xl">
+        The most you can pay a creator is whatever share of the sale is left
+        after the referral fee, your product cost and shipping, minus the
+        margin you want to keep. On a $30 product costing $14 to make and ship,
+        that ceiling is about 47% to break even and 27% to keep a 20% margin.
+        Enter your own product below.
+      </p>
+      <p class="mt-3 text-xs text-muted-foreground">
+        This estimator uses your inputs. It does not read your TikTok Shop
+        account.
+      </p>
+    </header>
+
+    <AffiliateCommissionCalculator client:load />
+
+    <div class="prose-tk mt-14 space-y-12 max-w-3xl">
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          What TikTok charges the commission on
+        </h2>
+        <p class="mt-3 text-muted-foreground">
+          You set the rate, anywhere from 1% to 80% per
+          <a class={link} href={COLLABORATIONS_URL} rel="nofollow noopener" target="_blank"
+            >TikTok Shop's collaboration settings</a
+          >. The base it applies to is narrower than the price on the listing.
+          TikTok's
+          <a class={link} href={SETTLEMENT_REPORT_URL} rel="nofollow noopener" target="_blank"
+            >settlement report</a
+          > defines it as:
+        </p>
+        <p
+          class="mt-3 rounded-lg border border-border bg-muted/40 px-4 py-3 text-sm text-foreground tabular-nums"
+        >
+          affiliate commission = (product price excl. tax &minus; seller
+          discount) &times; commission rate
+        </p>
+        <p class="mt-3 text-muted-foreground">
+          Two things follow from that. Sales tax never carries commission. And a
+          discount you fund yourself lowers the commission along with your
+          revenue, so a creator promoting a discounted product earns less per
+          sale than the listing price suggests. The same report uses the same
+          base for affiliate partner and shop ads commissions. If an agency
+          partner campaign also takes a rate on the same sale, include it in the
+          rate you test here.
+        </p>
+        <p class="mt-3 text-muted-foreground">
+          The commission is also not the only percentage taken from that sale.
+          The
+          <a class={link} href={REFERRAL_FEE_URL} rel="nofollow noopener" target="_blank"
+            >6% US referral fee</a
+          > still applies, so a 15% commission means 21% of the sale is gone
+          before you have paid for the product.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          The ceiling on your rate
+        </h2>
+        <p class="mt-3 text-muted-foreground">
+          Divide your product cost and shipping by the commission base. That is
+          the share of every sale your costs already use. What remains after
+          that share, the referral fee and the margin you want to keep is the
+          highest commission rate the product can carry:
+        </p>
+        <p
+          class="mt-3 rounded-lg border border-border bg-muted/40 px-4 py-3 text-sm text-foreground tabular-nums"
+        >
+          highest rate = 1 &minus; referral rate &minus; target margin &minus;
+          (COGS + shipping) &divide; commission base
+        </p>
+        <p class="mt-3 text-muted-foreground">
+          Set the target margin to 0 and you get the break-even rate: the point
+          where an affiliate sale earns you nothing. Anything above it loses
+          money on every order the creator sends, however many orders that is.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          Three products, three answers
+        </h2>
+        <div class="mt-4 space-y-6 text-muted-foreground">
+          <div>
+            <h3 class="font-semibold text-foreground">
+              A $30 product with room to share
+            </h3>
+            <p class="mt-1.5">
+              $30 price, no discount, $9 product cost, $5 shipping, 6% referral
+              fee. An organic sale leaves $14.20. At a 15% commission the
+              creator gets $4.50 and you keep $9.70, a 32.3% margin. The ceiling
+              is 27.3% if you want to keep 20%, and 47.3% to break even. A 15%
+              offer leaves headroom to go higher for a creator who sells well.
+            </p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-foreground">
+              The same product with a $6 discount
+            </h3>
+            <p class="mt-1.5">
+              The commission base drops to $24, so the 15% commission falls to
+              $3.60 and the referral fee to $1.44. But your costs stay at $14,
+              and they now use 58% of the base instead of 47%. You keep $4.96, a
+              20.7% margin, and the ceiling for a 20% margin falls from 27.3% to
+              15.7%. A discount and a generous commission compete for the same
+              dollars.
+            </p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-foreground">
+              A $12 product that can't pay creators
+            </h3>
+            <p class="mt-1.5">
+              $12 price, $5 product cost, $5 shipping. An organic sale leaves
+              $1.28, a 10.7% margin, so the break-even commission is 10.7%. At
+              15% the creator earns $1.80 and you lose $0.52 on every sale they
+              drive. A 20% margin isn't reachable even at 0% commission. Here
+              the answer isn't a lower rate. Raise the price, bundle units into
+              one order so shipping is shared, or don't run this product through
+              affiliates.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          Before you publish a rate
+        </h2>
+        <ul class="mt-3 space-y-3 text-muted-foreground">
+          <li>
+            <strong class="text-foreground">Lowering a rate is slow.</strong>
+            <a class={link} href={COLLABORATIONS_URL} rel="nofollow noopener" target="_blank"
+              >TikTok applies a change to an open collaboration's rate</a
+            > 30 days after you edit it, so a rate you can't carry keeps costing
+            you for a month. Start where you can stay.
+          </li>
+          <li>
+            <strong class="text-foreground">Use targeted offers for the higher rate.</strong>
+            A target collaboration's rate supersedes your open rate for that
+            creator. Keep the open rate safe and give the higher one only to
+            creators you've invited.
+          </li>
+          <li>
+            <strong class="text-foreground">Refunds cost you, but not the commission.</strong>
+            Per
+            <a class={link} href={HOW_COMMISSION_WORKS_URL} rel="nofollow noopener" target="_blank"
+              >TikTok's commission rules</a
+            >, a fully refunded order pays the creator 0, and a partial refund
+            reduces it. Your shipping and product cost on a return are still
+            yours, so a high-return product has less room than this calculator
+            shows. The
+            <a class={link} href="/tiktok-shop-break-even-calculator/">break-even price calculator</a>
+            takes a return rate if you want to price that in.
+          </li>
+          <li>
+            <strong class="text-foreground">Ads and commission add up.</strong>
+            If you also pay for ads on creator videos, the ad cost per order
+            comes out of the same margin. Check it with the
+            <a class={link} href="/tiktok-shop-roas-calculator/">break-even ROAS calculator</a>
+            using your commission as an input.
+          </li>
+        </ul>
+        <p class="mt-4 text-sm text-muted-foreground">
+          This page models one product at rates you enter. <a class={link} href="/"
+            >MarginReady</a
+          > will read the commission TikTok actually charged on each order from
+          your settled payouts and show profit per SKU after it. For the full
+          set of seller calculators, see the
+          <a class={link} href="/tools/">free TikTok Shop tools</a>, or start
+          with the <a class={link} href="/tiktok-shop-fee-calculator/"
+            >fee and profit calculator</a
+          > at a price you already charge.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          Questions sellers ask about affiliate commission
+        </h2>
+        <div class="mt-4 space-y-5">
+          {
+            faq.map((f) => (
+              <div>
+                <h3 class="font-semibold text-foreground">{f.q}</h3>
+                <p class="mt-1.5 text-muted-foreground">{f.a}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>

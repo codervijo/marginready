@@ -200,3 +200,14 @@ to surface "last AI prompt" per project. Keep entries append-only.
 > v1.N "is TikTok Shop worth it", v1.O dropshipping margin. All use the proven calculator format.
 > Renumbered: the deferred payout-cluster row v1.L → **v1.P**. Discovery caveat noted on the rows.
 > PRD only; no code. Not committed.
+
+## 2026-10-31 — v1.L built: affiliate commission page + sitemap lastmod
+
+> "find me a path forward … not to block progress" → "commit docs, start building next phase".
+> Docs committed (`a481384`). Path forward: keep building pages and fix discovery alongside
+> them. The sitemap fix is folded into v1.L. Built `/tiktok-shop-affiliate-commission-calculator/`:
+> `src/lib/tiktok-affiliate.ts` + tests (worked examples guarded, cross-checked against
+> break-even), React island with non-heading card titles (avoids BUG-001), a page with 4 Seller
+> Center citations (commission base from the settlement report, 1–80% range, target supersedes
+> open, 30-day open-rate change, refunds pay 0), footer and hub links. The sitemap now has a
+> git-derived `<lastmod>`, skipped in a shallow clone. Suite green (200), build passes. Not committed.

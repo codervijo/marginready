@@ -59,6 +59,7 @@ const CONTENT_PAGES = [
   'tiktok-shop-fee-calculator.astro',
   'tiktok-shop-break-even-calculator.astro',
   'tiktok-shop-roas-calculator.astro',
+  'tiktok-shop-affiliate-commission-calculator.astro',
   'tiktok-shop-fbt-fee-calculator.astro',
   'how-to-calculate-cogs-tiktok-shop.astro',
   'tiktok-shop-payout-schedule.astro',
@@ -182,6 +183,7 @@ describe('internal linking', () => {
     '/tiktok-shop-fee-calculator/',
     '/tiktok-shop-break-even-calculator/',
     '/tiktok-shop-roas-calculator/',
+    '/tiktok-shop-affiliate-commission-calculator/',
     '/tiktok-shop-fbt-fee-calculator/',
     '/how-to-calculate-cogs-tiktok-shop/',
     '/tiktok-shop-payout-schedule/',
@@ -199,5 +201,24 @@ describe('internal linking', () => {
   it('uses trailing slashes on internal links (avoids a redirect hop)', () => {
     const bad = landing.match(/href="\/[a-z0-9-]+(?<!\/)"/g) ?? [];
     expect(bad).toHaveLength(0);
+  });
+});
+
+// v1.L discovery fix: sitemap <lastmod> must come from git history, never from
+// the build time, and must be skipped in a shallow clone.
+describe('sitemap lastmod', () => {
+  const config = readFileSync(join(process.cwd(), 'astro.config.mjs'), 'utf8');
+
+  it('derives lastmod from git log per page file', () => {
+    expect(config).toMatch(/serialize:/);
+    expect(config).toMatch(/'log', '-1', '--format=%cI'/);
+  });
+
+  it('refuses to use history from a shallow clone', () => {
+    expect(config).toMatch(/--is-shallow-repository/);
+  });
+
+  it('never stamps lastmod with the build time', () => {
+    expect(config).not.toMatch(/lastmod:\s*new Date\(/);
   });
 });

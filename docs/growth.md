@@ -617,3 +617,29 @@ https://search.google.com/search-console directly.
   verified live. `lamill project check` after deploy: 81 passed, 6 failed (unchanged).
 - **Phase renumbering (2026-10-23):** this took **v1.J**; new payout-cluster pages moved
   v1.J → **v1.K**.
+
+## 2026-10-31 — v1.L: affiliate commission page, plus sitemap lastmod as a discovery bet
+- **Status:** active (not deployed yet)
+- **Hypothesis:** Google last downloaded `sitemap-index.xml` on 2026-06-19, and the sitemap
+  had no `lastmod`, so it gave Google no reason to come back. Real per-page `lastmod` dates,
+  plus a manual resubmit in GSC, should get the sitemap re-fetched. That would give
+  `/tools/`, FBT, COGS and the new page a discovery path that doesn't depend on internal
+  links (v1.F showed those aren't enough). Separately, the affiliate commission page targets
+  `tiktok shop affiliate commission` (Serpstat 390 SV/mo, `docs/keywords.md`).
+- **KPI:** (1) the sitemap's GSC `last_downloaded` moves past 2026-06-19; (2) per-URL coverage
+  for `/tools/`, FBT, COGS and `/tiktok-shop-affiliate-commission-calculator/` leaving
+  `url_is_unknown_to_google`; (3) first impressions for the new page.
+- **Baseline (2026-10-31):** sitemap last downloaded 2026-06-19; 6 of 9 URLs indexed;
+  `/tools/`, FBT and COGS unknown. The new page doesn't exist yet.
+- **Action:** `astro.config.mjs` writes `<lastmod>` from each page file's last git commit,
+  and omits it in a shallow clone or when git fails. New page
+  `/tiktok-shop-affiliate-commission-calculator/` (calculator, 4 Seller Center citations,
+  visible FAQ), linked from the footer and the `/tools/` hub.
+- **Confound:** both bets land in the same deploy, so a newly discovered page can't be
+  pinned on the sitemap alone unless the GSC `last_downloaded` date moves first.
+- **Unverified:** whether Cloudflare Pages builds from a full clone. If it's shallow, the
+  deployed sitemap will have no `lastmod` at all, which is honest but is no change. Check
+  `curl -s https://marginready.com/sitemap-0.xml | grep -c lastmod` after deploy.
+- **Deployed:** TBD.
+- **Result:** TBD — review 28 days after deploy.
+- **Learning:** TBD.
