@@ -56,6 +56,7 @@ describe('SEO baseline (src/pages/index.astro)', () => {
 // keep a full tag set — they are the site's entire organic surface area.
 const CONTENT_PAGES = [
   'tools.astro',
+  'how-to-sell-on-tiktok-shop.astro',
   'tiktok-shop-fee-calculator.astro',
   'tiktok-shop-break-even-calculator.astro',
   'tiktok-shop-roas-calculator.astro',
@@ -180,6 +181,7 @@ describe('internal linking', () => {
   // inbound internal links, leaving it to be discovered by sitemap alone.
   const MUST_BE_LINKED = [
     '/tools/',
+    '/how-to-sell-on-tiktok-shop/',
     '/tiktok-shop-fee-calculator/',
     '/tiktok-shop-break-even-calculator/',
     '/tiktok-shop-roas-calculator/',

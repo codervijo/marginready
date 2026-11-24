@@ -1,0 +1,333 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const site = "https://marginready.com";
+const path = "/how-to-sell-on-tiktok-shop/";
+const url = site + path;
+const title = "How to Sell on TikTok Shop for Beginners: Setup to Profit";
+const description =
+  "What TikTok asks for at sign-up, the order of the setup steps, and the math to run before you list: what one sale leaves after the fee, cost and shipping.";
+
+// TikTok sources, re-read 2026-11-23.
+// Registration guide (rendered page; requirements, seller types, sign-up methods).
+const REGISTER_URL = "https://seller.tiktok.com/how-to-register";
+// Seller registration requirements (ads.tiktok.com help, last updated August 2025).
+const REQUIREMENTS_URL =
+  "https://ads.tiktok.com/help/article/requirements-to-register-as-a-seller-on-tiktok-shop";
+// US referral fee: 6% per order from April 1, 2024.
+const REFERRAL_FEE_URL =
+  "https://seller-us.tiktok.com/university/essay?knowledge_id=5982454398175018&lang=en";
+// Referral fee by category: most at 6%, some jewelry and pre-owned at 5%.
+const REFERRAL_BY_CATEGORY_URL =
+  "https://seller-us.tiktok.com/university/essay?knowledge_id=5988482086864682&lang=en";
+
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "How to start selling on TikTok Shop, and make money on your first product",
+  url,
+  description,
+  publisher: { "@id": "https://marginready.com/#organization" },
+  isPartOf: { "@id": "https://marginready.com/#website" },
+};
+
+const faq = [
+  {
+    q: "How much does it cost to start selling on TikTok Shop?",
+    a: "TikTok's registration guide lists documents and details to provide, not a sign-up fee. What TikTok takes is a referral fee on each order: 6% in most US categories, 5% in a few. Your real startup cost is your own: the first batch of inventory, samples, packaging and shipping.",
+  },
+  {
+    q: "Do I need an LLC or a registered business?",
+    a: "No. TikTok has an individual seller type for people selling under their own name, alongside sole proprietorship and corporation or partnership. As an individual you give an SSN or ITIN; a registered business gives a TIN or EIN.",
+  },
+  {
+    q: "Can I use my existing TikTok account to sign up?",
+    a: "Yes. TikTok lets you create the seller account with an existing TikTok account, by QR code or login, or with a phone number or email that isn't already tied to another TikTok Shop.",
+  },
+  {
+    q: "Do I need followers to sell on TikTok Shop?",
+    a: "TikTok's seller registration guide lists no follower count. It asks for age, residency, ID, tax and bank details. Followers help a product get seen, but they are not a condition for opening a shop.",
+  },
+  {
+    q: "I already earn commission as a creator. What changes when I sell my own product?",
+    a: "You stop being paid a share of someone else's sale and start paying the costs yourself: the referral fee, the product, shipping, returns, and commission to any other creator who promotes it. Your own videos don't cost you a commission, which is the advantage. Run the numbers per product before you order stock.",
+  },
+];
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const link = "underline hover:text-foreground";
+---
+
+<Layout>
+  <Fragment slot="head">
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={url} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:site_name" content="MarginReady" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(articleLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
+  </Fragment>
+
+  <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+    <header class="mb-8">
+      <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight">
+        How to start selling on TikTok Shop, and make money on your first product
+      </h1>
+      <p class="mt-4 text-muted-foreground">
+        To sell on TikTok Shop in the US you register in Seller Center, verify
+        your identity (you must be 18 or older and a US resident, with a
+        government ID, an SSN, ITIN or EIN, a US address and a bank account), and
+        then list products. TikTok's guide asks for documents, not a sign-up fee. The step most
+        beginners skip comes next: working out what one sale actually leaves you
+        after TikTok's 6% referral fee, your product cost and shipping, before
+        you order stock or pay a creator.
+      </p>
+    </header>
+
+    <div class="prose-tk space-y-12">
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          What TikTok asks for before you can sell
+        </h2>
+        <p class="mt-3 text-muted-foreground">
+          Per TikTok's
+          <a class={link} href={REGISTER_URL} rel="nofollow noopener" target="_blank"
+            >step-by-step seller guide</a
+          >, every US seller must be at least 18, be a US resident, provide a
+          valid government-issued ID (passport, driver's license, state ID or
+          permanent resident card) and provide a US business address. On top of
+          that you'll enter:
+        </p>
+        <ul class="mt-3 list-disc space-y-2 pl-5 text-muted-foreground">
+          <li>
+            <strong class="text-foreground">Identity details:</strong> full legal
+            name, date of birth and your ID's expiration date. They must match the
+            ID you upload.
+          </li>
+          <li>
+            <strong class="text-foreground">Tax number:</strong> an SSN or ITIN if
+            you sell as an individual, or a TIN or EIN for a registered business.
+          </li>
+          <li>
+            <strong class="text-foreground">Contact details:</strong> a phone
+            number and email that
+            <a class={link} href={REQUIREMENTS_URL} rel="nofollow noopener" target="_blank"
+              >aren't already used for another TikTok Shop</a
+            >, and a residential or registered business address.
+          </li>
+          <li>
+            <strong class="text-foreground">A bank account</strong> to receive
+            payouts.
+          </li>
+        </ul>
+        <p class="mt-3 text-muted-foreground">
+          You also pick a seller type: <strong class="text-foreground">individual</strong>
+          (selling under your own name), <strong class="text-foreground">sole proprietorship</strong>
+          (an unincorporated business owned by one person) or
+          <strong class="text-foreground">corporation or partnership</strong>. If
+          you're testing one product, individual is the type built for you; you
+          don't need to form a company first.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          Setting up the account, step by step
+        </h2>
+        <ol class="mt-3 list-decimal space-y-3 pl-5 text-muted-foreground">
+          <li>
+            <strong class="text-foreground">Create the seller account</strong> in
+            TikTok Shop Seller Center. You can sign in with an existing TikTok
+            account (QR code or login) or register with a phone number or email.
+            TikTok sends a code by SMS or email to confirm it, then you set a
+            password.
+          </li>
+          <li>
+            <strong class="text-foreground">Choose your seller type and verify.</strong>
+            Upload your ID as a clear PDF, JPEG or PNG under 10MB. Every detail
+            has to match the document; when it doesn't, TikTok asks you to correct
+            it or upload again.
+          </li>
+          <li>
+            <strong class="text-foreground">Add tax, contact and bank details.</strong>
+            A green checkmark shows when verification passes.
+          </li>
+          <li>
+            <strong class="text-foreground">List your first product.</strong>
+            TikTok's guide says you can list and sell once verification is
+            complete. Before you do, run the numbers in the next section: the
+            price you list at decides whether every later sale makes or loses
+            money.
+          </li>
+        </ol>
+        <p class="mt-3 text-muted-foreground">
+          If you're a creator, step 1 is where your two roles meet: you can sign
+          up with the TikTok account you already post from instead of starting a
+          new one.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          The part setup guides skip: what one sale leaves you
+        </h2>
+        <p class="mt-3 text-muted-foreground">
+          A sale on TikTok Shop is not your profit. Out of every order comes the
+          <a class={link} href={REFERRAL_FEE_URL} rel="nofollow noopener" target="_blank"
+            >6% referral fee</a
+          > (5% in a few
+          <a class={link} href={REFERRAL_BY_CATEGORY_URL} rel="nofollow noopener" target="_blank"
+            >jewelry and pre-owned categories</a
+          >), then your own costs: what the product cost you landed at your door,
+          and shipping it to the buyer. If a creator sold it, their commission
+          comes out too, and so does any ad spend. What's left is your profit:
+        </p>
+        <p
+          class="mt-3 rounded-lg border border-border bg-muted/40 px-4 py-3 text-sm text-foreground tabular-nums"
+        >
+          profit per sale = price &minus; referral fee &minus; product cost
+          &minus; shipping &minus; creator commission &minus; ad cost &minus;
+          returns
+        </p>
+        <p class="mt-3 text-muted-foreground">
+          Beginners usually get two inputs wrong. The product cost is not the
+          supplier's unit price: freight, duties, packaging and the units that
+          arrive damaged all belong in it, and the
+          <a class={link} href="/how-to-calculate-cogs-tiktok-shop/">landed COGS guide</a>
+          works it out from one purchase order. And shipping is a cost per
+          order you pay, even when the buyer sees "free shipping".
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          Three first products, worked through
+        </h2>
+        <div class="mt-4 space-y-6 text-muted-foreground">
+          <div>
+            <h3 class="font-semibold text-foreground">
+              A $25 product you promote yourself
+            </h3>
+            <p class="mt-1.5">
+              $25 price, $8 landed product cost, $5 shipping, 6% referral fee.
+              The fee is $1.50, so one sale leaves $10.50, a 42% margin. Your own
+              videos cost you no commission, which is why selling your own product
+              from your own account is the easiest place to start.
+            </p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-foreground">
+              The same product, sold through creators with ads
+            </h3>
+            <p class="mt-1.5">
+              Add a 15% creator commission ($3.75) and $3 of ad spend per order.
+              The sale now leaves $3.75, a 15% margin. Still profitable, but most
+              of the room is gone, and a higher commission or a pricier ad
+              would push it to zero. Find that limit first with the
+              <a class={link} href="/tiktok-shop-affiliate-commission-calculator/"
+                >affiliate commission calculator</a
+              > and the
+              <a class={link} href="/tiktok-shop-roas-calculator/">break-even ROAS calculator</a>.
+            </p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-foreground">
+              A $12 product that loses money on every order
+            </h3>
+            <p class="mt-1.5">
+              $12 price, $5 product cost, $5 shipping. After the $0.72 referral
+              fee one sale leaves $1.28, a 10.7% margin, and that's before
+              anything else. Pay a creator 10% ($1.20) and count a 5% return
+              rate as lost revenue ($0.60 per order), and each sale loses $0.52.
+              Selling more makes it worse. A cheap product with
+              a full-size shipping cost is the most common beginner trap: raise the
+              price, bundle units into one order, or pick a different product. The
+              <a class={link} href="/tiktok-shop-break-even-calculator/"
+                >break-even price calculator</a
+              > gives the lowest price that works.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          Before your first order ships
+        </h2>
+        <ul class="mt-3 space-y-3 text-muted-foreground">
+          <li>
+            <strong class="text-foreground">Price from your costs, not from competitors.</strong>
+            Copying the price of a similar listing copies their margin, not
+            yours. Check your price in the
+            <a class={link} href="/tiktok-shop-fee-calculator/">fee and profit calculator</a>
+            with your own landed cost and shipping.
+          </li>
+          <li>
+            <strong class="text-foreground">Decide on creator commission before you open it to creators.</strong>
+            A rate that sounds normal can be more than a cheap product can carry,
+            as the $12 example shows.
+          </li>
+          <li>
+            <strong class="text-foreground">Plan cash for the wait.</strong>
+            You pay for stock and shipping up front, and the money from a sale
+            arrives later. The
+            <a class={link} href="/tiktok-shop-payout-schedule/">payout schedule guide</a>
+            explains when, so you can restock without running dry.
+          </li>
+          <li>
+            <strong class="text-foreground">Expect the payout to be smaller than your sales.</strong>
+            When it is, the
+            <a class={link} href="/why-tiktok-shop-payout-is-less-than-sales/"
+              >GMV vs settlement guide</a
+            > walks through every deduction, so a normal gap doesn't look like a
+            missing payment.
+          </li>
+        </ul>
+        <p class="mt-4 text-sm text-muted-foreground">
+          All of these are free and run in your browser; the
+          <a class={link} href="/tools/">TikTok Shop seller tools</a> page puts
+          them in the order to use them. Once you're selling,
+          <a class={link} href="/">MarginReady</a> will read your settled
+          payouts and show the real profit on each product, so you're not
+          estimating any more.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          Questions new sellers ask
+        </h2>
+        <div class="mt-4 space-y-5">
+          {
+            faq.map((f) => (
+              <div>
+                <h3 class="font-semibold text-foreground">{f.q}</h3>
+                <p class="mt-1.5 text-muted-foreground">{f.a}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>

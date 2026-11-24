@@ -222,3 +222,11 @@ to surface "last AI prompt" per project. Keep entries append-only.
 > ~no demand (40 SV); `how to sell on tiktok shop for beginners` has 480 SV, KD 2. Operator chose
 > to retarget. Inserted as **v1.M**; ads → v1.N, worth-it → v1.O, dropship → v1.P, payout
 > cluster → v1.Q. Keyword table added to `docs/keywords.md`. Not committed.
+
+## 2026-11-23 — v1.M built: beginner seller page
+
+> "start v1.M" → `/how-to-sell-on-tiktok-shop/`, target `how to sell on tiktok shop for beginners`.
+> Requirements cited from TikTok's registration guide (JS-rendered; read via Treg rendered fetch)
+> and the ads.tiktok.com requirements article. Per-sale math with 3 test-guarded examples
+> (`how-to-sell.test.js`; the test caught a $1 arithmetic slip in the draft failure case).
+> Footer + `/tools/` hub links. Suite green (216), build passes. Not committed.

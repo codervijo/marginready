@@ -678,3 +678,27 @@ https://search.google.com/search-console directly.
 - **Open:** COGS discovery (linked from `/tools/`, so it should follow). The v1.I payout-schedule
   review was due 2026-11-20 and the v1.C re-review is also due 2026-11-20; neither is done yet.
 
+
+## 2026-11-23 — v1.M: beginner seller page on a low-competition query
+- **Status:** active (not deployed yet)
+- **Hypothesis:** `how to sell on tiktok shop for beginners` (DataForSEO 480 SV/mo, KD 2; pages
+  ranking now average ~3 referring domains) is winnable for a low-authority site. The live
+  SERP (2026-11-23, Treg call `1f81fe69…`) is TikTok's own pages plus setup-step guides
+  (Lengow, Printful, Printify) and videos. None does the per-sale money math, so a page that
+  answers the setup question **and** shows what one sale leaves can rank on page 1.
+- **KPI:** (1) URL discovered and indexed; (2) impressions and average position for the target
+  query and the page; (3) impressions for `how to sell on tiktok shop` (2,400–3,600 SV, hard).
+- **Baseline (2026-11-23):** page doesn't exist. Site GSC 28d: 405 impressions / 1 click /
+  average position ~32.
+- **Action:** `/how-to-sell-on-tiktok-shop/` (Article + FAQPage JSON-LD, visible FAQ). The setup
+  requirements are cited from TikTok's registration guide (`seller.tiktok.com/how-to-register`,
+  read via a rendered fetch, Treg `6036941f…`) and the ads.tiktok.com requirements article; the
+  referral fee from the two Seller Center fee pages. 3 worked examples guarded in
+  `src/__tests__/how-to-sell.test.js`. Linked from the footer ("Start selling"), the `/tools/`
+  hub card list and its "Work through them in this order" intro.
+- **Confound:** v1.L's affiliate page review (2026-12-01) overlaps this window; the footer link
+  is now on every page.
+- **Deployed:** TBD.
+- **Result:** TBD — review 28 days after deploy for discovery; 8 weeks for position (see the
+  2026-11-23 checkpoint on discovery lag).
+- **Learning:** TBD.
