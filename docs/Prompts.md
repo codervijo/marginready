@@ -230,3 +230,11 @@ to surface "last AI prompt" per project. Keep entries append-only.
 > and the ads.tiktok.com requirements article. Per-sale math with 3 test-guarded examples
 > (`how-to-sell.test.js`; the test caught a $1 arithmetic slip in the draft failure case).
 > Footer + `/tools/` hub links. Suite green (216), build passes. Not committed.
+
+## 2026-11-23 — v1.N built: sales breakdown chart
+
+> "start v1.N" → `src/lib/sale-breakdown-chart.ts` renders one SVG from `calcFees`: inline on
+> `/how-to-sell-on-tiktok-shop/`, as `/charts/tiktok-shop-sale-breakdown.svg` (build endpoint)
+> and as a committed 1200×630 PNG (also the page's og:image). Table view, download, embed code
+> with credit link. First PNG render had no text (no fonts in the container); fixed by
+> mounting host fonts. Hash sidecar guards PNG drift. Suite green (221). Not committed.

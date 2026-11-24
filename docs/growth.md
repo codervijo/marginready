@@ -702,3 +702,22 @@ https://search.google.com/search-console directly.
 - **Result:** TBD — review 28 days after deploy for discovery; 8 weeks for position (see the
   2026-11-23 checkpoint on discovery lag).
 - **Learning:** TBD.
+
+## 2026-11-23 — v1.N: sales breakdown chart as a linkable image
+- **Status:** active (not deployed yet)
+- **Hypothesis:** an original, reusable chart ("Where a $25 TikTok Shop sale goes") gives
+  link-track posts and seller-resource roundups something to embed with a credit link. The
+  site had no images on content pages, so there was nothing to earn image links with.
+- **KPI:** referring domains linking to `/how-to-sell-on-tiktok-shop/` or
+  `/charts/tiktok-shop-sale-breakdown.png` (Ahrefs or GSC Links report); embeds found by
+  reverse image search. Only meaningful once the link track posts it.
+- **Baseline (2026-11-23):** referring domains unknown (never measured; `docs/links-log.md`
+  is empty). 0 image assets.
+- **Action:** inline SVG on `/how-to-sell-on-tiktok-shop/` (numbers from `calcFees`, same as
+  the v1.M examples), table view, download link, embed snippet with a credit link; the PNG
+  is also the page's `og:image` (`summary_large_image`). Palette validated (6 adjacent parts,
+  worst CVD ΔE 9.1; 3 sub-3:1 hues relieved by in-block labels, legend and table).
+- **Confound:** none for rankings; this is a link asset. It does nothing until it's posted.
+- **Deployed:** TBD.
+- **Result:** TBD — review 28 days after the first link-track post that uses it.
+- **Learning:** TBD.

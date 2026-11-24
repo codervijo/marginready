@@ -105,6 +105,17 @@ cd ~/work/projects/sites && docker run --rm -v "$PWD":/usr/src/app \
   bash -lc 'export PATH=/root/.volta/bin:$PATH; npx vitest run && npx astro build'
 ```
 
+**v1.N chart PNG is committed, not built.** `public/charts/tiktok-shop-sale-breakdown.png` is
+rendered from the built SVG with real fonts (the container has none, so mount the host's).
+`sale-breakdown-chart.test.js` fails if the chart changes without a re-render. To regenerate:
+
+```bash
+cd ~/work/projects/sites && docker run --rm -v /usr/share/fonts:/usr/share/fonts:ro \
+  -v /etc/fonts:/etc/fonts:ro -v "$PWD":/usr/src/app -w /usr/src/app/marginready.com sites1:latest \
+  bash -lc "export PATH=/root/.volta/bin:\$PATH; npx astro build && node scripts/render-sale-breakdown-png.mjs \
+  && chown $(id -u):$(id -g) public/charts/*.png src/lib/sale-breakdown-chart.png.sha256"
+```
+
 Deploy: Cloudflare **Pages** — CF's Git integration on push to `main`. `wrangler deploy`
 is unverified here (it targets a Worker, not this Pages project).
 
