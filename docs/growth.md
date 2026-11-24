@@ -680,7 +680,7 @@ https://search.google.com/search-console directly.
 
 
 ## 2026-11-23 — v1.M: beginner seller page on a low-competition query
-- **Status:** active (not deployed yet)
+- **Status:** active
 - **Hypothesis:** `how to sell on tiktok shop for beginners` (DataForSEO 480 SV/mo, KD 2; pages
   ranking now average ~3 referring domains) is winnable for a low-authority site. The live
   SERP (2026-11-23, Treg call `1f81fe69…`) is TikTok's own pages plus setup-step guides
@@ -698,7 +698,7 @@ https://search.google.com/search-console directly.
   hub card list and its "Work through them in this order" intro.
 - **Confound:** v1.L's affiliate page review (2026-12-01) overlaps this window; the footer link
   is now on every page.
-- **Deployed:** TBD.
+- **Deployed:** 2026-11-23 (pushed `3d79169`); page, sitemap entry and `/tools/` links verified live.
 - **Result:** TBD — review 28 days after deploy for discovery; 8 weeks for position (see the
   2026-11-23 checkpoint on discovery lag).
 - **Learning:** TBD.
