@@ -704,7 +704,7 @@ https://search.google.com/search-console directly.
 - **Learning:** TBD.
 
 ## 2026-11-23 — v1.N: sales breakdown chart as a linkable image
-- **Status:** active (not deployed yet)
+- **Status:** active
 - **Hypothesis:** an original, reusable chart ("Where a $25 TikTok Shop sale goes") gives
   link-track posts and seller-resource roundups something to embed with a credit link. The
   site had no images on content pages, so there was nothing to earn image links with.
@@ -718,6 +718,6 @@ https://search.google.com/search-console directly.
   is also the page's `og:image` (`summary_large_image`). Palette validated (6 adjacent parts,
   worst CVD ΔE 9.1; 3 sub-3:1 hues relieved by in-block labels, legend and table).
 - **Confound:** none for rankings; this is a link asset. It does nothing until it's posted.
-- **Deployed:** TBD.
+- **Deployed:** 2026-11-23 (pushed `670fa09`); inline chart, PNG, SVG and og:image verified live.
 - **Result:** TBD — review 28 days after the first link-track post that uses it.
 - **Learning:** TBD.
