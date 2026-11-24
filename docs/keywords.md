@@ -55,9 +55,41 @@ Ranked by fit with the proven format (calculator + profit question) first, then 
 | 7 | tiktok shop returns | 880 | — | — | — | **Weak.** Mostly shopper intent. A seller-side "return cost" angle exists. |
 | 8 | tiktok shop seller requirements | — | 50 | — | 19 | **Weak.** Declining (170 → 50 over 12 months), and not a money question. |
 
+## Beginner-seller candidates (pulled 2026-11-23)
+
+Pulled to size a creator → seller page before planning it. US Google. **SE Ranking**
+(`seranking.google.keywords.volume`, call `06ddbb31…`, 25 keywords, $0.045) and **DataForSEO**
+related keywords for the seed `how to sell on tiktok shop` (`d47c8758…`, $0.013). Serpstat
+refused (`Limits exceeded`, no charge). "Ref. domains" = DataForSEO's average referring domains
+of the pages ranking now, a rough read on how hard the SERP is for this site.
+
+| Keyword | SV SE Ranking | SV DataForSEO | KD SE Ranking | KD DataForSEO | Ref. domains | Notes |
+|---|---|---|---|---|---|---|
+| how to sell on tiktok shop for beginners | — | 480 | — | 2 | ~3 | **Chosen for v1.M.** +175% YoY |
+| how to sell on tiktok shop without inventory | — | 210 | — | 2 | ~3 | Dropship-adjacent (v1.P) |
+| how to sell on tiktok shop for free | — | 170 | — | 13 | ~152 | Hard SERP |
+| how to sell on tiktok shop | 2,400 | 3,600 | 70 | 14 | ~178 | Hard SERP; out of reach for now |
+| how to sell on tiktok | 1,600 | — | 75 | — | — | Hard |
+| how to sell on tiktok shop as a creator | — | 40 | — | 0 | — | The only literal creator→seller phrasing with data; −82% YoY |
+| tiktok shop for creators | 1,300 | — | 77 | — | — | Creator intent, volatile (120–3,100/mo) |
+| tiktok shop seller | 12,100 | — | 91 | — | — | Head term, hard |
+| tiktok shop seller center / tiktok seller center | 33,100 / 33,100 | 40,500 | 97 / 98 | 34 | ~184 | Navigational (people heading to TikTok's site) |
+| tiktok shop seller requirements | 50 | — | 29 | — | — | Declining |
+| how to set up tiktok shop | 10 | — | 29 | — | — | |
+
+No data from SE Ranking for: `tiktok creator to seller`, `tiktok affiliate to seller`,
+`become a tiktok shop seller`, `how to start a tiktok shop`, `how to open a tiktok shop`,
+`tiktok shop affiliate vs seller` (autocomplete shows it exists), and 9 others. Absence of a
+row is not zero demand.
+
+**Takeaway:** creator → seller as a phrase has no measurable demand. The beginner-seller angle
+does, with a weak SERP. v1.M targets it.
+
 ## Open for the operator
 
 - **Decided 2026-10-31:** rows 1–4 are planned as v1.L–v1.O in `docs/prd.md`. Rows 5–8 are not
   planned.
 - Discovery caveat (from v1.F): new pages will probably stay undiscovered until external links
   or a working sitemap change that.
+- **Decided 2026-11-23:** beginner seller page inserted as v1.M. The 2026-10-31 rows 2–4 moved to
+  v1.N (ads), v1.O (worth it), v1.P (dropship); the payout cluster moved to v1.Q.

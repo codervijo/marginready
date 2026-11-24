@@ -619,7 +619,7 @@ https://search.google.com/search-console directly.
   v1.J → **v1.K**.
 
 ## 2026-10-31 — v1.L: affiliate commission page, plus sitemap lastmod as a discovery bet
-- **Status:** active (not deployed yet)
+- **Status:** active
 - **Hypothesis:** Google last downloaded `sitemap-index.xml` on 2026-06-19, and the sitemap
   had no `lastmod`, so it gave Google no reason to come back. Real per-page `lastmod` dates,
   plus a manual resubmit in GSC, should get the sitemap re-fetched. That would give
@@ -640,6 +640,41 @@ https://search.google.com/search-console directly.
 - **Unverified:** whether Cloudflare Pages builds from a full clone. If it's shallow, the
   deployed sitemap will have no `lastmod` at all, which is honest but is no change. Check
   `curl -s https://marginready.com/sitemap-0.xml | grep -c lastmod` after deploy.
-- **Deployed:** TBD.
-- **Result:** TBD — review 28 days after deploy.
+- **Deployed:** by 2026-11-03. Committed 2026-11-02 (`6e30144`) and Google first crawled the
+  new page 2026-11-03 12:53 UTC. The exact push date wasn't recorded.
+- **Unverified → checked 2026-11-23:** `curl -s https://marginready.com/sitemap-0.xml | grep -c lastmod`
+  returns `0`. Cloudflare Pages builds from a shallow clone, so the sitemap half of this bet
+  never shipped. It is a no-op, not a failure of the hypothesis.
+- **Result:** TBD — review 2026-12-01 (28 days after deploy).
 - **Learning:** TBD.
+
+## 2026-11-23 — checkpoint: 9 of 10 indexed; discovery came through internal links, not the sitemap
+- **Status:** note. A snapshot, not a new bet. It updates the v1.F (2026-09-23, `failed`) and
+  v1.L (2026-10-31) entries without rewriting them.
+- **Numbers (`lamill project seo marginready.com --refresh`, 2026-11-23; per-URL crawl times
+  from `portfolio/data/gsc/marginready.com/2026-11-24.json`):**
+  - GSC 28d: **405 impressions / 1 click / 0.2% CTR / average position ~32**. Compare 227 / 2 /
+    0.9% on 2026-10-09.
+  - Coverage: **9 of 10 indexed** (2026-10-31: 6 of 9). Only
+    `/how-to-calculate-cogs-tiktok-shop/` is still `url_is_unknown_to_google`.
+  - Newly discovered: affiliate commission page, crawled 2026-11-03 12:53 UTC, about a day
+    after its commit. `/tools/`, crawled 2026-11-16 19:54 UTC. FBT, crawled 2026-11-16 21:55
+    UTC, 2h after `/tools/`. FBT is linked from `/tools/`, so this matches the
+    "`/tools/` gates FBT and COGS" reading.
+  - Sitemap: last downloaded 2026-06-19, unchanged. The live sitemap has no `lastmod`
+    (shallow clone, see the v1.L entry).
+  - Link track: no posts or submissions logged (`docs/links-log.md` is empty).
+- **What this changes:**
+  - **v1.F's fail was premature, not wrong.** At 2026-10-31 `/tools/` was still unknown. It was
+    discovered 16 days later, and the sitemap played no part, so the path was internal links
+    plus time. The 28-day window was too short for discovery on this domain. Use 6–8 weeks for
+    discovery KPIs on low-authority sites.
+  - **The v1.K/v1.L caveat ("new pages will probably stay undiscovered") was too pessimistic.**
+    The affiliate page was crawled within about a day. A footer link from pages Google
+    already re-crawls was enough for a new URL. `/tools/` was the slow case, not the rule.
+  - Ranked "what is enough" from 2026-10-31 still stands for crawl *volume*. But levers 1
+    (external links) and 2 (a working sitemap) are both still untried, and discovery moved
+    anyway.
+- **Open:** COGS discovery (linked from `/tools/`, so it should follow). The v1.I payout-schedule
+  review was due 2026-11-20 and the v1.C re-review is also due 2026-11-20; neither is done yet.
+

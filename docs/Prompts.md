@@ -211,3 +211,14 @@ to surface "last AI prompt" per project. Keep entries append-only.
 > Center citations (commission base from the settlement report, 1–80% range, target supersedes
 > open, 30-day open-rate change, refunds pay 0), footer and hub links. The sitemap now has a
 > git-derived `<lastmod>`, skipped in a shallow clone. Suite green (200), build passes. Not committed.
+
+## 2026-11-23 — status check, docs refresh, v1.M beginner seller page planned
+
+> "check on live site and status now" → 9 of 10 indexed, 405 impressions / 28d, avg position ~32.
+> `/tools/` and FBT discovered 2026-11-16 without the sitemap; live sitemap has no `lastmod`
+> (shallow clone). Recorded in `docs/growth.md` (2026-11-23 checkpoint) and `docs/prd.md`.
+> "how do we 10x impressions" → authority (link track never started) is the constraint, not page count.
+> "add the creator-to-seller page to the prd" → "first check data": literal creator→seller has
+> ~no demand (40 SV); `how to sell on tiktok shop for beginners` has 480 SV, KD 2. Operator chose
+> to retarget. Inserted as **v1.M**; ads → v1.N, worth-it → v1.O, dropship → v1.P, payout
+> cluster → v1.Q. Keyword table added to `docs/keywords.md`. Not committed.
