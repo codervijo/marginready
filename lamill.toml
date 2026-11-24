@@ -25,11 +25,19 @@ framework = "astro"
 # Declarative content identity for this site.
 # Authored by the human; consumed by rankmill to generate drafts and run audits.
 # Leave fields empty until you have a deliberate answer. Empty is better than wrong.
-site_type = ""            # e.g. "legal-compliance", "tool", "directory", "blog", "b2c"
-primary_keyword = ""      # the one phrase this site should rank for
-secondary_keywords = []   # 3-8 supporting phrases
-icp = ""                  # ideal customer profile — one sentence, specific role + context
-urgency_trigger = ""      # what makes the reader act now (deadline, penalty, pain)
-penalty = ""              # cost of inaction, in their terms (dollars, risk, time)
-tone = ""                 # e.g. "direct, technical, no fluff" or "warm, plainspoken"
+site_type = "tool"
+primary_keyword = "TikTok Shop fee calculator"
+secondary_keywords = [
+    "tiktok shop fees explained",
+    "how to calculate true margin",
+    "tiktok shop payout schedule",
+    "why tiktok shop payout is less than sales",
+    "tiktok shop break-even calculator",
+    "tiktok shop roas calculator",
+    "how to calculate cogs tiktok shop",
+]
+icp = "A US-based TikTok Shop seller doing roughly $5k–$50k/month in sales across 10–80 SKUs, managing the business themselves, profitable enough to care about margins but too busy to reconcile fees and COGS manually in spreadsheets."
+urgency_trigger = "Limited free beta access — discover real per‑SKU profit now instead of reconciling fees manually"
+penalty = "Continue misjudging product profitability: wasted time, lower margins, and risking selling unprofitable SKUs"
+tone = "practical, direct, data-driven"
 law = ""                  # statute or regulation if applicable, else empty
