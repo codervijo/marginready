@@ -93,3 +93,5 @@ does, with a weak SERP. v1.M targets it.
   or a working sitemap change that.
 - **Decided 2026-11-23:** beginner seller page inserted as v1.M. The 2026-10-31 rows 2–4 moved to
   v1.N (ads), v1.O (worth it), v1.P (dropship); the payout cluster moved to v1.Q.
+- **Renumbered 2026-11-23 (later):** a chart phase took v1.N; ads → v1.O, worth it → v1.P,
+  dropship → v1.Q, payout cluster → v1.R.
